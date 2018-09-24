@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+  {% if name %}
+	<p>Cher {{name}},</p>
+	{% else %}
+	<p>Cher utilisateur,</p>
+	{% endif %}
+	<p></p>
+
+  <p> Merci d'avoir choisi {{appName}}! Il dispose de nombreuses fonctionnalités avancées, telles que: </p>
+  <p> - Le score de repas personnalisé (100 est le meilleur) </p>
+  <p> - Recherche en ligne sur les bases de données alimentaires avec plus de 50 000 aliments/collations </p>
+  <p> - Reconnaissance alimentaire populaire à partir de photos </p>
+  <p> - Conseils personnalisés </p>
+  <p> - Journal en ligne </p>
+
+  <p>Le <a href="https://myaccount.glucoguide.com"> Journal en ligne </a> suit toutes vos données et affiche des graphiques et
+les tendances. Vous pouvez imprimer votre journal de bord pour apporter à votre santé
+les fournisseurs!
+
+Vous pouvez voir un journal de démonstration <a href="https://myaccount.glucoguide.com">ici</a>!</p>
+
+<p>Pour mieux utiliser {{appName}}, vous pouvez accéder à notre <a href="https://www.youtube.com/channel/UCnL7tFkxfcnwh5UY7-__dVQ">chaîne YouTube</a>. Nous fournissons plusieurs vidéos Tutoriel courtes là. </p>
+
+<p>Vous pouvez nous envoyer un courriel avec vos commentaires et suggestions,
+questions, à <a href="mailto:support@glucoguide.com?Subject=Feedback%20for%20GlucoGuide">support@glucoguide.com</a>. Nous améliorons toujours!</p>
+
+	<p>Enfin, cliquez sur le lien suivant pour activer votre compte.</p>
+	<p><a href="{{url}}">Activez votre compte...</a></p>
+	<p>Cordialement,</p>
+	<p>L'équipe de soutien de {{appName}}</p>
+</body>
+</html>

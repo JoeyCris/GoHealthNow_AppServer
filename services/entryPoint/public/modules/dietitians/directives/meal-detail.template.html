@@ -1,0 +1,113 @@
+
+	<div class="modal-header">
+		<div class="modal-title">
+			<h3>{{title}}
+				<small class="pull-right">{{meal.recordedTime | date:'MMM d, h:mm a'}}</small>
+			</h3>
+			<!-- small>{{typeDescription}}</small -->
+		</div>
+	</div>
+
+	<div class="modal-body">
+		<div class="row">
+			<div  ng-if="meal.mealPhoto" class="col-md-6 col-md-offset-2">
+
+				<a href="/images/{{meal.userID}}/{{meal.mealPhoto}}">
+					<img  ng-src="/images/{{meal.userID}}/{{meal.mealPhoto}}" class="img-thumbnail" >
+				</a>
+			</div>
+			<div  ng-if="meal.mealScore" class="col-sm-3 col-xs-12">
+				<strong>Score:</strong>
+				<span>{{meal.mealScore | number:1}} </span>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<strong>Calories:</strong>
+				<span>{{meal.cals | number:1}} </span>
+			</div>
+
+			<div class="col-sm-3 col-xs-12">
+				<strong>Carb:</strong>
+				<span>{{meal.carb | number:1}} g</span><br>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<strong>Fibre:</strong>
+				<span>{{meal.fibre?(meal.fibre | number:1):  '--'}} g</span><br>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<strong>Fat:</strong>
+				<span>{{meal.fat | number:1}} g</span>
+			</div>
+			<div class="col-sm-3 col-xs-12">
+				<strong>Protein:</strong>
+				<span>{{meal.pro | number:1}} g</span>
+			</div>
+		</div>
+		<div ng-if="meal.note">
+			<p>
+			<strong>Note:</strong>
+			<span>{{meal.note}}</span>
+			</p>
+		</div>
+		<hr>
+
+
+		<div class="row">
+			<div class="col-md-6 col-xs-12" style="min-height: 280px;" ng-repeat="food in meal.food">
+
+				<div class="panel panel-default">
+
+					<div class="panel-heading"><strong>{{food.name}}</strong>
+					</div>
+					<div class="panel-body">
+
+						<!-- div  ng-if="food.photoName" >
+
+							<a href="/images/{{meal.userID}}/{{food.photoName}}">
+								<img  ng-src="/images/{{meal.userID}}/{{food.photoName}}" class="img-thumbnail" >
+							</a>
+						</div -->
+						<p/>
+						<strong>Serving Size:</strong><span>{{food.servingSizeName}}</span><br>
+						<strong>Number of Servings:</strong><span>{{food.servingSize | number:2}}</span>
+						<p/>
+						<strong>Calories:</strong>
+						<span>{{food.cals | number:1}} </span><br>
+						<strong>Carb:</strong>
+						<span>{{food.carb | number:1}} g</span><br>
+						<strong>Fibre:</strong>
+						<span>{{food.fibre | number:1}} g</span><br>
+						<strong>Fat:</strong>
+						<span>{{food.fat | number:1}} g</span><br>
+						<strong>Protein:</strong>
+						<span>{{food.pro | number:1}} g</span><br>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="row" ng-repeat="tip in meal.tips">
+			<hr ng-if="tip != tips[0]" style="width: 100%; color: #EEEEEE; height: 1px 0; background-color:#EEEEEE; margin: 18px 0;" />
+			<div  ng-if="tip.medias.length != 0" class="col-md-6 col-md-offset-3">
+				<a href="{{tip.medias[0].uri}}">
+					<img  ng-src="{{tip.medias[0].uri}}" class="img-thumbnail" >
+				</a>
+			</div>
+			<div  ng-if="tip.description" class="col-sm-12 col-xs-12">
+				<strong>Tip Content:</strong>
+				<span>{{tip.description}} </span>
+				<small class="pull-right">{{tip.create_time | date:'MMM d, h:mm a'}}</small>
+			</div>
+			<div ng-if="tip.link">
+				<p>
+				<strong>URL:</strong>
+				<a href="{{tip.link}}">{{tip.link}}</a>
+				</p>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+	</div>

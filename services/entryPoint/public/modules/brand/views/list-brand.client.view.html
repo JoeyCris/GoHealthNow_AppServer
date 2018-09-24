@@ -1,0 +1,26 @@
+<section data-ng-controller="BrandController" data-ng-init="find()">
+	<div class="page-header">
+		<h1>Brand</h1>
+	</div>
+	<!-- <ul class="nav nav-pills">
+    <li ng-class="{ active: true }">
+      accesscode
+    </li>
+  </ul> -->
+
+	<div class="list-group">
+		<a data-ng-repeat="brand in brandList" data-ng-href="#!/brand/{{brand.accessCode}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="brand.create_time | date:'mediumDate'"></span>
+			</small>
+			<h4 class="list-group-item-heading">{{brand.name?brand.name:'N/A'}}</h4>
+			<p class="list-group-item-text">AccessCode: {{brand.accessCode}}</p>
+			<!-- <span class="label label-warning" ng-show="knowledge.send_push">Push Notification</span> -->
+			<!-- <span class="label label-warning" ng-show="knowledge.send_email">Email Notification</span> -->
+		</a>
+		<div class="alert alert-warning text-center" data-ng-if="brandList.$resolved && !brandList.length">
+			No Brand Info yet, why don't you <a href="/#!/brand/create">create one</a>?
+		</div>
+	</div>
+</section>

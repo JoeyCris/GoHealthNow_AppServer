@@ -1,0 +1,18 @@
+<div class="form-group">
+  <div ng-show="medias != null" ng-class="{ 'has-error': questionForm.photos.$dirty && questionForm.photos.$invalid }">
+    <label class="control-label" for="photos">Photo</label>
+    <div class="row">
+      <div class="col-sm-1 btn" ng-repeat="media in medias">
+          <img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="img-thumbnail">
+          <img class="img-responsive"  ng-src="{{premedia.uri}}" />
+      </div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="btn btn-primary" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<style>
+	#sbnWrapper {
+		max-width: 200px;
+		/*min-width: 110px;*/
+		position: fixed;
+		left: 5px;
+		top: 25%;
+		z-index: 1000;
+		/*margin-left: -6%;*/
+	}
+	.dropdown-menu#sidebar{
+		border: 1px solid rgba(0, 0, 0, .05);
+		box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	}
+</style>
+
+<div id="sbnWrapper" class="col-lg-1 hidden-sm hidden-xs noPrint">
+	<!--<button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">-->
+		<!--<span class="glyphicon glyphicon-align-left" aria-hidden="true">Menu</span></button>-->
+	<!--<div id="sbn" class="well bs-sidebar" ng-show="isCollapsed">-->
+		<!--<ul class="nav nav-pills nav-stacked">-->
+			<!--<li>-->
+				<!--&lt;!&ndash;<p><strong>Operations for {{user.firstName ? user.firstName : user.email.split('@')[0]}}</strong></p>&ndash;&gt;-->
+				<!--&lt;!&ndash;<p>Operations</p>&ndash;&gt;-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/logbook/{{user._id}}">See Logbook</a>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/reminders/create/{{user._id}}">Send Tips</a>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/reminders/user/{{user._id}}">List Tips</a>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/questions/user/{{user._id}}">List Questions</a>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/answers/user/{{user._id}}">List Answers</a>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/dietitian/goals/{{user._id}}">Edit Goals</a>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/notes/user/{{user._id}}">List Notes</a>-->
+			<!--</li>-->
+			<!--<li>-->
+				<!--<a ng-href="#!/notes/create/{{user._id}}">Create Note</a>-->
+			<!--</li>-->
+		<!--</ul>-->
+	<!--</div>-->
+
+	<div class="btn-group" dropdown is-open="status.isopen" ng-init="initSideBar()">
+		<button id="single-button" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+			<span class="glyphicon glyphicon-align-left" aria-hidden="true">Menu</span>
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" id="sidebar" role="menu" aria-labelledby="single-button">
+			<!--<li role="menuitem">-->
+				<!--<p><strong>Operations for {{user.firstName ? user.firstName : user.email.split('@')[0]}}</strong></p>-->
+			<!--</li>-->
+			<!--<li class="divider"></li>-->
+			<li role="menuitem">
+				<a ng-href="#!/logbook/{{user._id}}">View Logbook</a>
+			</li>
+			<li class="divider"></li>
+			<li role="menuitem">
+				<a ng-href="#!/reminders/create/{{user._id}}">Send Tips</a>
+			</li>
+			<li role="menuitem">
+				<a ng-href="#!/reminders/user/{{user._id}}">View Tips</a>
+			</li>
+			<li class="divider"></li>
+			<li role="menuitem">
+				<a ng-href="#!/questions/user/{{user._id}}">View Questions</a>
+			</li>
+			<li role="menuitem">
+				<a ng-href="#!/answers/user/{{user._id}}">View Answers</a>
+			</li>
+			<li class="divider"></li>
+			<li role="menuitem">
+				<a ng-href="#!/dietitian/goals/{{user._id}}">Set Goals</a>
+			</li>
+			<!-- li role="menuitem">
+				<a ng-href="#!/dietitian/weight_goal/{{user._id}}">Set Weight Goal</a>
+			</li -->
+			<li role="menuitem">
+				<a ng-href="#!/dietitian/activity/{{user._id}}">Set Activity Level</a>
+			</li>
+			<li role="menuitem">
+				<a ng-href="#!/dietitian/macros/{{user._id}}">Set Calories Distribution</a>
+			</li>
+			<li class="divider"></li>
+			<li role="menuitem">
+				<a ng-href="#!/notes/create/{{user._id}}">Create Note</a>
+			</li>
+			<li role="menuitem">
+				<a ng-href="#!/notes/user/{{user._id}}">View Notes</a>
+			</li>
+
+		</ul>
+	</div>
+</div>

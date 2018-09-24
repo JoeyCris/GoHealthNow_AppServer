@@ -1,0 +1,8 @@
+<LoginInfo>
+<LoginType >1</LoginType>
+<Email >test2017@test.com</Email>
+<Password >t123456</Password>
+<DeviceType>1</DeviceType> <!-- //0: Android, 1: iOS -->
+<AppID>1</AppID> <!-- 0: GlucoGuide, 1: GoMobileHealth -->
+<Language>1</Language>
+</LoginInfo>

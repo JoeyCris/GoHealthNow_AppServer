@@ -1,0 +1,104 @@
+<html ng-app="BasicSlider">
+<head>
+	<title>Angular FlexSlider Example - Basic Slider</title>
+	<link rel="stylesheet" type="text/css" href="/lib/flexslider/flexslider.css">
+	<style type="text/css">
+		.flexslider-container {
+			width: 100%;
+			margin: 10px auto;
+		}
+		.highcharts-container {
+			max-height: 360px;
+
+			position: relative;
+			overflow: hidden;
+			text-align: left;
+			line-height: normal;
+			z-index: 0;
+			-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+		}
+	</style>
+
+	<script src="/lib/jquery/dist/jquery.js"></script>
+	<script src="/lib/flexslider/jquery.flexslider.js"></script>
+	<script src="/lib/angular/angular.js"></script>
+	<script src="/lib/angular-flexslider/angular-flexslider.js"></script>
+
+	<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+	<script src="/lib/angular-animate/angular-animate.js"></script>
+	<script src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+	<script src="/lib/Chart.js/Chart.js"></script>
+	<link rel="stylesheet" href="/lib/angular-chart.js/dist/angular-chart.css" />
+    <script src="/lib/angular-chart.js/dist/angular-chart.js"></script>
+
+	<script src="./js/example.js"></script>
+</head>
+<body ng-controller="BasicSliderCtrl">
+
+<div class="container-fluid">
+	<div id = "header_section" class="row">
+		<h3 class="text-center"> Online Logbook</h3>
+		<hr>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-10 col-centered text-center">
+
+			<span><button type="button" class="btn btn-primary" ng-click="dt.setDate(dt.getDate() - 1)"><i class="glyphicon glyphicon-chevron-left"></i></button>
+			</span>
+			<span>
+					<button type="button" class="btn btn-primary" ng-click="open($event)" datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+						<strong>{{dt | date:'fullDate' }}</strong></button>
+			</span>
+			<span>
+					<button type="button" class="btn btn-primary" ng-click="tomorrow()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+</span>
+
+			<div class="btn-group pull-right">
+				<label class="btn btn-default" ng-model="recordsPeriod" btn-radio="'d7'">Last 7 days</label>
+				<label class="btn btn-default" ng-model="recordsPeriod" btn-radio="'d3'">Last 3 days</label>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-xs-12 col-centered text-center">
+			<flex-slider flex-slide="s in slides" animation="slide">
+				<li>
+					<div class="row">
+						<div class="col-lg-2">
+
+								<div class="col-xm-4"><b>BG above 10 mmol/L:</b>
+									<strong class="text-warning" style="font-size: 150%">13</strong>
+									<span> times (37%)</span></div>
+								<div class="col-xm-4">
+									<b>BG between 4-10 mmol/L:</b>
+									<strong class="text-success" style="font-size: 150%">22</strong>
+									<span> times (63%)</span></div>
+								<div class="col-xm-4"><b>BG below 4 mmol/L:</b>
+									<strong class="text-danger" style="font-size: 150%">0</strong>
+									<span> times (0%)</span></div>
+
+						</div>
+					<div class="col-lg-10 highcharts-container">
+						<canvas id="line1" class="chart chart-line" chart-data="data"
+								chart-labels="labels" height="100"  chart-options="chartOptions" chart-series="series"
+								click="onClick">
+						</canvas>
+					</div>
+						</div>
+				</li>
+			</flex-slider>
+		</div>
+	</div>
+
+
+
+	<!--div class="highcharts-container" id="highcharts-0" style="position: relative; overflow: hidden; width: 850px; height: 360px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" -->
+</div>
+
+
+</body>
+</html>

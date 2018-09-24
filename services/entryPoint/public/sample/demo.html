@@ -1,0 +1,231 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Online Logbook</title>
+
+	<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+	<script src="/lib/angular/angular.js"></script>
+	<script src="/lib/angular-animate/angular-animate.js"></script>
+	<script src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="./js/example.js"></script>
+
+	<!--link rel="stylesheet" href="/lib/angular-chart.js/dist/angular-chart.css" />
+	<script src="/lib/angular/angular.min.js"></script>
+	<script src="/lib/angular-chart.js/dist/angular-chart.js"></script -->
+
+
+	<!-- link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" -->
+</head>
+<body>
+<style>
+	.full button span {
+		background-color: limegreen;
+		border-radius: 32px;
+		color: black;
+	}
+	.partially button span {
+		background-color: orange;
+		border-radius: 32px;
+		color: black;
+	}
+
+	.col-centered{
+		float: none;
+		margin: 0 auto;
+	}
+
+	#header_section {padding-top:80px;}
+
+</style>
+<div ng-controller="DatepickerDemoCtrl">
+
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/sample/sample.html">GlucoGuide</a>
+			</div>
+			<div class="navbar-collapse collapse">
+
+
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Daily View</a></li>
+					<li><a href="#">Weekly View</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id = "header_section" class="row">
+		<h3 class="text-center"> User Diary </h3>
+		<hr>
+	</div>
+
+	<div class="container-fluid">
+
+
+
+
+		<div class="row">
+			<div class="col-xs-12 col-centered text-center">
+				<div class="btn-group" role="group" aria-label="...">
+				<button type="button" class="btn btn-primary" ng-click="dt.setDate(dt.getDate() - 1)"><i class="glyphicon glyphicon-chevron-left"></i></button>
+				<button type="button" class="btn btn-primary" ng-click="open($event)" datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+					<strong>	{{dt | date:'fullDate' }}</strong></button>
+				<button type="button" class="btn btn-primary" ng-click="tomorrow()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+			</div>
+				</div>
+		</div>
+	</div>
+	<p></p>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-xs-12 col-centered">
+
+				<div class="panel">
+					<div class="panel-heading text-center"><strong>Daily BG Chart</strong></div>
+					<canvas id="line" class="chart chart-line" data="data"
+							labels="labels" height="200"  options="chartOptions" series="series"
+							click="onClick">
+					</canvas>
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="col-xs-12 col-centered">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center"></div>
+
+				<div class="col-xs-12 well">
+					<strong>Before Breakfast BG</strong>:5.5<br>
+					Time: 10:46:52<br>
+				</div>
+				<div class="col-xs-12 well">
+					<strong>Breakfast</strong> 10:46:52<br>
+					Calories: 480.5 kcals<br>
+					Carbs: 47.5(g)<br>
+					Pro: 24.7(g)<br>
+					Fat: 21.8(g)<br>
+
+				</div>
+				<div class="col-xs-12 well">
+					<strong>After Breakfast BG</strong>:5.5<br>
+					Time: 14:34:38<br>
+				</div>
+
+
+			</div>
+			<div class="row ">
+				<div class="col-xs-12 well">
+					<strong>Snack</strong> 09:11:25<br>
+					Calories: 354.5 kcals<br>
+					Carbs: 28.5(g)<br>
+					Pro: 1.7(g)<br>
+					Fat: 26.8(g)<br>
+
+				</div>
+				<div class="col-xs-12 well">
+					<strong>Exercise</strong><br>
+					Time: 10:49:17<br>
+					Type: Moderate Time Last: 29 minutes<br>
+					Total Calories burned: 174.0 kcals<br>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-centered">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Aug 21</div>
+				<div class="col-xs-12 well">
+					<div class="col-xs-3">
+						<strong>Before Lunch BG</strong>:5.5<br>
+						Time: 10:46:52<br>
+					</div>
+					<div class="col-xs-6">
+						<strong>Lunch</strong> 10:46:52<br>
+						Calories: 480.5 kcals<br>
+						Carbs: 47.5(g)<br>
+						Pro: 24.7(g)<br>
+						Fat: 21.8(g)<br>
+					</div>
+					<div class="col-xs-3">
+						<strong>After Lunch BG</strong>:5.5<br>
+						Time: 14:34:38<br>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 well">
+				<strong>Snack</strong> 09:11:25<br>
+				Calories: 354.5 kcals<br>
+				Carbs: 28.5(g)<br>
+				Pro: 1.7(g)<br>
+				Fat: 26.8(g)<br>
+			</div>
+			<div class="col-xs-12 well">
+				<strong>Exercise</strong><br>
+				Time: 10:49:17<br>
+				Type: Moderate Time Last: 29 minutes<br>
+				Total Calories burned: 174.0 kcals<br></div>
+		</div>
+	</div>
+
+
+	<div class="col-xs-12 col-centered">
+		<div class="panel panel-primary">
+			<div class="panel-heading text-center">Aug 20</div>
+			<table class="table  table-striped">
+
+				<tbody>
+				<tr>
+					<td>
+						<strong>Before Lunch BG</strong>:5.5<br>
+						Time: 10:46:52<br>
+					</td></tr>
+				<tr>
+					<td>
+						<strong>Lunch</strong> 10:46:52<br>
+						Calories: 480.5 kcals<br>
+						Carbs: 47.5(g)<br>
+						Pro: 24.7(g)<br>
+						Fat: 21.8(g)<br>
+					</td></tr>
+				<tr>
+					<td><strong>After Lunch BG</strong>:5.5<br>
+						Time: 14:34:38<br>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<div class="col-xs-12 well">
+			<strong>Snack</strong> 09:11:25<br>
+			Calories: 354.5 kcals<br>
+			Carbs: 28.5(g)<br>
+			Pro: 1.7(g)<br>
+			Fat: 26.8(g)<br>
+		</div>
+		<div class="col-xs-12 well">
+			<strong>Exercise</strong><br>
+			Time: 10:49:17<br>
+			Type: Moderate Time Last: 29 minutes<br>
+			Total Calories burned: 174.0 kcals<br></div>
+	</div>
+</div>
+</div>
+</body>
+</html>

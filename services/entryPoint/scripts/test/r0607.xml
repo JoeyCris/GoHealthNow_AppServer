@@ -1,0 +1,173 @@
+<User_Record>
+<UserID>590a13b6526e95083f499a19</UserID>
+	<Exercise_Records>
+		<Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>1232</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <Calories>1014.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>265</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <Calories>104.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>368</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <Calories>361.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>5894</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-03T16:27:59-0400</RecordedTime>
+            <Calories>4286.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>2563</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-04T16:27:59-0400</RecordedTime>
+            <Calories>1341.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>78</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-04T16:27:59-0400</RecordedTime>
+            <Calories>67.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>2631</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-05T16:27:59-0400</RecordedTime>
+            <Calories>1982.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>111</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-06T16:27:59-0400</RecordedTime>
+            <Calories>123.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>        <Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>222</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2017-06-04T16:27:59-0400</RecordedTime>
+            <Calories>201.5</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+    </Exercise_Records>
+
+    <Meal_Records>
+        <Meal_Record>
+            <Food_Records>
+                <Food_Record>
+                    <FoodItem>
+                        <FoodItemID>8231</FoodItemID>
+                    </FoodItem>
+                    <FoodItemServingSize>1.0</FoodItemServingSize>           
+                </Food_Record>
+            </Food_Records>
+            <Carb>22.0</Carb>
+            <Pro>8.0</Pro>
+            <Fat>1.0</Fat>
+            <Cals>88.0</Cals>
+             <MealScore>96</MealScore>
+            <RecordedTime>2017-06-01T08:27:59-0400</RecordedTime>
+        </Meal_Record>
+         <Meal_Record>
+            <Food_Records>
+                <Food_Record>
+                    <FoodItem>
+                        <FoodItemID>8231</FoodItemID>
+                    </FoodItem>
+                    <FoodItemServingSize>1.0</FoodItemServingSize>
+                     
+                </Food_Record>
+            </Food_Records>
+            <Carb>0.0</Carb>
+            <Pro>20.0</Pro>
+            <Fat>0.0</Fat>
+            <Cals>62.0</Cals>
+            <MealScore>16</MealScore>
+            <RecordedTime>2017-06-03T18:27:59-0400</RecordedTime>
+        </Meal_Record>
+        <Meal_Record>
+            <Food_Records>
+                <Food_Record>
+                    <FoodItem>
+                        <FoodItemID>8231</FoodItemID>
+                    </FoodItem>
+                    <FoodItemServingSize>1.0</FoodItemServingSize>                  
+                </Food_Record>
+            </Food_Records>
+            <Carb>22.0</Carb>
+            <Pro>25.0</Pro>
+            <Fat>5.0</Fat>
+            <Cals>88.0</Cals>
+            <MealScore>52</MealScore>
+            <RecordedTime>2017-06-05T18:27:59-0400</RecordedTime>
+        </Meal_Record>
+        <Meal_Record>
+            <Food_Records>
+                <Food_Record>
+                    <FoodItem>
+                        <FoodItemID>8231</FoodItemID>
+                    </FoodItem>
+                    <FoodItemServingSize>1.0</FoodItemServingSize>       
+                </Food_Record>
+            </Food_Records>
+            <Carb>22.0</Carb>
+            <Pro>1.0</Pro>
+            <Fat>1.0</Fat>
+            <Cals>81.0</Cals>
+            <MealScore>74</MealScore>
+            <RecordedTime>2017-06-06T18:27:59-0400</RecordedTime>
+        </Meal_Record>
+    </Meal_Records>
+<Created_Time>2017-06-06T15:33:06+0000</Created_Time>
+</User_Record>
+

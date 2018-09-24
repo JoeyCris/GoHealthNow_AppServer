@@ -1,0 +1,7 @@
+<div class="text-left" ng-if="diet">
+	<!--strong>Calories:</strong>{{diet.cals | number:0}}<br>
+	<strong>Carbs:</strong>{{diet.carb | number:1}}<br>
+	<strong>Fibre:</strong>{{diet.fiber | number:1}}<br -->
+	<p>{{diet.carb | number:1}}/{{diet.fiber | number:1}}</p>
+	<p style="font-size: 75% ; margin-bottom: 0; padding-bottom: 0">{{diet.recordedTime | date:'HH:mm'}}</p>
+</div>

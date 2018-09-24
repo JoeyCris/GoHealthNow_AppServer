@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+	{% if name %}
+	<p>Dear {{name}},</p>
+	{% else %}
+	<p>Dear user,</p>
+	{% endif %}
+	<p></p>
+	<p>Thanks for choosing GlucoGuide. Please click the following link to activate your account.</p>
+	<br>
+	<p><a href="{{url}}">Activate your account...</a></p>
+	<br>
+	<br>
+	<p>The {{appName}} Support Team</p>
+</body>
+</html>

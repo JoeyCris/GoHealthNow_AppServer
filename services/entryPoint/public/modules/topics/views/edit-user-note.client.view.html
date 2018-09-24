@@ -1,0 +1,83 @@
+<section data-ng-controller="NotesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Edit Note</h1>
+	</div>
+	<div class="col-md-12">
+		<!--<div class="jumbotron" data-ng-show="question">-->
+			<!--<h4>Reference: </h4>-->
+			<!--<div class="page-header">-->
+				<!--<p data-ng-bind="question.questionContent"></p>-->
+			<!--</div>-->
+			<!--<small>-->
+				<!--<em class="text-muted">-->
+					<!--Posted on-->
+					<!--<span data-ng-bind="question.recordedTime | date:'mediumDate'"></span>-->
+					<!--by-->
+					<!--<span data-ng-bind="question.userID.email"></span>-->
+				<!--</em>-->
+			<!--</small>-->
+			<!--<div ng-show="question.medias">-->
+				<!--<label class="control-label" for="photo">Photo</label>-->
+				<!--<div class="row">-->
+					<!--<div class="col-sm-1 btn" ng-repeat="media in question.medias">-->
+						<!--<img class="img-responsive" ng-click="selectqmedia(media)" ng-src="{{media.uri}}" />-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+					<!--<div class="img-thumbnail">-->
+						<!--<img class="img-responsive"  ng-src="{{preqmedia.uri}}" />-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<form name="topicForm" class="form-horizontal" data-ng-submit="topicForm.$valid && update(topicForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && topicForm.description.$invalid}">
+					<label class="control-label" for="description">Note</label>
+					<div class="controls">
+						<textarea name="description" data-ng-model="note.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description" required></textarea>
+					</div>
+					<div ng-show="submitted && topicForm.description.$invalid" class="help-block">
+						<p ng-show="topicForm.description.$error.required" class="text-danger">Description is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': topicForm.signature.$invalid }">
+					<label class="control-label" for="signature">Creator</label>
+					<div class="controls">
+						<input type="text" name="signature" data-ng-model="note.signature" id="signature" class="form-control" placeholder="Leave you name here" required></input>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && topicForm.link.$invalid}">
+					<label class="control-label" for="link">Link</label>
+					<div class="controls">
+						<input type="url" data-ng-model="note.link" name="link" id="link" class="form-control" placeholder="Link URL : http://www.google.ca"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<div ng-show="medias" ng-class="{ 'has-error': topicForm.photos.$dirty && topicForm.photos.$invalid }">
+						<label class="control-label" for="photos">Photo</label>
+						<div class="row">
+							<div class="col-sm-1 btn" ng-repeat="media in medias">
+								<img class="img-responsive" ng-click="toggleMedia(media)" ng-src="{{media.uri}}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="img-thumbnail" ng-class="{hidden:!premedia}">
+								<img class="img-responsive"  ng-src="{{premedia.uri}}" ng-click="toggleMedia(media)"/>
+							</div>
+						</div>
+					</div>
+					<div class="controls">
+						<div class="btn btn-primary" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

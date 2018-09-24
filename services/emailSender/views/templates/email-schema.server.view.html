@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+	{% if name %}
+	<p>Dear {{name}},</p>
+	{% else %}
+	<p>Dear GlucoGuide user,</p>
+	{% endif %}
+	{% autoescape false %}{{ content }}{% endautoescape %}
+	<p>We hope you enjoyed receiving this message. However, if you'd rather not receive future e-mails of this sort from <a href="https://www.glucoguide.com">GlucoGuide</a>, please opt-out <a href="{{unsubscribe}}">here<a>.</p>
+	<p>Regards,</p>
+	<p>The {{appName}} Support Team</p>
+</body>
+</html>

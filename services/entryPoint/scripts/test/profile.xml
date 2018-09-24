@@ -1,0 +1,27 @@
+<Profile>
+ <DeviceType>1</DeviceType>
+ <UserID>5872532dd0980b9f0aa16977</UserID>
+ <AccessCode>dec1234</AccessCode>
+ <Language>1</Language>
+ <BGUnit>0</BGUnit>
+ <MeasureUnit>0</MeasureUnit>
+ <UpdatedTime>2017-01-02T03:59:49+0000</UpdatedTime>
+ <MealDistribution>
+  <Snacks>25</Snacks>
+  <Dinner>25</Dinner>
+  <Lunch>25</Lunch>
+  <Breakfast>25</Breakfast>
+ </MealDistribution>
+ <Ethnicity>5</Ethnicity>
+ <Conditions/>
+ <TargetCalories>2074.4856</TargetCalories>
+ <AppID>1</AppID>
+ <RegistrationTime>2017-01-02T03:59:49+0000</RegistrationTime>
+ <WaistSize>80</WaistSize>
+ <Height>180</Height>
+ <Weight>80</Weight>
+ <DOB>1965</DOB>
+ <Gender>0</Gender>
+ <BMI>24.7</BMI>
+ <SponsorUID>gsc1233456</SponsorUID>
+</Profile>

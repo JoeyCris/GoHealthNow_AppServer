@@ -1,0 +1,67 @@
+<section data-ng-controller="TopicTemplatesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Edit Template</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="templateForm" class="form-horizontal" data-ng-submit="templateForm.$valid && update(templateForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && templateForm.title.$invalid}">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<input name="title" type="text" data-ng-model="template.title" id="title" class="form-control" placeholder="Title" required>
+					</div>
+					<div ng-show="submitted && templateForm.title.$invalid" class="help-block">
+						<p ng-show="templateForm.title.$error.required" class="text-danger">Title is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': templateForm.type.$dirty && templateForm.type.$invalid }">
+					<label class="control-label" for="type">Type</label>
+					<div class="controls">
+						<select name="type" data-ng-options="onetype for onetype in types" data-ng-model="template.type" id="type" class="form-control" placeholder="Type" required>
+						</select>
+					</div>
+				</div>
+				<div ng-show="template.type" class="alert alert-info"><strong>Notice:</strong> {{templateTypes[template.type].description}}</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && templateForm.content.$invalid}">
+					<label class="control-label" for="content">Content</label>
+					<div class="controls">
+						<textarea name="content" data-ng-model="template.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
+					</div>
+					<div ng-show="submitted && templateForm.content.$invalid" class="help-block">
+						<p ng-show="templateForm.content.$error.required" class="text-danger">Content is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && templateForm.link.$invalid}">
+					<label class="control-label" for="link">Link</label>
+					<div class="controls">
+						<input type="url" data-ng-model="template.link" name="link" data-ng-model="link" id="link" class="form-control" placeholder="Link URL : http://www.google.ca"></input>
+					</div>
+				</div>
+				<div class="form-group">
+					<div ng-show="medias" ng-class="{ 'has-error': templateForm.photos.$dirty && templateForm.photos.$invalid }">
+						<label class="control-label" for="photos">Photo</label>
+						<div class="row">
+							<div class="col-sm-1 btn" ng-repeat="media in medias">
+									<img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="img-thumbnail">
+									<img class="img-responsive"  ng-src="{{premedia.uri}}" />
+							</div>
+						</div>
+					</div>
+					<div class="controls">
+						<div class="btn btn-primary" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

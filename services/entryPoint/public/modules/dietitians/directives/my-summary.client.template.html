@@ -1,0 +1,42 @@
+<!-- div class="col-xs-3">
+    <b>Daily Summary</b> <br>
+    Total Calories intake: {{summary.totalCals | number:1}} kcals<br>
+    Carb: {{summary.totalCarb | number:1}}(g): <br>
+	Fibre: {{summary.totalFiber| number:1}}(g); <br>
+    Pro:   {{summary.totalPro | number:1}}(g) <br>
+    Fat:   {{summary.totalFat | number:1}}(g)  <br>
+
+    Total Calories burned: {{summary.totalBurned | number:1}} kcals <br>
+</div -->
+
+<div class="panel panel-danger">
+	<div class="panel-heading"><strong>Summary</strong></div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-12">
+			<p class="text-success"><i class="glyphicon glyphicon-cutlery" style="font-size: 150%"></i> Intake:
+				<span style="font-size: 150%">{{summary.totalCals | number:1}}</span> kcals</p>
+			<p class="text-danger"><i class="glyphicon glyphicon-fire" style="font-size: 150%"></i> Burn:
+				<span style="font-size: 150%">{{summary.totalBurned | number:1}}</span> kcals</p>
+				</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+
+				<canvas id="doughnut" class="chart chart-doughnut pull-left"
+						chart-data="dailyData"  chart-legend="false" chart-labels="dailyLabels">
+				</canvas>
+			</div>
+			<div class="col-xs-6 text-left">
+				<i class="glyphicon glyphicon-stop text-success"></i>Carb: 45.4 (g)<br>
+				<i class="glyphicon glyphicon-stop text-danger"></i>Fibre: 5.6 (g))<br>
+				<i class="glyphicon glyphicon-stop text-warning"></i>Fat: 45.4 (g)<br>
+				<i class="glyphicon glyphicon-stop" ></i>Pro: 45.4 (g)<br>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+

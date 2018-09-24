@@ -1,0 +1,766 @@
+<section data-ng-controller="LogbookController" data-ng-init="getUserProfile()" class="row">
+	<div class="row noPrint">
+		<div ng-show="authentication.user.roles[0] === 'user' && user.email !== 'johndoe3433@gmail.com'" class="col-sm-12">
+			<form class="form-inline" data-ng-submit="updateUserProfile()" novalidate>
+
+				<script type="text/ng-template" id="UserPrivacy.html">
+					<div class="modal-header">
+						<h3 class="modal-title text-center">Update successfully</h3>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+					</div>
+				</script>
+
+				<div class="form-group">
+					<div class="input-group checkbox">
+						<label> <input name="checked" type="checkbox" ng-model="checked" >&nbsp;Allow my healthcare providers with the same Access Code to
+							view my data.</label> &nbsp;
+						<div class="pull-right"><input type="submit" value="Save" class="btn btn-primary btn-sm "/></div>
+
+						<br><br>
+					</div>
+				</div>
+				<br>
+				<!--<div id="messages" class="alert alert-success" data-ng-show="success" data-ng-bind="success"></div>-->
+
+
+			</form>
+		</div>
+	</div>
+	<div class="row" id="home_tag">
+		<div ng-show="userRole == 'dietitian'" ng-controller="DietSidebarCtrl">
+			<diet-sidebar></diet-sidebar>
+		</div>
+		<!--<div class="noPrint col-sm-10" id="home_tag">-->
+		<div ng-class="{true: 'noPrint col-lg-offset-1', false: 'noPrint col-sm-12'}[userRole=='dietitian']">
+			<div ng-show="user.email == 'johndoe3433@gmail.com'" class="alert alert-danger alert-dismissible" role="alert">
+				<!-- button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button -->
+				<p><b>Alert:</b> This is a "test" user, so the data are fake and not medically
+					meaningful. After you create your account in the GlucoGuide App, you
+					can use the email address and password you used to login <a href="/auth/signout">here</a> to see
+					your logbook online.</p>
+
+			</div>
+
+			<script type="text/ng-template" id="logBookHelp.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Logbook Help</h3>
+				</div>
+				<div class="modal-body">
+					<ol>
+						<li>To display charts and trends better, days are listed at the top, time line on the left. It is a 90-degree turn of a paper logbook.</li>
+						<li>"Day 7" is the last day that you have entered and uploaded any data, "Day 6" is the day before that, and so on. You can always choose any different day to view and compare</li>
+						<li>You can scroll left to right, and up and down to see all charts, trends, and data.</li>
+						<li>You can print out the logbook to bring to your healthcare
+							providers.  Use the Print button to the top right.  However, due to
+							the small paper size, the info printed on paper (similar to the
+							standard paper logbooks) is limited.  Our online logbook displays
+							rich info including charts, trends, details of meals, and so on.</li>
+					</ol>
+					<hr>
+					We hope our online logbook can help you better track and manage your diabetes. We love to hear your opinions and suggestions so we can improve further.  Please email us at <a href="mailto:solutions@glucoguide.com" target="_blank">solutions@glucoguide.com</a>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+				</div>
+			</script>
+
+			<script type="text/ng-template" id="CopyURL.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Share My Logbook</h3>
+				</div>
+				<div class="modal-body">
+
+					<input id="copyurl" class="form-control" type="text" value="{{content}}"  select-on-click="shouldBeOpen"/>
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" ngclipboard data-clipboard-text="{{content}}">
+						Copy to clipboard
+					</button>
+					<button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+				</div>
+			</script>
+
+			<div class="panel panel-default hiddenForSmallDevice">
+				<div class="panel-heading text-center">
+					<div class="row">
+						<strong class="text-center">Logbook For {{user.firstName ?  user.firstName  : user.email}}</strong>
+				<span class="pull-right">
+					<button class="btn-default" onclick="window.print()"> Print
+						<i class="glyphicon glyphicon-print"></i>
+					</button>
+					<a target="_blank" href="/filedownload?name=out.pdf&userID={{dietitian._id}}" class="btn-default"> <button class="btn-default" ng-click="genPdf()"> Save
+						<i class="glyphicon glyphicon-download-alt"></i>
+					</button></a>
+					<!-- <button class="btn-default" ng-click="genPdf()"> Share
+						<i class="glyphicon glyphicon-share"></i>
+					</button> -->
+					<button class="btn-default" ng-click="showHelp()"> Help
+						<i class="glyphicon glyphicon-info-sign"></i>
+					</button>
+						</span>
+					</div>
+				</div>
+				<div class="panel-body">
+
+					<div >
+
+
+						<table class="table table-condensed">
+							<tr>
+								<td><span class="glyphicon glyphicon-user"></span><b>Email:</b> {{user.email}}</td>
+								<td><b>Gender:</b> {{ user.gender === 0 ? 'Male': 'Female'}}</td>
+								<td><b>Birthday:</b> {{user.dob}}</td>
+								<td>
+									<b>Weight:</b>
+									<span> {{user.weight| number:1}} kg. ({{user.weight * 2.2046 | number:0}} lbs)
+									</span>
+									<span>
+										<button type="button" ng-if="user.weight" class="btn btn-default btn-sm"
+																				  ng-click="seeWeightInDetail()">
+																		<i class="glyphicon glyphicon-info-sign"></i>
+										</button>
+									</span>
+								</td>
+								<td><b>Height:</b> {{user.height| number:0}} cm. ({{toImperialLength(user.height)}})</td>
+								<td><b>BMI:</b> {{user.bmi | number:1}}</td>
+
+							</tr>
+							<tr>
+								<td>
+									<b>A1c:</b> {{latestA1CValue.a1CValue || '-'}}
+									<span><button type="button" ng-if="latestA1CValue.a1CValue" class="btn btn-default btn-sm"
+																					  ng-click="seeA1CRecordsInDetail()">
+																			<i class="glyphicon glyphicon-info-sign"></i>
+									</button></span>
+
+								</td>
+								<td><b>Waist:</b> {{user.waistSize| number:0}} cm. ({{toImperialLength(user.waistSize)}})</td>
+								<td colspan="3"><b>Ideal Daily Calories Intake:</b> {{getIdeaCals(user) | number:0}} kcals</td>
+								<td><b>Access Code:</b> {{user.accessCode}}</td>
+							</tr>
+							<tr>
+								<td colspan="2"><b>Ethnicity:</b> {{ ethnicitySpans[user.ethnicity] || '-' }}</td>
+								<td colspan="2"><b>Language:</b> {{ languageSpans[user.language] || 'English' }}</td>
+								<td><b>APP Name:</b> {{getAPPName()}}</td>
+							</tr>
+							<tr>
+								<td colspan="4" ng-if="user.conditions.condition.length != 0"><b>Conditions:</b> <span class="label label-primary" ng-repeat="condition in user.conditions.condition" >{{ conditionSpans[condition] }}</span> </td>
+							</tr>
+							<tr>
+								<td data-ng-controller="GoalController" data-ng-init="getLatestGoal()">
+									<div>
+										<b>Goals:</b> {{details.description ? details.description:'Not Set'}}
+									<span><button type="button" ng-if="details.description" class="btn btn-default btn-sm"
+												  ng-click="seeGoalsInDetail(details)">
+										<i class="glyphicon glyphicon-info-sign"></i>
+									</button></span>
+									</div>
+								</td>
+								<td>
+									<div>
+										<b>Reminders:</b> {{!!reminders.length ? reminders.description :'Not Set'}}
+									<span><button type="button" ng-if="!!reminders.length" class="btn btn-default btn-sm"
+												  ng-click="seeRemindersInDetail(reminders)">
+										<i class="glyphicon glyphicon-info-sign"></i>
+									</button></span>
+									</div>
+								</td>
+								<td>
+
+								<b>Device Type:</b> {{ deviceSpans[user.deviceType] || '-' }}
+								</td>
+								<td>
+								 <div ng-if="authentication.user.roles[0] === 'user'">
+									 <div ng-show="hasBindFitbit">
+										 <label> <input name="checked" type="checkbox" ng-model="hasBindFitbit" ng-change="unbindFitbit()" >Connected to Fitbit</label>
+									 </div>
+									 <div ng-hide="hasBindFitbit">
+									 <a class="btn btn-default" href="/auth/fitbit" role="button">Connect to Fitbit</a>
+								     </div>
+								 </div
+										 >
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><b>Input Selection:</b> {{ inputSelections.description || '-' }}
+								</td>
+								<td  colspan="2">
+
+									<div ng-show="isValidAccessCode">
+										<b>Monthly Random ID:</b> {{genRandomID(user.userID)}}
+									</div>
+								</td>
+							</tr>
+
+						</table>
+					</div>
+				</div>
+				<!--</div>-->
+			</div>
+	 
+
+			<div class="hiddenForBigDevice container-fluid trendContainer" name="top" id="trendContainer" >
+		 		<div class="row">
+						<div class="col-md-8 text-center" style="margin: 20px 0; color:whitesmoke">
+							<h3>TREND FOR LAST 7 DAYS</h3>
+						</div>
+
+						<div class="col-md-4 text-center" style="margin: 40px auto; vertical-align: bottom">
+							<div class="row text-center">
+								<div class="btn-group">
+
+									<button type="button" class="btn btn-default   pull-left" ng-click="prePeriod()">
+										<strong><i class="glyphicon glyphicon-chevron-left"></i></strong></button>
+
+									<button type="button" class="btn btn-default pull-center"  datepicker-popup="{{format}}"
+											ng-model="dt7" is-open="opened7" ng-click="open7($event)" datepicker-options="dateOptions"
+											close-text="Close" >
+
+										<!-- button type="button" class="btn btn-default pull-center"
+	                                            ng-click="open($event)" datepicker-popup="{{format}}" ng-model="dt7"
+	                                            is-open="opened7" min-date="minDate" max-date="'2020-06-22'"
+	                                            datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+	                                            ng-required="true" close-text="Close" -->
+										<strong>{{dt7 | date:'fullDate' }}  </strong>
+										<span><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
+									</button>
+									<button type="button" class="btn btn-default  pull-right" ng-click="nextPeriod()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+								</div>
+							</div>
+						</div>
+						<div ng-hide="hasBGData()">
+							<div class="row weeklySum">
+
+								<div class="col-md-4">
+									<b>BG above 10 mmol/L:</b> <strong  style="font-size: 150%">--</strong><span> times </span>
+								</div>
+
+								<div class="col-md-4">
+									<b>BG between 4-10 mmol/L:</b>
+									<strong style="font-size: 150%">--</strong>
+									<span> times</span>
+								</div>
+								<div class="col-md-4">
+									<b>BG below 4 mmol/L:</b>
+									<strong  style="font-size: 150%">--</strong>
+									<span> times</span>
+								</div>
+							</div>
+						</div>
+						<div  ng-if="hasBGData()">
+							<div class="row weeklySum">
+
+								<div class="col-md-4">
+									<b>BG above 10 mmol/L:</b> <strong  style="font-size: 150%;color:#FFF263">{{numBGLG10}}</strong><span> times ({{numBGLG10*100/numTotalBG | number : 0}}%)</span>
+								</div>
+
+								<div class="col-md-4">
+									<b>BG between 4-10 mmol/L:</b>
+									<strong  style="font-size: 150%;color:#90ee7e">{{numTotalBG - numBGLG10 - numBGSM4}}</strong>
+									<span> times ({{(numTotalBG - numBGLG10 - numBGSM4)*100/numTotalBG | number : 0}}%)</span>
+								</div>
+								<div class="col-md-4">
+									<b>BG below 4 mmol/L:</b>
+									<strong  style="font-size: 150%;color:#f45b5b"> {{numBGSM4}}</strong>
+									<span> times ({{numBGSM4*100/numTotalBG | number : 0}}%)</span>
+								</div>
+							</div>
+						</div>
+				</div>
+				<hr/>
+				<!--slider for summary graph --> 
+				<div >
+					<div class='row'>
+				     	<div class="highcharts-container col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12" ng-repeat="slide in slides"  ng-show="slide.active">
+				   			<highchart id="chart1" config="slide.config" ></highchart>		
+				   			<br>
+				   		</div>
+			   		</div>
+			   		<div class='text-center' ng-show="slides.length>0" style="color:white">{{curslide+1}}/{{slides.length}}</div>
+			   		<div align="center" ng-show="slides.length>0">
+				   		<button type="button" class="btn btn-primary waves-effect waves-light" aria-label="Left Align" ng-click="slides_left()">
+						  <span class="glyphicon glyphicon-chevron-left " aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-primary waves-effect waves-light" aria-label="Right Align" ng-click="slides_right()">
+						  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" ></span>
+						</button>
+					</div>
+			   	</div>	  
+
+			<!-- <div id="myCarousel1" class="carousel slide col-md-6 col-md-offset-3 col-sm-12 col-sm-offset-3 col-xs-12" interval="myInterval">
+			    	<div class="carousel-inner">
+			    		<div class="item active">
+			    			<h1>asdasdasd</h1>
+			    		</div>
+			   		</div>
+			   		<a class="carousel-control left" href="#myCarousel1"
+				        data-slide="prev">&lsaquo;</a>
+				    <a class="carousel-control right" href="#myCarousel1"
+				        data-slide="next">&rsaquo;</a>
+			    </div>
+ 			-->
+			     
+			    <div ng-if="weeklyReports.length != 0">
+					<div style="margin: 0 20px 20px 0;">
+						<a type="button" class="btn btn-default"
+								ng-click="isWeeklyReportCollapsed = !isWeeklyReportCollapsed">
+							<!-- <strong>{{isWeeklyReportCollapsed?'See Details ':'Hide Details '}}</strong> -->
+							<strong>Weekly Reports</strong>
+							<span><i class="glyphicon glyphicon" ng-class="{'glyphicon-chevron-down': !isWeeklyReportCollapsed, 'glyphicon-chevron-right': isWeeklyReportCollapsed}"></i></span>
+						</a>
+					</div>
+
+					<div collapse="isWeeklyReportCollapsed" class="jumbotron">
+						<div ng-repeat="report in weeklyReports">
+							<br ng-if="report != weeklyReports[0]"/>
+							{{report.description}}<small class="pull-right">{{report.create_time | date:'MMM d, h:mm a'}}</small>
+						</div>
+					</div>
+				</div>
+
+ 			</div>
+
+
+
+
+
+
+			<!-- the  summary graph for 7 last days-->
+			<div class="hiddenForSmallDevice container-fluid trendContainer" name="top" id="trendContainer">
+
+				<div class="row">
+					<div class="col-md-8 text-center" style="margin: 20px 0; color:whitesmoke">
+						<h3>TREND FOR LAST 7 DAYS</h3>
+					</div>
+
+
+					<div class="col-md-4 text-center" style="margin: 40px auto; vertical-align: bottom">
+						<div class="row text-center">
+							<div class="btn-group">
+
+								<button type="button" class="btn btn-default   pull-left" ng-click="prePeriod()">
+									<strong><i class="glyphicon glyphicon-chevron-left"></i></strong></button>
+
+								<button type="button" class="btn btn-default pull-center"  datepicker-popup="{{format}}"
+										ng-model="dt7" is-open="opened7" ng-click="open7($event)" datepicker-options="dateOptions"
+										close-text="Close" >
+
+									<!-- // button type="button" class="btn btn-default pull-center"
+                                            ng-click="open($event)" datepicker-popup="{{format}}" ng-model="dt7"
+                                            is-open="opened7" min-date="minDate" max-date="'2020-06-22'"
+                                            datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                            ng-required="true" close-text="Close" -->
+									<strong>{{dt7 | date:'fullDate' }}  </strong>
+									<span><i class="glyphicon glyphicon glyphicon-calendar"></i></span>
+								</button>
+								<button type="button" class="btn btn-default  pull-right" ng-click="nextPeriod()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<hr/>
+
+				<div ng-hide="hasBGData()">
+					<div class="row weeklySum">
+
+						<div class="col-md-4">
+							<b>BG above 10 mmol/L:</b> <strong  style="font-size: 150%">--</strong><span> times </span>
+						</div>
+
+						<div class="col-md-4">
+							<b>BG between 4-10 mmol/L:</b>
+							<strong style="font-size: 150%">--</strong>
+							<span> times</span>
+						</div>
+						<div class="col-md-4">
+							<b>BG below 4 mmol/L:</b>
+							<strong  style="font-size: 150%">--</strong>
+							<span> times</span>
+						</div>
+					</div>
+				</div>
+				<div  ng-if="hasBGData()">
+					<div class="row weeklySum">
+
+						<div class="col-md-4">
+							<b>BG above 10 mmol/L:</b> <strong  style="font-size: 150%;color:#FFF263">{{numBGLG10}}</strong><span> times ({{numBGLG10*100/numTotalBG | number : 0}}%)</span>
+						</div>
+
+						<div class="col-md-4">
+							<b>BG between 4-10 mmol/L:</b>
+							<strong  style="font-size: 150%;color:#90ee7e">{{numTotalBG - numBGLG10 - numBGSM4}}</strong>
+							<span> times ({{(numTotalBG - numBGLG10 - numBGSM4)*100/numTotalBG | number : 0}}%)</span>
+						</div>
+						<div class="col-md-4">
+							<b>BG below 4 mmol/L:</b>
+							<strong  style="font-size: 150%;color:#f45b5b"> {{numBGSM4}}</strong>
+							<span> times ({{numBGSM4*100/numTotalBG | number : 0}}%)</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<highchart id="chart1" config="weeklyBGChart1"></highchart>
+						</div>
+						<div class="col-md-6 ">
+							<highchart id="chart1" config="weeklyBGChart2"></highchart>
+						</div>
+					</div>
+					<br>
+				</div>
+
+				<div  ng-if="hasExerciseData()">
+					<div class="row ">
+
+						<div class="col-md-6">
+							<highchart id="chart1" config="weeklyStepChart"></highchart>
+						</div>
+						<div class="col-md-6">
+							<highchart id="chart1" config="weeklyExerciseChart"></highchart>
+						</div>
+						<div class="col-md-12">
+							<br>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div  ng-if="hasMealData()">
+					<div class="row ">
+						<div class="col-md-6 col-xs-12">
+							<highchart id="chart1" config="mealScoreChart"></highchart>
+						</div>
+						<div class="col-md-6 col-xs-12">
+							<highchart id="chart1" config="weeklyNutrionChart"></highchart>
+						</div>
+						<div class="col-md-12">
+							<br>
+						</div>
+					</div>
+					<br>
+				</div>
+				<div ng-if="weeklyReports.length != 0">
+					<div style="margin: 0 20px 20px 0;">
+						<a type="button" class="btn btn-default"
+								ng-click="isWeeklyReportCollapsed = !isWeeklyReportCollapsed">
+							<!-- 
+								//<strong>{{isWeeklyReportCollapsed?'See Details ':'Hide Details '}}</strong>
+							 -->
+							<strong>Weekly Reports</strong>
+							<span><i class="glyphicon glyphicon" ng-class="{'glyphicon-chevron-down': !isWeeklyReportCollapsed, 'glyphicon-chevron-right': isWeeklyReportCollapsed}"></i></span>
+						</a>
+					</div>
+
+					<div collapse="isWeeklyReportCollapsed" class="jumbotron">
+						<div ng-repeat="report in weeklyReports">
+							<br ng-if="report != weeklyReports[0]"/>
+							{{report.description}}<small class="pull-right">{{report.create_time | date:'MMM d, h:mm a'}}</small>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+
+			<hr/>
+			<div ng-repeat="day in [day1,day2,day3,day4,day5,day6,day7] track by $index" >
+
+				<div class="container-fluid" ng-if="isValid(day)">
+
+					<div class="row">
+						<div class="col-md-12 col-xs-12">
+							<div class="page-header text-center">
+								<h4>{{dts[$index] | date:'fullDate' }}</h4>
+							</div>
+						</div>
+						<div class="col-md-12  col-xs-12">
+							<div class="row trendContainer" ng-if="isValidBG(day)">
+								<div class="col-md-8  col-xs-12">
+									<highchart id="chart1" config="dailyBGChart[$index]" ></highchart>
+								</div>
+								<div class="col-md-4  col-xs-12 pull-left summaryCard hiddenForSmallDevice">
+
+									<div class="col-xs-12">
+										<highchart id="chart1" config="dailyNutritionChart[$index]" ></highchart>
+									</div>
+
+									<div class="dailySummaryBoard">
+
+										<p><i class="glyphicon glyphicon-cutlery" style="font-size: 150%"></i> Intake:
+											<span style="font-size: 150%">{{summaryInfo[$index].totalCals + summaryInfo[$index].totalCalsFromSnack | number : 1}}</span> kcals
+										</p>
+										<p><i class="glyphicon glyphicon-fire" style="font-size: 150%"></i> Burn:
+											<span style="font-size: 150%">{{summaryInfo[$index].totalBurned | number : 1}}</span> kcals
+										</p>
+
+									</div>
+
+								</div>
+							</div>
+
+							<p/>
+
+						</div>
+						<div class="col-md-12  col-xs-12">
+							<div class="row thumbnail">
+								<div class="col-md-12 ">
+									<div class='col-md-8'>
+										<div class="btn-group col-md-1 col-xs-6">
+											<a type="button" ng-class="{disabled : !dailyTips[$index]}" class="btn btn-default"
+											   ng-click="showTips(dailyTips[$index])">
+												<strong>See Tips</strong>
+											</a>
+										</div>
+										<div  class="btn-group col-md-1 col-md-offset-1 col-xs-6  ">
+											<a type="button" ng-class="{disabled : !questions[$index]}" class="btn btn-default small-font"
+											   ng-click="showQuestions(questions[$index])">
+												<strong >See Questions</strong>
+											</a>
+										</div>
+										<div class="phoneOnly"> <br><br>  </div>
+										<div class="btn-group col-md-1 col-md-offset-2 col-xs-6  ">
+											<button type="button" class="btn btn-default"
+													ng-click="isDailyDetailCollapsed = !isDailyDetailCollapsed">
+												<strong>{{isDailyDetailCollapsed?'See Details ':'Hide Details '}}</strong>
+
+												<!-- span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !isDailyDetailCollapsed, 'glyphicon-chevron-right': isDailyDetailCollapsed}">
+
+                                                </i></span -->
+												<span><i class="glyphicon glyphicon" ng-class="{'glyphicon-chevron-down': !isDailyDetailCollapsed, 'glyphicon-chevron-right': isDailyDetailCollapsed}"></i></span>
+											</button>
+										</div>
+								 	</div>
+									<div class="col-xs-5 col-md-4">
+										<a ng-click="scrollToTop('home_tag')" class="btn btn-default pull-right" role="button">Back to Top</a>
+									</div>
+								</div>
+
+							</div>
+							<p/>
+
+
+
+
+						<div collapse="isDailyDetailCollapsed">
+							<div class="col-md-12">
+								<div class="col-md-3 col-sm-6 col-xs-12">
+									<meal-and-glucose before="beforeBreakfastBG[$index]"  meal="breakfast[$index]"
+													  after="afterBreakfastBG[$index]" title="Breakfast"></meal-and-glucose>
+								</div>
+								<div class="col-md-3 col-sm-6  col-xs-12">
+
+									<meal-and-glucose before="beforeLunchBG[$index]"  meal="lunch[$index]"
+													  after="afterLunchBG[$index]" title="Lunch"></meal-and-glucose>
+
+								</div>
+								<div class="col-md-3 col-sm-6  col-xs-12">
+
+									<meal-and-glucose before="beforeSupperBG[$index]"  meal="supper[$index]"
+													  after="afterSupperBG[$index]" title="Dinner"></meal-and-glucose>
+								</div>
+								<div class="col-md-3 col-sm-6  col-xs-12">
+									<my-sleep sleep="sleepTime[$index]" glucose="beforeBedBG[$index]"></my-sleep>
+
+									<my-exercise exercises="eveningSnackAndExercise[$index].sumOfExercise"></my-exercise>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="col-md-3 col-sm-6  col-xs-12">
+									<my-other-records records="beforeBreakfastSnackAndExercise[$index]" collapsed="bmsnackisCollapsed"
+													  title="Before Breakfast Snack">
+									</my-other-records>
+
+								</div>
+								<div class="col-md-3  col-sm-6 col-xs-12">
+									<my-other-records records="morningSnackAndExercise[$index]">
+									</my-other-records>
+
+								</div>
+								<div class="col-md-3  col-sm-6 col-xs-12">
+									<my-other-records records="afternoonSnackAndExercise[$index]">
+									</my-other-records>
+
+								</div>
+								<div class="col-md-3  col-sm-6 col-xs-12">
+
+									<!-- my-exercise exercises="eveningSnackAndExercise[$index].sumOfExercise"></my-exercise -->
+									<my-other-records records="eveningSnackAndExercise[$index]">
+									</my-other-records>
+
+								</div>
+							</div>
+
+						</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="printOnly" id="printOnly"> <!-- class="printOnly" -->
+		<div class="col-xs-12 col-centered">
+
+			<div class="alert alert-info alert-dismissible" role="alert">
+				<b>Hint:</b>
+				<p>
+
+					The secure online logbook (https://myaccount.glucoguide.com) displays
+					rich info including charts, trends, details of meals including meal photos, and so on.
+					If you would like to allow your healthcare providers, family members or friends to view your online logbook,
+					please email support@glucoguide.com
+
+				</p>
+			</div>
+
+
+			<h3 class="text-center">Logbook For {{user.firstName}} {{user.lastName}}</h3>
+			<div class="text-left">
+				<p><strong>From</strong> {{dt1 | date:'MMM dd'}} <strong>to</strong> {{dt7 | date:'MMM dd'}}</p>
+			</div>
+		</div>
+		<div class="col-xs-12">
+
+			<h4 class="text-center"></h4>
+		</div>
+		<div class="col-xs-12">
+
+			<table class="table table-bordered table-condensed text-center">
+				<thead>
+				<tr>
+					<th>BG above 10 mmol/L</th>
+					<th>BG between 4-10 mmol/L</th>
+					<th>BG below 4 mmol/L</th>
+				</tr>
+				</thead>
+				<tbody align="center">
+				<tr>
+					<td><strong>{{numBGLG10}}</strong><span> times ({{numBGLG10*100/numTotalBG | number : 0}}%)</span></td>
+					<td><strong>{{numTotalBG - numBGLG10 - numBGSM4}}</strong>
+						<span> times ({{(numTotalBG - numBGLG10 - numBGSM4)*100/numTotalBG | number : 0}}%)</span></td>
+					<td><strong>{{numBGSM4}}</strong>
+						<span> times ({{numBGSM4*100/numTotalBG | number : 0}}%)</span></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-12 text-center">
+
+			<highchart config="weeklyBGChart1"></highchart>
+		</div>
+		<!-- div class="col-xs-12">
+
+			<highchart config="weeklyBGChart2"></highchart>
+		</div -->
+
+		<div class="col-xs-12">
+
+			<h4 class="text-center"></h4>
+		</div>
+
+
+		<div class="col-xs-12">
+			<table class="table table-bordered table-condensed text-center">
+				<thead class="text-center" align="center">
+				<tr class="text-center" align="center">
+					<th rowspan="2" class="text-center"  style="vertical-align: middle">Day</th>
+					<th colspan="3" class="text-center">Breakfast</th>
+					<th colspan="3" class="text-center">Lunch</th>
+					<th colspan="3" class="text-center">Dinner</th>
+					<th rowspan="2" class="text-center" style="vertical-align: middle">Bedtime BG</th>
+
+				</tr>
+				<tr class="text-center">
+					<th class="text-center">Before BG</th>
+					<th class="text-center">Carbs / Fibre</th>
+					<th class="text-center">After BG</th>
+					<th class="text-center">Before BG</th>
+					<th class="text-center">Carbs / Fibre</th>
+					<th class="text-center">After BG</th>
+					<th class="text-center">Before BG</th>
+					<th class="text-center">Carbs / Fibre</th>
+					<th class="text-center">After BG</th>
+				</tr>
+				</thead>
+				<tbody align="center" ng-repeat="record in [0,1,2,3,4,5,6] track by $index">
+				<tr>
+					<td rowspan="2" style="vertical-align: middle">
+						<div class="avoidBreak">
+							<strong>{{dts[$index] | date:'MMM dd'}}</strong>
+						</div>
+					</td>
+
+					<td>
+						<print-glucose bg="beforeBreakfastBG[$index]" ></print-glucose>
+					</td>
+					<td>
+						<print-meal diet="breakfast[$index]" ></print-meal>
+					</td>
+					<td>
+						<print-glucose bg="afterBreakfastBG[$index]" ></print-glucose>
+					</td>
+
+
+					<td>
+						<print-glucose bg="beforeLunchBG[$index]" ></print-glucose>
+					</td>
+
+					<td class="text-left">
+						<print-meal diet="lunch[$index]" ></print-meal>
+					</td>
+
+					<td>
+						<print-glucose bg="afterLunchBG[$index]" ></print-glucose>
+					</td>
+
+					<td>
+						<print-glucose bg="beforeSupperBG[$index]" ></print-glucose>
+					</td>
+					<td>
+						<print-meal diet="supper[$index]" ></print-meal>
+					</td>
+					<td>
+						<print-glucose bg="afterSupperBG[$index]" ></print-glucose>
+					</td>
+
+					<td>
+						<print-glucose bg="beforeBedBG[$index]" ></print-glucose>
+					</td>
+
+
+				</tr>
+
+				<tr>
+					<td colspan="3">
+						<print-others records="beforeBreakfastSnackAndExercise[$index]" ></print-others>
+					</td>
+					<td colspan="3">
+						<print-others records="morningSnackAndExercise[$index]" ></print-others>
+					</td>
+					<td colspan="3">
+						<print-others records="afternoonSnackAndExercise[$index]" ></print-others>
+					</td>
+					<td>
+						<print-others records="eveningSnackAndExercise[$index]" ></print-others>
+					</td>
+				</tr>
+
+				</tbody>
+				<br>
+			</table>
+		</div>
+
+
+
+	</div>
+</section>

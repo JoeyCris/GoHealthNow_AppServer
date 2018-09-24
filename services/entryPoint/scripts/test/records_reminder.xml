@@ -1,0 +1,49 @@
+<User_Record>
+	<UserID>55c5080e00dbf257afe98c4c</UserID>
+	<Reminder_Records>
+		<Reminder>
+			<ReminderType>0</ReminderType><!-- 0:Medication, 1:BloodGlucose, 2:Exercise, 3: Meal-->
+			<ReminderTime> 2016-01-15T16:27:59-0400</ReminderTime>
+			<RecordedTime> 2016-01-15T16:27:59-0400</RecordedTime>
+			<RepeatType>0</RepeatType><!-- 0 for once, 1 for daily -->
+			<Parameters>
+				<Dose>820</Dose>
+				<Unit>mg</Unit> <!-- mg/mL -->
+				<MedicineID>in011</MedicineID>  <!--if it is user entered, leave it blank -->
+				<MedicineName>Humulin N</MedicineName>
+				<MedicineType>0</MedicineType><!-- 0 for user entered, others for system provided -->
+			</Parameters>
+		</Reminder>
+		<Reminder>
+			<ReminderType>1</ReminderType><!-- 0:Medication, 1:BloodGlucose, 2:Exercise, 3: Meal-->
+			<ReminderTime> 2016-01-15T16:27:59-0400</ReminderTime>
+			<RecordedTime> 2016-01-15T16:27:59-0400</RecordedTime>
+			<RepeatType>1</RepeatType><!-- 0 for once, 1 for daily -->
+			<Parameters>
+				<GlucoseType>1</GlucoseType> <!-- 0: before breakfast, 1: after breakfast, 2: before lunch, 3: after lunch, 4: before dinner, 5: after dinner, 6: bedtime, 7: other. -->
+			</Parameters>
+		</Reminder>
+		<Reminder>
+			<ReminderType>2</ReminderType><!-- 0:Medication, 1:BloodGlucose, 2:Exercise, 3: Meal-->
+			<ReminderTime>2016-05-15T16:27:59-0400</ReminderTime>
+			<RecordedTime>2016-05-15T16:27:59-0400</RecordedTime>
+			<RepeatType>1</RepeatType><!-- 0 for once, 1 for daily -->
+			<Parameters>
+				<ExerciseType>0</ExerciseType><!-- 0 for light, 1 for moderate, 2 for vigorous -->
+			</Parameters>
+		</Reminder>
+		<Reminder>
+			<ReminderType>3</ReminderType><!-- 0:Medication, 1:BloodGlucose, 2:Exercise, 3: Meal-->
+			<ReminderTime>2016-05-15T16:27:59-0400</ReminderTime>
+			<RecordedTime>2016-05-15T16:27:59-0400</RecordedTime>
+			<RepeatType>0</RepeatType><!-- 0 for once, 1 for daily -->
+			<Parameters>
+				<MealType>1</MealType> <!-- 0 for snack, 1 for breakfast, 2 for lunch, 3 for supper -->
+			</Parameters>
+		</Reminder>
+	</Reminder_Records>
+
+	<Created_Time>2016-05-15T16:27:59-0400</Created_Time>
+</User_Record>
+
+

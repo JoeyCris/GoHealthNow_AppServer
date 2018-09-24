@@ -1,0 +1,56 @@
+<section data-ng-controller="KnowledgeController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="knowledge.title"></h1>
+	</div>
+	<div class="pull-right">
+		<a class="btn btn-primary" href="/#!/knowledge/{{knowledge._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="knowledge.create_time | date:'mediumDate'"></span>
+		</em>
+	</small>
+	<span class="label label-warning" ng-show="knowledge.send_push">App Notification</span>
+	<span class="label label-warning" ng-show="knowledge.send_email">Email Notification</span>
+	<span class="label label-info" ng-show="knowledge.priority">Priority: {{knowledge.priority}}</span>
+	<p class="lead" data-ng-bind="knowledge.content"></p>
+	<br/>
+	<p class="lead" data-ng-bind="knowledge.contenu"></p>
+	<a href="{{knowledge.link}}" ng-show="knowledge.link">{{knowledge.link}}</a>
+	<div ng-show="knowledge.replace_parts.length !== 0">
+		<label class="control-label">Replace Parts</label>
+		<div ng-repeat="part in knowledge.replace_parts">
+			<p class="input-group" ng-show="part.keyword != ''">
+				<span class="form-control" readonly>${{part.keyword}}$</span>
+				<span class="input-group-addon"> ==> </span>
+				<span class="form-control" readonly>{{part.reference}}</span>
+			</p>
+		</div>
+	</div>
+	<div ng-show="knowledge.medias">
+		<label class="control-label">Photo</label>
+		<div class="row">
+			<div class="col-sm-1 btn" ng-repeat="media in knowledge.medias">
+					<img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="img-thumbnail">
+					<img class="img-responsive"  ng-src="{{premedia.uri}}" />
+			</div>
+		</div>
+	</div>
+	<div ng-show="knowledge.conditions">
+		<label class="control-label">Conditions</label>
+		<tabset>
+				<tab ng-repeat="condition in knowledge.conditions" index="{{condition._id}}" heading="{{condition.functionName}}">{{condition.functionURL}}</uib-tab>
+		</tabset>
+	</div>
+
+</section>

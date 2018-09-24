@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+	{% if name %}
+	<p>Dear {{name}},</p>
+	{% else %}
+	<p>Dear {{appName}} user,</p>
+	{% endif %}
+	<p></p>
+
+	<p>Thanks for choosing {{appName}}! It has many advanced features, such as:</p>
+	<p>- Personalized meal scoring (100 is best)</p>
+	<p>- On-phone food database search with over 50,000 food/snacks</p>
+	<p>- Popular food recognition from photos</p>
+	<p>- Personalized tips and advice</p>
+	<p>- Online Logbook</p>
+
+	<p>The <a href="https://myaccount.glucoguide.com">Online Logbook</a> tracks all of your data, and displays charts and
+trends. You can print your logbook to bring to your healthcare
+providers!
+
+You can see a Demo Logbook <a href="https://myaccount.glucoguide.com">here</a>!</p>
+
+<p>To better use {{appName}}, you can just go to our <a href="https://www.youtube.com/channel/UCnL7tFkxfcnwh5UY7-__dVQ">YouTube Channel</a>. We provide several short Tutorial Videos there. </p>
+
+<p>You can email us with any feedback and suggestions, or any technical
+questions, to <a href="mailto:support@glucoguide.com?Subject=Feedback%20for%20GlucoGuide">support@glucoguide.com</a>. We are always improving!</p>
+
+	<p>Finally, please click the following link to activate your account.</p>
+	<p><a href="{{url}}">Activate your account...</a></p>
+	<p>Regards,</p>
+	<p>The {{appName}} Support Team</p>
+</body>
+</html>

@@ -1,0 +1,21 @@
+
+	<p>Vous avez un nouveau conseil de {{appName}} pour la question que vous avez saisie dans "Ask Experts":</p>
+	<br>
+	<p><strong>Question: </strong></p>
+	{% if question.medias.length != 0 %}
+	{% for media in question.medias %}
+	<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	{% endif %}
+	<!-- <p><img src="http://res.cloudinary.com/da1blwk33/image/upload/v1428250875/220px-InsideJob2010Poster_em0cxq.jpg"/></img></p> -->
+	<p>{{question.questionContent}}</p>
+	<br>
+
+	<p><strong>Répondre: </strong></p>
+	{% if answer.medias.length != 0 %}
+	{% for media in answer.medias %}
+	<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	{% endif %}
+	<p>{{answer.description}}</p>
+	<p>Vous pouvez également entrer votre {{appName}} pour l'afficher!</p>

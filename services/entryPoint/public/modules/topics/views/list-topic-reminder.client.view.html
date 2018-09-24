@@ -1,0 +1,24 @@
+<section data-ng-controller="TopicsController" data-ng-init="findByType('reminder')">
+	<div class="page-header">
+		<h1>Personalized Tips</h1>
+	</div>
+	<div class="list-group">
+		<a data-ng-repeat="topic in topicTypes['reminder']" data-ng-href="#!/topics/{{topic._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="topic.create_time | date:'mediumDate'"></span>
+				by
+				<span ng-show="topic.signature" data-ng-bind="topic.signature"></span>
+				<span ng-hide="topic.signature" data-ng-bind="topic.creator.email"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="topic.user.email"></h4>
+			<p class="list-group-item-text" data-ng-bind="topic.description"></p>
+		</a>
+	</div>
+	<div class="alert alert-warning text-center" data-ng-if="topicTypes.reminder.$resolved && !topicTypes.reminder.length">
+		No tips yet.
+	</div>
+	<div class="text-center">
+		<pagination  ng-model="currentPage" total-items="totalNum" max-size="maxSize" rotate="false" boundary-links="true"></pagination>
+	</div>
+</section>

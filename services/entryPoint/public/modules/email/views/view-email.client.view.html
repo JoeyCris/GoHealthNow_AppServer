@@ -1,0 +1,29 @@
+<section data-ng-controller="EmailController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="email.title"></h1>
+	</div>
+	<div class="pull-right">
+		<a class="btn btn-primary" href="/#!/email/{{email._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="email.create_time | date:'mediumDate'"></span>
+		</em>
+	</small>
+	<div class="jumbotron">
+	<span ng-repeat="receiver in email.users">{{receiver.email}}, </span>
+	</div>
+	<div class="jumbotron">
+		<p class="lead" ng-bind-html="email.content"></p>
+	</div>
+
+	<!-- {{email.content}} -->
+	<progressbar class="progress-striped active" value="email.progress" max="email.users.length" type="{{type}}">{{email.progress}}/{{email.users.length}}</progressbar>
+
+</section>

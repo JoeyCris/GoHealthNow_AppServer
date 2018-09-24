@@ -1,0 +1,60 @@
+
+<div ng-show="glucose">
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading"><strong>Bedtime</strong>
+				<span class="pull-right">{{glucose.recordedTime | date:'HH:mm'}}</span>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-12 text-center">
+					<strong>BEDTIME</strong><br>
+					<strong  style="font-size: 200%" ng-class="{
+				'text-danger': glucose.level < 4,
+				'text-success': glucose.level >= 4 && glucose.level <=10,
+				'text-warning':  glucose.level > 10 }" >
+
+						{{glucose.level ? glucose.level: '--'}}
+					</strong><br>
+					<small>mmol/L</small><br>
+
+					<div ng-if="glucose.note">
+						<strong>Note:</strong>
+						<span>{{glucose.note}}</span>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+</div>
+
+<div ng-show="sleep">
+
+	<div class="panel panel-default">
+		<div class="panel-heading"><strong>Sleeping</strong>
+			<span class="pull-right">{{sleep.recordedTime | date:'HH:mm'}}</span>
+		</div>
+		<div class="panel-body">
+			<strong>Last Night: </strong>
+			<span>
+				<strong style="font-size: 150%" class="text-info text-center">{{sleep.minutes?(sleep.minutes/60 | number:1):  '--'}}
+				</strong>
+			</span>
+			<span>
+				<small>hours</small>
+			</span>
+
+			<div ng-if="sleep.note">
+				<strong>Note:</strong>
+				<span>{{sleep.note}}</span>
+
+			</div>
+
+		</div>
+	</div>
+
+</div>
+
+

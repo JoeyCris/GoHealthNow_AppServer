@@ -1,0 +1,85 @@
+
+# iOS / Apple
+# ===========
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Node and related ecosystem
+# ==========================
+.nodemonignore
+.sass-cache/
+npm-debug.log
+node_modules
+services/*/node_modules
+
+services/entryPoint/gruntfile.js
+services/entryPoint/public/lib/
+services/entryPoint/.sass-cache/
+services/entryPoint/public/images/
+services/entryPoint/public/uploads/
+services/entryPoint/public/dist
+#services/entryPoint/public/sample
+services/entryPoint/development_server.txt
+services/entryPoint/public/images
+services/entryPoint/public/images.tar.bz2
+services/entryPoint/public/sample/audio_test.aac
+
+services/entryPoint/public/audio
+services/entryPoint/public/files
+
+
+tools/genFoodItem/*_new.db
+
+tools/
+
+tests/coverage/
+.idea/
+
+# app and assets
+# ======================
+config/sslcerts/*.pem
+service/collector/access.log
+#public/dist/
+
+# Sublime editor
+# ==============
+.sublime-project
+*.sublime-project
+*.sublime-workspace
+
+# Eclipse project files
+# =====================
+.project
+.settings/
+.*.md.html
+.metadata
+*~.nib
+local.properties
+
+# IntelliJ
+# ========
+*.iml
+
+# Cloud9 IDE
+# =========
+.c9/
+data/
+mongod
+
+# General
+# =======
+*.log
+#*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+logs/
+build/
+log/
+

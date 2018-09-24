@@ -1,0 +1,24 @@
+<div ng-show="!!records.insulinRecords.length" > <!-- Insulin -->
+	<div class="col-xs-12">
+		<b>Insulin</b>
+
+		<div class="text-left" ng-repeat="insulin in records.insulinRecords">
+			<strong>{{insulin.insulinID.name}}</strong>: {{insulin.dose}} units.
+			<span style="font-size: 75%"> {{insulin.recordedTime | date:'HH:mm'}}</span>
+		</div>
+	</div>
+</div>
+
+<div ng-if="!!records.medicineRecords.length" > <!-- Insulin -->
+	<div class="col-xs-12">
+		<p></p>
+		<b>Medicine</b>
+
+		<div class="text-left" ng-repeat="medicine in records.medicineRecords">
+			<strong>{{medicine.medicineName}}</strong>: {{medicine.dose| number:1}} {{medicine.unit}}.
+			<span style="font-size: 75%"> {{medicine.recordedTime | date:'HH:mm'}}</span>
+			<hr ng-hide="$last">
+		</div>
+	</div>
+</div>
+

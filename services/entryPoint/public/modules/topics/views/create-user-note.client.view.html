@@ -1,0 +1,96 @@
+<section data-ng-controller="NotesController" data-ng-init="createNoteWithUserIdInit()">
+	<div class="page-header">
+		<h1>New Note</h1>
+	</div>
+	<div class="row">
+		<div ng-controller="DietSidebarCtrl">
+			<diet-sidebar></diet-sidebar>
+		</div>
+		<div class="col-sm-12 col-md-11 col-md-offset-1 col-lg-11 col-lg-offset-1">
+			<form name="topicForm" class="form-horizontal" data-ng-submit="topicForm.$valid && createNote()"
+				  novalidate>
+				<fieldset>
+					<!--<div class="form-group"-->
+						 <!--ng-class="{ 'has-error': knowledgeForm.checkpush.$dirty && knowledgeForm.checkpush.$invalid }">-->
+						<!--<h4>Select to send app notification and/or send email:-->
+							<!--<span class="label label-warning" ng-show="checkpush.sendPush">App Notification</span>-->
+							<!--<span class="label label-warning" ng-show="checkpush.sendEmail">Email Notification</span>-->
+						<!--</h4>-->
+						<!--&lt;!&ndash; <pre>Model: {{checkpush}}</pre> &ndash;&gt;-->
+						<!--<div class="btn-group">-->
+							<!--<label class="btn btn-primary" ng-model="checkpush.sendPush" btn-checkbox>Send App-->
+								<!--Notification</label>-->
+							<!--<label class="btn btn-primary" ng-model="checkpush.sendEmail" btn-checkbox>Send-->
+								<!--Email</label>-->
+						<!--</div>-->
+					<!--</div>-->
+					<div class="form-group"
+						 ng-class="{ 'has-error': topicForm.receiveuser.$dirty && topicForm.receiveuser.$invalid }">
+						<!--<label class="control-label">Send tip to: {{displayName}} ({{receiveemail}})</label>-->
+						<p><strong>To:</strong> {{displayName}} <em>({{receiveemail}})</em></p>
+					</div>
+					<!--<div class="form-group">-->
+						<!--<label class="control-label" for="template">Tip Template</label>-->
+						<!--<select name="template" data-ng-model="template" id="template" class="form-control"-->
+								<!--placeholder="Topic Templates" ng-change="updateTopicByTemplate(template)">-->
+							<!--<option value="{{onetemplate._id}}" ng-repeat="onetemplate in topicTemplates">{{onetemplate.title}}-->
+							<!--</option>-->
+						<!--</select>-->
+					<!--</div>-->
+					<div class="form-group"
+						 ng-class="{ 'has-error': topicForm.description.$invalid }">
+						<label class="control-label" for="description">Note</label>
+						<div class="controls">
+							<textarea name="description" data-ng-model="description" id="description"
+									  class="form-control" cols="30" rows="10" placeholder="Description"
+									  required></textarea>
+						</div>
+					</div>
+					<div class="form-group"
+						 ng-class="{ 'has-error': topicForm.signature.$invalid }">
+						<label class="control-label" for="signature">Creator</label>
+						<div class="controls">
+							<input type="text" name="signature" data-ng-model="signature" id="signature"
+								   class="form-control" placeholder="Leave your name here" required></input>
+						</div>
+					</div>
+					<div class="form-group"
+						 ng-class="{ 'has-error': topicForm.link.$dirty && topicForm.link.$invalid }">
+						<label class="control-label" for="link">Link</label>
+						<div class="controls">
+							<input type="text" name="link" data-ng-model="link" id="link" class="form-control"
+								   placeholder="Link URL : http://www.google.ca"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<div ng-show="medias"
+							 ng-class="{ 'has-error': topicForm.photos.$dirty && topicForm.photos.$invalid }">
+							<label class="control-label" for="photos">Photo</label>
+							<div class="row">
+								<div class="col-sm-1 btn" ng-repeat="media in medias">
+									<img class="img-responsive" ng-click="toggleMedia(media)" ng-src="{{media.uri}}"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="img-thumbnail" ng-class="{hidden:!premedia}">
+									<img class="img-responsive"  ng-src="{{premedia.uri}}" ng-click="toggleMedia(media)"/>
+								</div>
+							</div>
+						</div>
+						<div class="controls">
+							<div class="btn btn-primary" id="photos" ngf-select ngf-multiple="true" ng-model="photos">
+								Upload Photo
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-default" value="Create">
+					</div>
+					<div data-ng-show="error" class="text-danger">
+						<strong data-ng-bind="error"></strong>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</section>

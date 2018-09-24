@@ -1,0 +1,366 @@
+<section ng-controller="LogbookCtrl">
+
+	<div class="container-fluid bg-primary">
+		<div id = "header_section" class="row">
+			<h3 class="text-center"> Online Logbook</h3>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="row">
+					<div class="col-xs-3">
+
+						<button type="button" class="btn btn-primary btn-large  pull-left" ng-click="dt.setDate(dt.getDate() - 1)">
+							<strong><i class="glyphicon glyphicon-chevron-left"></i></strong></button>
+					</div>
+					<div class="col-xs-6">
+						<button type="button" class="btn btn-primary pull-center" ng-click="open($event)" datepicker-popup="{{format}}" ng-model="dt" is-open="status.opened" min-date="minDate" max-date="'2020-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
+							<strong>{{dt | date:'fullDate' }}  </strong><span><i class="glyphicon glyphicon glyphicon-calendar"></i></span></button>
+					</div>
+					<div class="col-xs-3">
+						<button type="button" class="btn btn-primary btn-large pull-right" ng-click="tomorrow()"><i class="glyphicon glyphicon-chevron-right"></i></button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4 pull-right">
+				<div class="btn-group pull-right">
+					<label class="btn btn-default" ng-model="recordsPeriod" btn-radio="'d7'">Last 7 days</label>
+					<label class="btn btn-default" ng-model="recordsPeriod" btn-radio="'d3'">Last 3 days</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<h1></h1>
+		</div>
+	</div>
+	<div class="container-fluid">
+
+		<div class="row">
+			<h1><hr></h1>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 col-md-12 col-centered text-center" id="hs-slider">
+				<flex-slider flex-slide="s in slides" animation="slide" animationLoop="false" slideshow="false">
+					<li>
+
+						<div class="col-xs-12 col-md-4" id="gg-sum">
+
+
+
+							<div class="row" style="vertical-align: middle;">
+
+								<div class="col-xs-4 sumCell">
+									<strong class="text-warning" style="font-size: 150%">13</strong>
+									<span>(37%)</span>
+									<p>Over</p>
+
+								</div>
+								<div class="divider"></div>
+								<div class="col-xs-4 sumCell">
+									<strong class="text-success" style="font-size: 150%">22</strong>
+									<span>(63%)</span>
+									<p>Normal</p>
+
+								</div>
+								<div class="divider"></div>
+								<div class="col-xs-4 lastCell">
+									<strong class="text-danger" style="font-size: 150%">0</strong>
+									<span>(0%)</span>
+									<p>Below</p>
+
+								</div>
+
+							</div>
+							<div class="row" style="vertical-align: bottom; margin:30px auto">
+
+								<div class="col-xs-4 text-right">
+									<b>Target:</b>
+								</div>
+								<div class="col-xs-8 text-left">
+									<p><small><b>Before meal BG:</b>
+										<span> 4 to 7 mmol/L</span>
+									</small>
+									</p>
+									<p><small><b>After meal BG:</b>
+										<span> 5 to 10 mmol/L</span>
+									</small>
+									</p>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col-xs-12 col-md-8 highcharts-container">
+							<div class="panel panel-default">
+								<div class="panel-heading"><strong class="text-center"><strong>Daily BG Chart</strong></strong></div>
+								<div class="panel-body">
+									<canvas id="line1" class="chart chart-line" chart-data="data"
+											chart-labels="labels" height="100"  chart-options="chartOptions" chart-series="series"
+											click="onClick">
+									</canvas>
+								</div>
+							</div>
+
+
+
+						</div>
+
+					</li>
+				</flex-slider>
+			</div>
+		</div>
+		<hr>
+
+		<div class="page-header text-center">
+			<h4>Aug 25</h4>
+		</div>
+
+		<div class="container-fluid dailyBody">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="row">
+						<p class="text-success"><i class="glyphicon glyphicon-cutlery" style="font-size: 150%"></i> Intake:
+							<span style="font-size: 150%">2,302.5</span> kcals</p>
+						<p class="text-danger"><i class="glyphicon glyphicon-fire" style="font-size: 150%"></i> Burn:
+							<span style="font-size: 150%">135.5</span> kcals</p>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-xs-6">
+
+							<canvas id="doughnut" class="chart chart-doughnut pull-left"
+									chart-data="dailyData"  chart-legend="false" chart-labels="dailyLabels">
+							</canvas>
+						</div>
+						<div class="col-xs-6 text-left">
+							<i class="glyphicon glyphicon-stop text-success"></i>Carb: 45.4 (g)<br>
+							<i class="glyphicon glyphicon-stop text-danger"></i>Fibre: 5.6 (g))<br>
+							<i class="glyphicon glyphicon-stop text-warning"></i>Fat: 45.4 (g)<br>
+							<i class="glyphicon glyphicon-stop" ></i>Pro: 45.4 (g)<br>
+
+						</div>
+
+					</div>
+
+
+				</div>
+				<div class="col-md-9">
+					<div class="row">
+						<div class="col-xs-3">
+
+
+							<div class="panel panel-danger">
+								<div class="panel-heading"><strong>Breakfast</strong></div>
+								<div class="panel-body">
+
+									<div class="row">
+										<div class="col-xs-6 col-md-6">
+											<strong>BEFORE</strong><br>
+											<strong style="font-size: 200%" class="text-success">6.5</strong><br>
+											<small>mmol/L</small><br>
+										</div>
+										<div class="col-xs-6 col-md-6">
+
+											<strong>AFTER</strong><br>
+											<strong style="font-size: 200%" class="text-danger">12.5</strong><br>
+											<small>mmol/L</small><br>
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-xs-4">
+											<strong>Carbs</strong><br>
+											<strong style="font-size: 150%" class="text-info">26.4</strong><br>
+											<small>grams</small><br>
+										</div>
+										<div class="col-xs-4">
+											<strong>Fibre</strong><br>
+											<strong style="font-size: 150%" class="text-info">5.4</strong><br>
+											<small>grams</small><br>
+										</div>
+										<div class="col-xs-4">
+											<strong>Calories</strong><br>
+											<strong style="font-size: 150%" class="text-info">26.4</strong><br>
+											<small>kcals</small><br>
+										</div>
+									</div>
+
+								</div>
+
+								<div class="panel-footer">
+									<div class="row text-center">
+										<button popover-template="dynamicPopover.templateUrl2" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-default">See Details</button>
+
+										<script type="text/ng-template" id="myPopoverTemplate2.html">
+											<div>{{dynamicPopover.content}}</div>
+											<div class="form-group">
+												<label>Popup Title:</label>
+												<input type="text" ng-model="dynamicPopover.title" class="form-control">
+											</div>
+										</script>
+									</div>
+
+								</div>
+
+							</div>
+
+
+							<div class="panel panel-danger">
+								<div class="panel-heading"><strong>Insulin</strong></div>
+								<div class="panel-body">
+									<b>NovoRapid</b> 7 units.<small> 07:35</small>
+									<b>Lantus</b> 15 units.<small> 07:45</small>
+								</div>
+							</div>
+
+
+
+						</div>
+						<div class="col-xs-3">
+							<div class="panel panel-danger">
+								<div class="panel-heading"><strong>Lunch</strong></div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-xs-6">
+											<strong>BEFORE</strong><br>
+											<strong style="font-size: 200%"  class="text-success">6.5</strong><br>
+											<small>mmol/L</small><br>
+										</div>
+										<div class="col-xs-6">
+											<strong>AFTER</strong><br>
+											<strong style="font-size: 200%" class="text-danger">12.5</strong><br>
+											<small>mmol/L</small><br>
+										</div>
+									</div>
+									<hr/>
+									<div class="row">
+										<div class="col-xs-4">
+											<strong>Carbs</strong><br>
+											<strong style="font-size: 150%" class="text-info">26.4</strong><br>
+											<small>grams</small><br>
+										</div>
+										<div class="col-xs-4">
+											<strong>Fibre</strong><br>
+											<strong style="font-size: 150%" class="text-info">5.4</strong><br>
+											<small>grams</small><br>
+										</div>
+										<div class="col-xs-4">
+											<strong>Calories</strong><br>
+											<strong style="font-size: 150%" class="text-info">26.4</strong><br>
+											<small>kcals</small><br>
+											<br>
+										</div>
+									</div>
+									<div class="row text-center">
+										<button popover-template="dynamicPopover.templateUrl" popover-title="{{dynamicPopover.title}}" type="button" class="btn btn-default">See Details</button>
+
+										<script type="text/ng-template" id="myPopoverTemplate.html">
+											<div>{{dynamicPopover.content}}</div>
+											<div class="form-group">
+												<label>Popup Title:</label>
+												<input type="text" ng-model="dynamicPopover.title" class="form-control">
+											</div>
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-3">
+
+							<div class="panel panel-danger">
+								<div class="panel-heading"><strong>Dinner</strong></div>
+								<div class="panel-body">
+									<b>Before Breakfast BG:</b> 6.5<br>
+									Time: 08:45<br>
+									<b>Breakfast</b> 09:00<br>
+									Calories: 456.6 kcals <br>
+									Carb: 45.4 (g)<br>
+									Fibre: 5.6 (g) <br>
+									<b>After Breakfast BG:</b> 8.5<br>
+									Time: 10:45<br>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-xs-3">
+
+							<div class="row">
+								<div class="col-xs-12">
+
+									<div class="panel panel-danger">
+										<div class="panel-heading"><strong>Bedtime</strong></div>
+										<div class="panel-body">
+											<b>Bedtime BG:</b> 6.5<br>
+											Time: 08:45<br>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="panel panel-danger">
+										<div class="panel-heading"><strong>Insulin</strong></div>
+										<div class="panel-body">
+											<b>Humulin N</b> 12 units.<small> 08:45</small>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!--div class="row">
+                        <div class="col-xs-3">
+                            <div class="panel panel-danger">
+                                <div class="panel-heading"><strong>Insulin</strong></div>
+                                <div class="panel-body">
+                                    <b>Humulin N</b> 12 units.<small> 08:45</small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-3">
+
+
+                            <div class="panel panel-danger">
+                                <div class="panel-heading"><strong>Exercise</strong></div>
+                                <div class="panel-body">
+                                    <b>Moderate</b> 25.8 minutes.<small> 08:45</small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="panel panel-danger">
+                                <div class="panel-heading"></div>
+                                <div class="panel-body">
+                                    <b>Exercise</b> 11:24<br>
+                                    Type: Moderate <br>
+                                    Time Last: 25.8 minutes<br>
+                                    Total Calories burned: kcals<br>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xs-3">
+
+                        </div>
+                    </div -->
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--div class="highcharts-container" id="highcharts-0" style="position: relative; overflow: hidden; width: 850px; height: 360px; text-align: left; line-height: normal; z-index: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" -->
+	</div>
+
+
+</section>

@@ -1,0 +1,263 @@
+<section data-ng-controller="RecordsController as recordCtrl" data-ng-init="getUserRecords()">
+
+
+<div>
+	<div class="row" >
+
+		<div ng-show="user.roles[0] === 'user'" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+			<form class="form-inline" data-ng-submit="updateUserProfile()" novalidate>
+				<div class="form-group">
+					<div class="input-group checkbox">
+						<label> <input name="checked" type="checkbox" ng-model="checked" >&nbsp;Allow my healthcare providers with the same Access Code to
+							view my data.</label> &nbsp;
+						<div class="pull-right"><input type="submit" value="Save" class="btn btn-primary btn-sm " /></div>
+
+						<br><br>
+					</div>
+				</div>
+				<br>
+
+			</form>
+		</div>
+
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+			<div class="well">
+				<table class="table table-condensed">
+					<tr>
+						<td><span class="glyphicon glyphicon-user"></span><b>Email:</b> {{targetUser.email}}</td>
+						<td><b>Gender:</b> {{ targetUser.gender === 0 ? 'Male': 'Female'}}</td>
+						<td><b>Birthday:</b> {{targetUser.dob}}</td>
+						<td><b>Weight:</b> {{targetUser.weight}} kg.</td>
+						<td><b>Height:</b> {{targetUser.height}} cm.</td>
+						<td><b>Access Code:</b> {{targetUser.accessCode}}</td>
+					</tr>
+					<tr>
+						<td><b>BMI:</b> {{targetUser.bmi | number:1}}</td>
+						<td><b>A1c:</b> {{latestA1CValue.a1CValue}}</td>
+						<td><b>Waist:</b> {{targetUser.waistSize}} cm. </td>
+						<td colspan="3"><b>Ideal Daily Calories Intake:</b> {{getIdeaCals(targetUser) | number:1}} kcals</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="row" >
+		<div class="col-sm-3 col-md-2 sidebar">
+			<ul class="nav nav-sidebar">
+				<li ng-class="{ active: isSelected('glucose') }"><a href="" ng-click="selectPanel('glucose')">Blood Glucose</a></li>
+				<li ng-class="{ active: isSelected('a1c') }"><a href="" ng-click="selectPanel('a1c')">A1C</a></li>
+				<li ng-class="{ active: isSelected('diet') }"><a href="" ng-click="selectPanel('diet')">Diet</a></li>
+				<li ng-class="{ active: isSelected('exercise') }"><a href="" ng-click="selectPanel('exercise')">Exercise</a></li>
+				<li ng-class="{ active: isSelected('weight') }"><a href="" ng-click="selectPanel('weight')">Weight</a></li>
+				<li ng-class="{ active: isSelected('sleep') }"><a href="" ng-click="selectPanel('sleep')">Sleep</a></li>
+				<li ng-class="{ active: isSelected('insulin') }"><a href="" ng-click="selectPanel('insulin')">Insulin</a></li>
+				<li ng-class="{ active: isSelected('question') }"><a href="" ng-click="selectPanel('question')">Question</a></li>
+				<li ng-class="{ active: isSelected('advice') }"><a href="" ng-click="selectPanel('advice')">Advice</a></li>
+			</ul>
+		</div>
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('glucose')">
+			<!--<div class="panel panel-primary">-->
+				<!--<div class="panel-heading text-center">Fasting Blood Glucose Records</div>-->
+					<!--<div class="panel-body">-->
+						<!--<canvas id="fastingChart" class="chart chart-line" data="fastingData"-->
+								<!--labels="fastingLabels" hover="onHover" options= "{bezierCurve:false} "></canvas>-->
+					<!--</div>-->
+			<!--</div>-->
+
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Glucose Records</div>
+				<div class="panel-body">
+					<canvas id="glucoseChart" class="chart chart-line" data="glucoseData"
+							labels="glucoseLabels" hover="onHover" options= "{bezierCurve:false, showXLabels:10} "></canvas>
+				</div>
+			</div>
+
+
+			<!--<div class="panel panel-primary">-->
+				<!--<div class="panel-heading text-center">Other Glucose Records</div>-->
+				<!--<div class="panel-body">-->
+					<!--<canvas id="otherbgChart" class="chart chart-line" data="otherbgData"-->
+							<!--labels="otherbgLabels" hover="onHover" options= "{bezierCurve:false} "></canvas>-->
+				<!--</div>-->
+			<!--</div>-->
+
+
+		</div>
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('a1c')">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">A1C Records</div>
+				<div class="panel-body">
+					<canvas id="a1cChart" class="chart chart-line" data="a1cData"
+							labels="a1cLabels" hover="onHover" options= "{bezierCurve:false, showXLabels: 10} " ></canvas>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('diet')">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Diet Records</div>
+					<table class="table table-striped">
+						<tr>
+							<th>Meal Type</th>
+							<th>Carb</th>
+							<th>Pro</th>
+							<th>Fat</th>
+							<th>Calories</th>
+							<th>Recorded Time</th>
+							<th>Food Images</th>
+						</tr>
+						<tr  data-ng-repeat="diet in userRecords.mealRecords | orderBy:'-recordedTime'">
+							<td>{{diet.mealType}}</td>
+							<td>{{diet.carb| number:1}}</td>
+							<td>{{diet.pro| number:1}}</td>
+							<td>{{diet.fat| number:1}}</td>
+							<td>{{diet.cals| number:1}}</td>
+							<td>{{diet.recordedTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td>
+								<div ng-if="diet.mealPhoto">
+									<a href="/images/{{targetUserId}}/{{diet.mealPhoto}}">
+										<img  ng-src="/images/{{targetUserId}}/{{diet.mealPhoto}}" class="img-rounded" height="80">
+									</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+			</div>
+		</div>
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('exercise')">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Exercises Records</div>
+				<table class="table table-striped">
+					<tr>
+						<th>Minutes</th>
+						<th>Type</th>
+						<th>Interval</th>
+						<th>Calories</th>
+						<th>Recorded Time</th>
+					</tr>
+					<tr data-ng-repeat="exercise in userRecords.exerciseRecords | orderBy:'-recordedTime'">
+						<td>{{exercise.minutes}}</td>
+						<td>{{exercise.type}}</td>
+						<td>{{exercise.interval}}</td>
+						<td>{{exercise.calories}}</td>
+						<td>{{exercise.recordedTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('weight')">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Weight Records</div>
+				<table class="table table-striped">
+					<tr>
+						<th>Weight</th>
+						<th>Recorded Time</th>
+					</tr>
+					<tr data-ng-repeat="weight in userRecords.weightRecords | orderBy:'-recordedTime'">
+						<td>{{weight.weightValue}}</td>
+						<td>{{weight.recordedTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('sleep')">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Sleep Records</div>
+				<table class="table table-striped">
+					<tr>
+						<th>Hours</th>
+						<th>Sick</th>
+						<th>Stressed</th>
+						<th>Recorded Time</th>
+					</tr>
+					<tr data-ng-repeat="sleep in userRecords.sleepRecords | orderBy:'-recordedTime'">
+						<td>{{sleep.minutes/60.0 | number:1}}</td>
+						<td>{{sleep.sick? 'Yes':'No'}}</td>
+						<td>{{sleep.stressed? 'Yes': 'No'}}</td>
+						<td>{{sleep.recordedTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('insulin')">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Insulin Records</div>
+				<table class="table table-striped">
+					<tr>
+						<th>Name</th>
+						<th>Does</th>
+						<th>Recorded Time</th>
+					</tr>
+					<tr data-ng-repeat="insulin in userRecords.insulinRecords | orderBy:'-recordedTime'">
+						<td>{{insulin.insulinID.name}}</td>
+						<td>{{insulin.dose}}</td>
+						<td>{{insulin.recordedTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<!-- <div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-show="isSelected('advice')">
+			<div class="panel panel-primary">
+				<div class="panel-heading text-center">Advice History</div>
+				<table class="table table-striped">
+				</table>
+			</div>
+		</div> -->
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('question')">
+			<h1 class="page-header">Question History</h1>
+			<div class="table-responsive">
+				<div class="list-group">
+					<a data-ng-repeat="question in userRecords.QuestionRecords" data-ng-href="#!/questions/{{question._id}}" class="list-group-item">
+						<small class="list-group-item-text">
+							Posted on
+							<span data-ng-bind="question.recordedTime | date:'mediumDate'"></span>
+							by
+							<span data-ng-bind="question.userID.email"></span>
+						</small>
+						<span data-ng-show="question.replyTimes" class="badge">{{question.replyTimes}}</span>
+						<h4 class="list-group-item-heading" data-ng-bind="question.userID.email"></h4>
+						<p class="list-group-item-text" data-ng-bind="question.questionContent"></p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-if="isSelected('advice')">
+			<h1 class="page-header">Advice History</h1>
+			<div class="table-responsive">
+				<div class="list-group">
+					<a data-ng-repeat="topic in userRecords.tipRecords" data-ng-href="#!/topics/{{topic._id}}" class="list-group-item">
+						<small class="list-group-item-text">
+							Posted on
+							<span data-ng-bind="topic.create_time | date:'mediumDate'"></span>
+							by
+							<span data-ng-bind="topic.creator.email"></span>
+						</small>
+						<span class="label label-info">{{topic.type}}</span>
+						<span data-ng-show="topic.comments" class="badge">{{topic.comments.length}}</span>
+						<h4 class="list-group-item-heading" data-ng-bind="topic.user.email"></h4>
+						<p class="list-group-item-text" data-ng-bind="topic.description"></p>
+					</a>
+				</div>
+			</div>
+		</div>
+
+<!-- 		<div  class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"  ng-show="isSelected('3day')">
+			<div class="slide-animate" ng-include src="'modules/dietitians/views/view-patient.client.view.html'"
+				 ng-init="targetUserId = user.userID">
+			</div>
+		</div> -->
+
+	</div>
+</div>
+</section>

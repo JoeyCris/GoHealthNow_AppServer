@@ -1,0 +1,98 @@
+<section data-ng-controller="DietitiansController" data-ng-init="listUsers()">
+
+	<div class="page-header">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-2">
+				<img  class="pull-left" ng-src="/{{brandInfo.uri}}" class="img-rounded" height="80"/><br>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-offset-2">
+					<h1 class="text-left">Client List</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div>
+		<label class="pull-right">Search:
+			<input ng-model="search" placeholder="Search...">
+		</label>
+	</div>
+	<br>
+	<br/>
+
+	<div class="panel panel-default">
+
+		<div class="panel-body">
+			<table class="table table-hove table-striped" id="userList">
+				<thead class="text-center" align="center">
+				<tr class="text-center">
+					<th>Email</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Access Code</th>
+					<th>BMI</th>
+					<th>Last Login Time</th>
+					<th>BG > 10</th>
+					<th>BG < 4</th>
+					<!-- th>Gender</th>
+                    <th>DoB</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>Waist Size</th>
+                    <th>BMI</th>
+                    <th>Registration Time</th>
+                    <th>Last Login Time</th>
+                    <th>Records</th -->
+					<th>Logbook</th>
+					<th>Personalized Tip</th>
+				</tr>
+				</thead>
+				<tbody align="center">
+				<tr data-ng-repeat="user in users | filter:search:strict">
+					<!-- th><span class="label label-success">6</span></th -->
+
+					<th>{{user.email}}</th>
+					<th>{{user.firstName}}</th>
+					<th>{{user.lastName}}</th>
+					<th>{{user.accessCode}}</th>
+					<th>{{user.bmi | number:1}}</th>
+					<th>{{user.retrieveTime | date:'yyyy-MM-dd'}}</th>
+
+					<th><strong class="label label-warning" style="font-size: 100%">{{bgData[user.userID] ? bgData[user.userID].high:"-"}}</strong></th>
+					<th><strong class="label label-danger" style="font-size: 100%">{{bgData[user.userID] ? bgData[user.userID].low:"-"}}</strong></th>
+					<!-- th>{{user.gender === 0 ? "Male":"Female"}}</th>
+                    <th>{{user.dob}}</th>
+                    <th>{{user.weight | number:1}}</th>
+                    <th>{{user.height | number:0}}</th>
+                    <th>{{user.waistSize | number:1}}</th>
+                    <th>{{user.bmi | number:1}}</th>
+                    <th>{{user.registrationTime | date:'yyyy-MM-dd' }}</th>
+                    <th>{{user.lastLoginTime | date:'yyyy-MM-dd'}}</th>
+                    <!-- th><a data-ng-href="/#!/user/records/{{user.userID}}">
+                        <button class="btn btn-default">User Records</button></a>
+                    </th -->
+					<th><a data-ng-href="/#!/logbook/{{user.userID}}">
+						<button class="btn btn-default">Logbook</button></a>
+					</th>
+
+					<th><a data-ng-href="#!/reminders/create/{{user.userID}}">
+						<button class="btn btn-default">Send Tip</button></a>
+					</th>
+
+
+				</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+
+
+	</div>
+	<div class="text-center">
+		<pagination  ng-model="currentPage" total-items="totalNum" max-size="maxSize" rotate="false" boundary-links="true"></pagination>
+	</div>
+
+</section>

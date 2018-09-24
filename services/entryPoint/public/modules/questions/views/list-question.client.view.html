@@ -1,0 +1,42 @@
+<section data-ng-controller="QuestionsController" data-ng-init="listQuestionsInit()">
+	<div class="page-header">
+		<h1 class="text-center">Questions</h1>
+	</div>
+
+	<div>
+		<label class="pull-right">Search:
+			<input ng-model="search" placeholder="Search...">
+		</label>
+	</div>
+	<br>
+	<br/>
+
+	<ul class="nav nav-pills">
+		<li data-ng-repeat="questionState in questionStates" ng-class="{active:isStateSelected(questionState.state)}">
+			<a href ng-click="selectState(questionState.state)">{{questionState.state}}</a>
+		</li>
+	</ul>
+
+
+	<a data-ng-repeat="question in currentState.questions|filter:search" data-ng-href="#!/questions/{{question._id}}"
+	   class="list-group-item">
+		<small class="list-group-item-text">
+			Posted on
+			<span data-ng-bind="question.recordedTime | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="question.userID.email"></span>
+		</small>
+		<span class="label label-primary">{{question.questionType}}</span>
+		<span data-ng-show="question.replyTimes" class="badge">{{question.replyTimes}}</span>
+		<h4 class="list-group-item-heading" data-ng-bind="question.userID.email"></h4>
+		<p class="list-group-item-text" data-ng-bind="question.questionContent"></p>
+	</a>
+	<div data-ng-if="!currentState.questions.length" class="alert alert-warning text-center">
+		{{currentState.state}} question is empty now.
+	</div>
+	<div class="text-center">
+		<pagination ng-model="currentState.currentPage" total-items="currentState.totalNum" items-per-page={{numPerPage}} max-size="maxSize"
+					rotate="false"></pagination>
+	</div>
+
+</section>

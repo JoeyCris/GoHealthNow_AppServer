@@ -1,0 +1,102 @@
+<section ng-controller="WeightGoalController"  class="row">
+
+
+	<div class="row" >
+
+		<div ng-controller="DietSidebarCtrl">
+			<diet-sidebar></diet-sidebar>
+		</div>
+
+		<div class="col-md-8 col-xs-12 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">
+					<strong>Set Weight Goal</strong>
+					<span class="pull-right"> {{user.firstName}} ({{user.email}})</span>
+				</div>
+
+				<div class="panel-body">
+
+
+					<div class="row">
+
+						<div class="col-md-6   col-xs-12 col-md-offset-1">
+
+							<form name="activityForm" class="form-horizontal" data-ng-submit="setActivityLevel()" novalidate>
+								<fieldset>
+
+									<div class="row">
+										<div class="col-xs-4"><b>Weight Goal: </b></div>
+										<div class="col-xs-8">
+									<div class="input-group" >
+
+										<select data-ng-model="target" class="form-control" >
+											<option value="-0.2">Lose 0.2 kg per week</option>
+											<option value="-0.5">Lose 0.5 kg per week</option>
+											<option value="-0.8">Lose 0.8 kg per week</option>
+											<option value="-1.0">Lose 1 kg per week</option>
+											<option value="0.00">Maintain weight</option>
+											<option value="0.2">Gain 0.2 kg per week</option>
+											<option value="0.5">Gain 0.5 kg per week</option>
+											<option value="0.8">Gain 0.8 kg per week</option>
+											<option value="1.0">Gain 1 kg per week</option>
+										</select>
+									</div>
+											</div><br>
+									</div>
+										<div class="col-xs-12">
+									<div class="form-group row">
+										<div class="input-group checkbox">
+											<label> <input name="checked" type="checkbox" ng-model="checked" ng-change="initTipContent()">&nbsp;Send Personalized Tip to User</label> &nbsp;
+
+
+												<span><button type="button" class="btn btn-primary btn-sm"
+															  ng-click="setTipContent()">
+													<i class="glyphicon glyphicon-pencil">Edit</i>
+												</button></span>
+
+										</div>
+										<div class="row text-center">
+
+											<div class="col-xs-11 well well-sm">
+
+												<p/>
+												<blockquote>
+													<p>{{tipContent}}</p></blockquote>
+											</div>
+										</div>
+									</div>
+</div>
+									<div class="col-xs-12">
+
+									<div class="form-group">
+										<input type="submit" value="Save & Sync" class="btn btn-default">
+									</div>
+										</div>
+									<div data-ng-show="error" class="text-danger">
+										<strong data-ng-bind="error"></strong>
+									</div>
+									<div data-ng-show="success" class="text-info">
+
+										<strong>successfully updated!</strong>
+
+									</div>
+
+								</fieldset>
+							</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+</section>
+
+

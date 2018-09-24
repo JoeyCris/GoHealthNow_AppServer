@@ -1,0 +1,105 @@
+<section data-ng-controller="StatisticsController" data-ng-init="usersStatistics()">
+    <div class="page-header text-center">
+        <h1>User Statistics</h1>
+    </div>
+    <!--<div class="col-md-12">-->
+        <!--<div class="well">-->
+            <!--<h3 class="text-center">Number of Users</h3>-->
+            <!--<h3 class="text-center"><button class="btn btn-lg">{{usersStatistics.numOfUsers}}</button></h3> <br>-->
+        <!--</div>-->
+
+    <!--</div>-->
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">Number of Users</div>
+				<div class="panel-body">
+					<h3 class="text-center"><button class="btn btn-lg">{{usersStatistics.numOfUsers}}</button></h3> <br>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">Number of Daily New Registered Users</div>
+				<div class="panel-body">
+					<canvas id="newUserChart" class="chart chart-line" data="newUserData"
+							labels="newUserLabels" hover="onHover" options= "{bezierCurve:false} "></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">Number of Daily Active Users</div>
+				<div class="panel-body">
+					<canvas id="activeUserChart" class="chart chart-line" data="activeUserData"
+							labels="activeUserLabels" hover="onHover" options= "{bezierCurve:false} "></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">Number of Users By Access Code</div>
+				<div class="panel-body">
+					<table class="table table-hove table-striped display nowrap  dtr-inline" id="accessCodeList">
+						<tr>
+							<th>Access Code</th>
+							<th>Number of Users</th>
+						</tr>
+						<tr data-ng-repeat="org in orgsStatistics ">
+							<td>{{org._id}}</td>
+							<td>{{org.count}}</td>
+						</tr>
+					</table>
+					<!--{{orgsStatistics}}-->
+					<!--<canvas id="activeUserChart" class="chart chart-line" data="activeUserData"-->
+							<!--labels="activeUserLabels" hover="onHover" options= "{bezierCurve:false} "></canvas>-->
+				</div>
+			</div>
+		</div>
+	</div>
+    <!--<div class="col-md-12">-->
+        <!--<div class="well">-->
+            <!--<h3 class="text-center">Number of Daily New Registered Users</h3><br>-->
+            <!--<table class="table">-->
+                <!--<tr>-->
+                    <!--<th>Day</th>-->
+                    <!--<th>Number of New Users</th>-->
+                <!--</tr>-->
+
+                <!--<tr data-ng-repeat="day in usersStatistics.newUserStats">-->
+                    <!--<td>{{day._id.month}}/{{day._id.day}}/{{day._id.year}}</td>-->
+                    <!--<td>{{day.count}}</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
+
+	<!--<div class="col-md-12">-->
+		<!--<div class="well">-->
+			<!--<h3 class="text-center">Number of Daily Active Users</h3><br>-->
+			<!--<table class="table">-->
+				<!--<tr>-->
+					<!--<th>Day</th>-->
+					<!--<th>Number of Active Users</th>-->
+				<!--</tr>-->
+
+				<!--<tr data-ng-repeat="day in usersStatistics.activeUserStats">-->
+					<!--<td>{{day._id.month}}/{{day._id.day}}/{{day._id.year}}</td>-->
+					<!--<td>{{day.count}}</td>-->
+				<!--</tr>-->
+			<!--</table>-->
+		<!--</div>-->
+	<!--</div>-->
+</section>

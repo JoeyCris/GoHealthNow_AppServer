@@ -1,0 +1,29 @@
+<section data-ng-controller="KnowledgeController" data-ng-init="find()">
+	<div class="page-header">
+		<h1>Knowledge</h1><div class="btn btn-primary pull-right" ng-click="switchLanguage()">Language: {{language}}</div>
+	</div>
+
+	<ul class="nav nav-pills">
+    <li data-ng-repeat="knowledgeType in knowledgeTypes" ng-class="{ active:isSet(knowledgeType.type) }">
+      <a href ng-click="setType(knowledgeType.type)">{{knowledgeType.type}}</a>
+    </li>
+  </ul>
+
+	<div ng-show="isSet(knowledgeType.type)" class="list-group" data-ng-repeat="knowledgeType in knowledgeTypes">
+		<a data-ng-repeat="knowledge in knowledgeType.knowledgeList" data-ng-href="#!/knowledge/{{knowledge._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="knowledge.create_time | date:'mediumDate'"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="knowledge.title"></h4>
+			<p ng-show="isEnglish()" class="list-group-item-text" data-ng-bind="knowledge.content"></p>
+			<p ng-show="isFrench()" class="list-group-item-text" data-ng-bind="knowledge.contenu"></p>
+			<span class="label label-warning" ng-show="knowledge.send_push">App Notification</span>
+			<span class="label label-warning" ng-show="knowledge.send_email">Email Notification</span>
+			<span class="label label-info" ng-repeat="condition in knowledge.conditions">{{condition.functionName}}</span>
+		</a>
+		<div class="alert alert-warning text-center" data-ng-if="knowledgeType.knowledgeList.$resolved && !knowledgeType.knowledgeList.length">
+			No knowledge yet, why don't you <a href="/#!/knowledge/create/type/{{knowledgeType.type}}">create one</a>?
+		</div>
+	</div>
+</section>

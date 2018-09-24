@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+	{% if name %}
+	<p>Cher {{name}},</p>
+	{% else %}
+	<p>Cher utilisateur,</p>
+	{% endif %}
+	<br>
+	{% autoescape false %}{{ content }}{% endautoescape %}
+	<br>
+	<p>Nous espérons que vous avez aimé recevoir ce message. Cependant, si vous préférez ne pas recevoir d'e-mails de ce genre depuis  <a href="https://www.glucoguide.com">{{appName}}</a>, veuillez désactiver <a href="{{unsubscribe}}">ici<a>.</p>
+	<br>
+	<p>L'équipe de soutien de {{appName}}</p>
+</body>
+</html>

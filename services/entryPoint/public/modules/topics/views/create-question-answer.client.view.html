@@ -1,0 +1,126 @@
+<section data-ng-controller="TopicsController" data-ng-init="createQuestionAnswerInit(1)">
+	<div class="page-header">
+		<h1>New Answer</h1>
+	</div>
+	<div class="col-md-12">
+		<div class="jumbotron" data-ng-show="question">
+			<h4>Reference: </h4>
+			<!-- <a data-ng-href="/#!/user/records/{{question.userID.userID}}">
+				<button class="btn btn-default">User Records</button></a> -->
+			<a data-ng-href="/#!/logbook/{{question.userID.userID}}">
+				<button class="btn btn-default">Logbook</button></a>
+			<div class="page-header">
+				<p data-ng-bind="question.questionContent"></p>
+			</div>
+			<small>
+				<em class="text-muted">
+					Posted on
+					<span data-ng-bind="question.recordedTime | date:'mediumDate'"></span>
+					by
+					<span data-ng-bind="question.userID.email"></span>
+				</em>
+			</small>
+			<div ng-show="question.medias.length">
+				<label class="control-label" for="photo">Photo</label>
+				<div class="row">
+					<div class="col-sm-1 btn" ng-repeat="media in question.medias">
+							<img class="img-responsive" ng-click="selectqmedia(media)" ng-src="{{media.uri}}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="img-thumbnail">
+							<img class="img-responsive"  ng-src="{{preqmedia.uri}}" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<form name="topicForm" class="form-horizontal" data-ng-submit="topicForm.$valid && createQuestionAnswer()" novalidate>
+			<fieldset>
+				<div class="form-group">
+					<label class="control-label" for="template">Topic Template</label>
+					<select name="template" data-ng-model="template" id="template" class="form-control" placeholder="Topic Templates" ng-change="updateTopicByTemplate(template)">
+						<option value="{{template._id}}" ng-repeat="template in topicTemplates">{{template.title}}</option>
+					</select>
+				</div>
+
+				<div class="form-group" ng-class="{ 'has-error': topicForm.description.$invalid }">
+					<label class="control-label" for="description">Tip Content*</label>
+					<div class="controls">
+						<textarea name="description" data-ng-model="description" id="description" class="form-control" cols="30" rows="10" placeholder="Description" required></textarea>
+					</div>
+				</div>
+
+				<!---
+					aution option
+
+				-->
+				<div class="form-group" data-ng-controller="AudioController" data-ng-init="Audio_init()">
+					<label class="control-label" for="template" cols="50">Audio option</label>
+
+				    <p>(Make sure you are using a recent version of Google Chrome.)</p>	
+
+				     <div class="btn-group" role="group" aria-label="...">
+							<button type="button" class="glyphicon glyphicon-play btn btn-default" ng-click="startRecording(this)" ng-disabled="startReadonly"></button>
+						    <button   type="button"class="glyphicon glyphicon-stop btn btn-default" ng-click="stopRecording(this)" ng-disabled="stopReadonly"></button>
+						    <button   type="button" class="glyphicon glyphicon-remove btn btn-default" ng-click="deleteRecording(this)" ng-disabled="deleteReadonly"></button>
+					 </div>	    
+				    <br>
+				 	<br>
+  					<!--<ul id="recordingslist" style="list-style:none;"></ul>-->
+  					<div id="recordinglist" ></div>
+  					<audio ng-show="aurlshow" ng-src="{{aurl}}" controls >
+					  Your browser doesn't support audio recording.
+					</audio>
+  					<pre id="log" >{{audiolog}}</pre>
+
+				</div>
+				<!--
+					audio content ends
+				-->
+				<div class="form-group" ng-class="{ 'has-error': topicForm.signature.$invalid }">
+					<label class="control-label" for="signature">Sender's Name*</label>
+					<div class="controls">
+						<input type="text" name="signature" data-ng-model="signature" id="signature" class="form-control" placeholder="Leave you name here" required></input>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': topicForm.link.$dirty && topicForm.link.$invalid }">
+					<label class="control-label" for="link">Link (If you put a link URL here, when users click the tip in their GlucoGuide App, the website will be loaded)</label>
+					<div class="controls">
+						<input type="text" name="link" data-ng-model="link" id="link" class="form-control" placeholder="Link URL : http://www.google.ca" ng-readonly="linkReadonly"></input>
+					</div>
+				</div>
+				<div class="form-group">
+				  <div ng-show="medias" ng-class="{ 'has-error': topicForm.photos.$dirty && topicForm.photos.$invalid }">
+				    <label class="control-label" for="photos">Photo</label>
+				    <div class="row">
+				      <div class="col-sm-1 btn" ng-repeat="media in medias">
+				          <img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}"/>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="img-thumbnail">
+				          <img class="img-responsive"  ng-src="{{premedia.uri}}" />
+				      </div>
+				    </div>
+				  </div>
+				  <div class="controls">
+				    <div class="btn btn-default" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+				  </div>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary" value="Send">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
+<!--
+script
+
+-->
+
+
+  <script src="../recorder.js"></script>

@@ -1,0 +1,116 @@
+<section ng-controller="MacrosController"  class="row">
+
+
+	<div class="row" >
+
+		<div ng-controller="DietSidebarCtrl">
+			<diet-sidebar></diet-sidebar>
+		</div>
+
+		<div class="col-md-8 col-xs-12 col-md-offset-2">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">
+					<strong>Set Calories Distribution</strong>
+					<span class="pull-right"> {{user.firstName}} ({{user.email}})</span>
+				</div>
+
+				<div class="panel-body">
+
+					<form name="methodForm">
+						<label>
+							<input type="radio" ng-model="setBy"  value="automatically">
+							Set automatically
+						</label><br/>
+
+
+
+						<label>
+							<input type="radio" ng-model="setBy"  value="manually">
+							Set manually
+						</label>
+					</form>
+
+					<div class="row" ng-show="setBy === 'manually'">
+
+                        <p></p>
+						<div class="col-md-6   col-xs-12 col-md-offset-1">
+
+							<form name="activityForm" class="form-horizontal" data-ng-submit="setMacros()" novalidate>
+								<fieldset>
+									<div class="form-group">
+										<label>
+											<b>Carbs: </b><input type="number" size="10" step="1" min="0.1" max="100" autofocus ng-model="carbs"> %
+										</label><br>
+										<label>
+											<b>Protein: </b><input type="number" size="10" step="1" min="0.1" max="100" autofocus ng-model="protein"> %
+										</label><br>
+										<p>
+											<b>Fat: </b>{{fat}} %
+										</p>
+
+									</div>
+
+									<div class="form-group">
+										<div class="input-group checkbox">
+											<label> <input name="checked" type="checkbox" ng-model="checked">&nbsp;Send Personalized Tip to User</label> &nbsp;
+
+
+												<span><button type="button" class="btn btn-primary btn-sm"
+															  ng-click="setTipContent()">
+													<i class="glyphicon glyphicon-pencil">Edit</i>
+												</button></span>
+
+										</div>
+										<div class="row">
+
+											<div class="col-xs-11 well well-sm">
+
+												<p/>
+												<blockquote>
+													<p>{{tipContent}}</p></blockquote>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<input type="submit" value="Save & Sync" class="btn btn-default">
+									</div>
+									<div data-ng-show="error" class="text-danger">
+										<strong data-ng-bind="error"></strong>
+									</div>
+									<div data-ng-show="success" class="text-info">
+
+										<strong>successfully updated!</strong>
+
+									</div>
+								</fieldset>
+							</form>
+
+						</div>
+						<div class="col-md-5 col-xs-12 ">
+							<div class="alert alert-info" role="alert">
+								<p>CDA/ADA recommends that the daily calories distribution as follows:<br>
+									- Carbs: 45% - 60%<br>
+									- Protein: 15 - 20%<br>
+									- Fat: 20 - 35%<br></p>
+								<p><strong>Note</strong><br>
+									1. You can set the mean values of calorie distribution differently from the default values of 50%, 20%, and 30% respectively, based on users health condition.<br>
+									2. Your setting will affect user’s meal scores.  This will “guide” users to eat according to what you have set in the calorie distribution.<br>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+</section>
+
+

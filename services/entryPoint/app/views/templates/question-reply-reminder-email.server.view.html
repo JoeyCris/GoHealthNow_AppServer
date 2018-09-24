@@ -1,0 +1,21 @@
+
+	<p>You have a new advice for the question you entered in "Ask Experts":</p>
+	<br>
+	<p><strong>Question: </strong></p>
+	{% if question.medias.length != 0 %}
+	{% for media in question.medias %}
+	<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	{% endif %}
+	<!-- <p><img src="http://res.cloudinary.com/da1blwk33/image/upload/v1428250875/220px-InsideJob2010Poster_em0cxq.jpg"/></img></p> -->
+	<p>{{question.questionContent}}</p>
+	<br>
+
+	<p><strong>Answer: </strong></p>
+	{% if answer.medias.length != 0 %}
+	{% for media in answer.medias %}
+	<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	{% endif %}
+	<p>{{answer.description}}</p>
+	<p>You can also enter your APP to view it!</p>

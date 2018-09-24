@@ -1,0 +1,46 @@
+<section data-ng-controller="EmailController" data-ng-init="createinit()">
+	<div class="page-header">
+		<h1>New Email</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="emailForm" class="form-horizontal" data-ng-submit="emailForm.$valid && create()" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error': emailForm.receivers.$dirty && emailForm.receivers.$invalid }">
+					<label class="control-label" type="receivers">Receivers: </label>
+					<div class="controls">
+						<div isteven-multi-select input-model="checkreceivers" output-model="checkResults" button-label="email" item-label="email accessCode" tick-property="ticked" output-properties="email _id" orientation="horizontal"></div>
+					</div>
+					<div ng-show="submitted && emailForm.receivers.$invalid" class="help-block">
+						<p ng-show="emailForm.receivers.$error.required" class="text-danger">Receivers is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': emailForm.title.$dirty && emailForm.title.$invalid }">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<!-- <input name="title" type="text" data-ng-model="title" id="title" class="form-control" placeholder="Title" required> -->
+						<input name="title" type="text" ng-model="title" id="title" class="form-control" placeholder="Title" required>
+					</div>
+					<div ng-show="submitted && emailForm.title.$invalid" class="help-block">
+						<p ng-show="emailForm.title.$error.required" class="text-danger">Title is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': emailForm.status.$dirty && emailForm.status.$invalid }">
+					<label class="control-label" for="content">Content</label>
+					<div class="controls">
+						<div ckeditor="options" ng-model="content" ready="onReady()"></div>
+						<!-- <textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea> -->
+					</div>
+					<div ng-show="submitted && emailForm.content.$invalid" class="help-block">
+						<p ng-show="emailForm.content.$error.required" class="text-danger">Content is required</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

@@ -1,0 +1,81 @@
+<section data-ng-controller="TopicsController" data-ng-init="createinit()">
+	<div class="page-header">
+		<h1>New Topic</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="topicForm" class="form-horizontal" data-ng-submit="topicForm.$valid && create()" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error': knowledgeForm.checkpush.$dirty && knowledgeForm.checkpush.$invalid }">
+					<h4>Check for send emails and push notifications:
+					<span class="label label-warning" ng-show="checkpush.sendPush">Push Notification</span>
+					<span class="label label-warning" ng-show="checkpush.sendEmail">Email Notification</span></h4>
+			    <!-- <pre>Model: {{checkpush}}</pre> -->
+			    <div class="btn-group">
+			        <label class="btn btn-primary" ng-model="checkpush.sendPush" btn-checkbox>Send Push Notification</label>
+			        <label class="btn btn-primary" ng-model="checkpush.sendEmail" btn-checkbox>Send Email</label>
+			    </div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': topicForm.receiveuser.$dirty && topicForm.receiveuser.$invalid }">
+					<label class="control-label" for="receiveuser">User</label>
+					<select name="receiveuser" data-ng-model="receiveuser" id="receiveuser" class="form-control" placeholder="User" required>
+						<option value="{{profile._id}}" ng-repeat="profile in profiles">{{profile.email}}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="control-label" for="knowledge">Knowledge</label>
+					<select name="knowledge" data-ng-model="knowledge" id="knowledge" class="form-control" placeholder="Knowledge" ng-change="updateTopicByKnowledge()">
+						<option value="{{knowledge._id}}" ng-repeat="knowledge in knowledgeList">{{knowledge.title}}</option>
+					</select>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': topicForm.type.$invalid }" >
+					<label class="control-label" for="type">Type</label>
+					<div class="controls">
+						<input name="type" type="text" data-ng-model="type" id="type" class="form-control" placeholder="Type" required>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': topicForm.description.$invalid }">
+					<label class="control-label" for="description">Description</label>
+					<div class="controls">
+						<textarea name="description" data-ng-model="description" id="description" class="form-control" cols="30" rows="10" placeholder="Description" required></textarea>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': opicForm.signature.$invalid }">
+					<label class="control-label" for="signature">Sender's Name</label>
+					<div class="controls">
+						<input type="text" name="signature" data-ng-model="signature" id="signature" class="form-control" placeholder="Leave you name here" required></input>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': topicForm.link.$dirty && topicForm.link.$invalid }">
+					<label class="control-label" for="link">Link</label>
+					<div class="controls">
+						<input type="text" name="link" data-ng-model="link" id="link" class="form-control" placeholder="Link URL : http://www.google.ca"></input>
+					</div>
+				</div>
+				<div class="form-group">
+				  <div ng-show="medias" ng-class="{ 'has-error': topicForm.photos.$dirty && topicForm.photos.$invalid }">
+				    <label class="control-label" for="photos">Photo</label>
+				    <div class="row">
+				      <div class="col-sm-1 btn" ng-repeat="media in medias">
+				          <img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}"/>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="img-thumbnail">
+				          <img class="img-responsive"  ng-src="{{premedia.uri}}" />
+				      </div>
+				    </div>
+				  </div>
+				  <div class="controls">
+				    <div class="btn btn-primary" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+				  </div>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

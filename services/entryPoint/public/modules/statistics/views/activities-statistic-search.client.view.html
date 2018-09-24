@@ -1,0 +1,32 @@
+<section data-ng-controller="StatisticsSearchController" data-ng-init="searchActivities()">
+	<div class="page-header">
+		<h1 class="text-center">User Login Activities Search Result for: {{searchContent}} </h1>
+	</div>
+	<div class="row">
+		<table class="table table-hove table-striped display nowrap  dtr-inline" id="activities">
+			<tr>
+				<th>Email</th>
+				<th>Access Code</th>
+				<th>Activity</th>
+				<th>IP Address</th>
+				<th>Location</th>
+				<th>Date</th>
+			</tr>
+
+			<tr data-ng-repeat="activity in activities | orderBy:'activityTime':true |filter:search ">
+				<!--<th>{{activity.user.email}}</th>-->
+				<th>
+					<a data-ng-href="/#!/user/records/{{activity.user.userID}}">{{activity.user.email}}</a>
+				</th>
+				<th>{{activity.user.accessCode}}</th>
+				<th>{{activity.activityName}}</th>
+				<th>{{activity.ipAddress}}</th>
+				<th>{{activity.location}}</th>
+				<th>{{activity.activityTime | date:'yyyy-MM-dd HH:mm:ss' }}</th>
+			</tr>
+		</table>
+	</div>
+	<div class="text-center">
+		<pagination  ng-model="currentPage" total-items="totalNum" max-size="maxSize" rotate="false" boundary-links="true"></pagination>
+	</div>
+</section>

@@ -1,0 +1,20 @@
+<User_Record>
+	<Exercise_Records>
+		<Exercise_Record>
+			<Minutes>90</Minutes>
+			<Type>Moderate</Type>
+			<Interval>0</Interval>
+			<ExerciseRecordType>1</ExerciseRecordType> <!-- 0 from manual input, 1 from pedometer -->
+            <StepCount>123</StepCount>
+            <ExerciseStartingTime>2016-08-30T16:27:59-0400</ExerciseStartingTime>
+            <RecordedTime>2016-08-30T16:27:59-0400</RecordedTime>
+            <Calories>505.18823</Calories>
+            <UploadingVersion>0</UploadingVersion>
+        </Exercise_Record>
+    </Exercise_Records>
+
+
+	<UserID>592a57a67fe64472611f2395</UserID>
+	<Created_Time>2016-08-30T15:33:06+0000</Created_Time>
+</User_Record>
+

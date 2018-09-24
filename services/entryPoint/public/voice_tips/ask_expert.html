@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gg.askexpert.demo">
+<head>
+	<meta charset="UTF-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Q&A Demo</title>
+
+	<!-- link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+	<script src="/lib/angular/angular.js"></script>
+	<script src="/lib/angular-animate/angular-animate.js"></script>
+	<script src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script -->
+
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+	<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
+
+	<script src="./js/askexpert.js"></script>
+
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+	<title></title>
+
+
+</head>
+<body>
+
+<div class="container-fluid" ng-controller="AskExpertDemoCtrl">
+	<div class="row" style="height: 30px">
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<p>
+				A new voice feature will be added in "Ask Expert" in our new App.
+				The users will be able to send in a question in voice, and/or text, with an optional photo via the App.
+				See below for a demo on how we partner with an insure for truck drivers.
+			</p>
+			<p></p>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-default">
+				<div class="panel-heading"><p><strong class="pull-right">Oct 3, 2016 12:35</strong></p>
+					<!-- span class="pull-right">Oct 3, 2016 12:05:08 PM</span --></div>
+				<div class="panel-body">
+					<div class="col-xs-12">
+						<p>(Note: John is a truck driver).</p>
+						<p>Question from John:</p>
+						<div class="col-xs-12">
+								<img src="food.jpg" class="img-responsive">
+
+						</div>
+						<div class="col-xs-12">
+							<audio controls>
+								<source src="question.mp3" type="audio/mp4">
+								Your browser does not support the audio element.
+							</audio>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					In a couple of hours, John receives a reply in his App:
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading"><p><strong class="pull-right">Oct 3, 2016 15:45</strong></p>
+					<!-- span class="pull-right">Oct 3, 2016 12:05:08 PM</span --></div>
+				<div class="panel-body">
+
+
+					<div class="col-xs-12">
+						<p>Dear John,<br>
+							<br>
+							Click below to hear/view the reply from our Health Expert Nikki, BSc. (Nutritional Science):<br>
+						</p>
+
+
+						<!-- small><strong>Reply Audio:</strong></small -->
+
+						<audio controls>
+							<source src="answer.mp3" type="audio/mp4">
+							Your browser does not support the audio element.
+						</audio>
+					</div>
+					<div class="col-xs-12">
+						<hr>
+						<p>Rate the reply:</p>
+						<span uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></span>
+						<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}% satisfied</span>
+
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

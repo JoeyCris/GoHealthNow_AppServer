@@ -1,0 +1,53 @@
+<section data-ng-controller="QuestionsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Edit Question</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="questionForm" class="form-horizontal" data-ng-submit="questionForm.$valid && update(questionForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && questionForm.questionType.$invalid}">
+					<label class="control-label" for="questionType">Type</label>
+					<div class="controls">
+						<input name="questionType" type="text" data-ng-model="question.questionType" id="questionType" class="form-control" placeholder="Type" required>
+					</div>
+					<div ng-show="submitted && questionForm.questionType.$invalid" class="help-block">
+						<p ng-show="questionForm.questionType.$error.required" class="text-danger">Type is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && questionForm.questionContent.$invalid}">
+					<label class="control-label" for="questionContent">Content</label>
+					<div class="controls">
+						<textarea name="questionContent" data-ng-model="question.questionContent" id="questionContent" class="form-control" cols="30" rows="10" placeholder="Content" required></textarea>
+					</div>
+					<div ng-show="submitted && questionForm.questionContent.$invalid" class="help-block">
+						<p ng-show="questionForm.questionContent.$error.required" class="text-danger">Content is required</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<div ng-show="medias" ng-class="{ 'has-error': questionForm.media.$dirty && questionForm.media.$invalid }">
+						<label class="control-label" for="photos">Photo</label>
+						<div class="row">
+							<div class="col-sm-1 btn" ng-repeat="media in medias">
+									<img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="img-thumbnail">
+									<img class="img-responsive"  ng-src="{{premedia.uri}}" />
+							</div>
+						</div>
+					</div>
+					<div class="controls">
+						<div class="btn btn-primary" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

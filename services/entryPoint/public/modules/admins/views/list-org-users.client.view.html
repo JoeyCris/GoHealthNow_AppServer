@@ -1,0 +1,215 @@
+<section data-ng-controller="OrgAdminsController" data-ng-init="listOrgUsersInRange()" xmlns="http://www.w3.org/1999/html">
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-2">
+				<img  class="pull-left" ng-src="/{{brandInfo.uri}}" class="img-rounded" height="80"/><br>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-offset-2">
+					<h1 class="text-left">User Statistics</h1>
+				</div>
+			</div>
+		</div>
+    </div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<!--<label class="pull-right">Time: </label>-->
+		</div>
+		<div class="col-md-3">
+			<p class="input-group">
+				<span class="input-group-addon">Type:</span>
+				<select class="form-control" name="dateSpan" ng-model="dateSpan">
+					<option value="dateSpan-month">Monthly Report</option>
+					<option value="dateSpan-quarter">Last Three Month Report</option>
+				</select>
+			</p>
+		</div>
+		<!--</div>-->
+
+		<!--<div class="row">-->
+		<div class="col-md-3">
+
+			<p class="input-group">
+				<span class="input-group-addon">End Time:</span>
+				<input type="text" class="form-control"
+					   datepicker-popup="MM/yyyy"
+					   ng-model="endDate" is-open="endDateOpened"
+					   max-date="maxDate" datepicker-options="dateOptions"
+					   min-mode="'month'" datepicker-mode="'month'"
+					   date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+				<span class="input-group-btn">
+                	<button type="button" class="btn btn-default" ng-click="endDateOpen($event)">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+              </span>
+			</p>
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+	<p>Log in your Personal Online Logbook to view your Monthly Random ID</p>
+			</div>
+		</div>
+	<br/>
+
+	<div ng-repeat=" (accesscode, orgUsers) in allOrgUsers">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-3">
+				Access Code: {{accesscode}}
+			</div>
+		</div>
+	<!--<hr>-->
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10">
+				<table class="table table-hove table-striped display nowrap  dtr-inline" id="orgUserList">
+					<tr>
+						<th>
+							<a ng-click="sortType = 'userName'; sortReverse = !sortReverse">Monthly Random ID
+								<span ng-show="sortType == 'userName' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'userName' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<!-- th>
+							<a ng-click="sortType = 'sponsorUID'; sortReverse = !sortReverse"> ID
+								<span ng-show="sortType == 'sponsorUID' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'sponsorUID' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th -->
+
+						<th>
+							<a ng-click="sortType = 'stepCountsAvg'; sortReverse = !sortReverse"> Daily Step Counts
+								<span ng-show="sortType == 'stepCountsAvg' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'stepCountsAvg' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'caloriesAvg'; sortReverse = !sortReverse"> Daily Calories Burned
+								<span ng-show="sortType == 'caloriesAvg' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'caloriesAvg' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'mealScoreAvg'; sortReverse = !sortReverse"> Average Meal Score
+								<span ng-show="sortType == 'mealScoreAvg' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'mealScoreAvg' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'activity'; sortReverse = !sortReverse"> Total Active Usage
+								<span ng-show="sortType == 'activity' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'activity' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'weeklyMealPoint'; sortReverse = !sortReverse"> Total Meal Points
+								<span ng-show="sortType == 'weeklyMealPoint' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'weeklyMealPoint' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'weeklyExercisePoint'; sortReverse = !sortReverse"> Total Exercise Points
+								<span ng-show="sortType == 'weeklyExercisePoint' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'weeklyExercisePoint' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'weeklyTotalPoint'; sortReverse = !sortReverse"> Total Points
+								<span ng-show="sortType == 'weeklyTotalPoint' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'weeklyTotalPoint' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+            <!-- th>
+							<a ng-click="sortType = 'weightChange'; sortReverse = !sortReverse"> Weight Change
+								<span ng-show="sortType == 'weightChange' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'weightChange' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th -->
+
+						<th>
+							<a ng-click="sortType = 'registrationTime'; sortReverse = !sortReverse"> Registration Time
+								<span ng-show="sortType == 'registrationTime' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'registrationTime' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'lastLoginTime'; sortReverse = !sortReverse"> Last App Use
+								<span ng-show="sortType == 'lastLoginTime' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'lastLoginTime' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+					</tr>
+					<tr class="success">
+						<th>
+							<strong class="text-danger"><b>Average</b></strong>
+						</th>
+
+						<th>
+							<strong class="text-danger">{{(overallAvgStepCounts[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+						<th>
+							<strong class="text-danger">{{(overallAvgCalories[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<th >
+							<strong class="text-danger">{{(overallAvgMealScore[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<th>
+							<strong class="text-danger">{{(overallAvgUsage[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+            <th>
+							<strong class="text-danger">{{(overallAvgWeeklyMealPoints[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<th >
+							<strong class="text-danger">{{(overallAvgWeeklyExercisePoints[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<th>
+							<strong class="text-danger">{{(overallAvgWeeklyTotalPoints[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+            <!-- th>
+							<strong class="text-danger">{{(overallAvgWeightChanges[accesscode] | number : 0) || '-'}}</strong>
+						</th -->
+
+						<th>
+							-
+						</th>
+						<th>
+							-
+						</th>
+					</tr>
+					<tr data-ng-repeat="user in orgUsers | orderBy:sortType:sortReverse | emptyToEnd : sortType">
+						<!-- td>{{getUserFullName(user)}} ({{user.userName}})< /td -->
+						<!-- td>{{user.sponsorUID}}</td -->
+						<td>{{genRandomID(user.userID)}}</td>
+						<td>{{(user.stepCountsAvg | number : 0) || '-'}}</td>
+						<!--<td>{{(user.minutesAvg | number : 0) || '-'}}</td>-->
+						<td>{{(user.caloriesAvg | number : 0) || '-'}}</td>
+						<td>{{(user.mealScoreAvg | number : 0) || '-'}}</td>
+						<td>{{(user.activity | number : 0) || '-'}}</td>
+            <td>{{(user.weeklyMealPoint | number : 0) || '-'}}</td>
+            <td>{{(user.weeklyExercisePoint | number : 0) || '-'}}</td>
+            <td>{{(user.weeklyTotalPoint | number : 0) || '-'}}</td>
+            <!-- td>{{(user.weightChange | number : 0) || '-'}}</td -->
+						<td>{{(user.registrationTime | date: 'MM/dd/yyyy') || '-'}}</td>
+						<td>{{(user.lastLoginTime | date: 'MM/dd/yyyy') || '-'}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<hr>
+	</div>
+</section>

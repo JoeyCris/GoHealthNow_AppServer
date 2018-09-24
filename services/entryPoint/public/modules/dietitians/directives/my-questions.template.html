@@ -1,0 +1,33 @@
+
+	<div class="modal-header">
+		<div class="modal-title">
+			<h3>My Questions</h3>
+		</div>
+	</div>
+
+	<div class="modal-body">
+		<div class="row" ng-repeat="question in questions">
+			<hr ng-if="question != questions[0]" style="width: 100%; color: #EEEEEE; height: 1px 0; background-color:#EEEEEE; margin: 18px 0;" />
+			<div  ng-if="question.medias.length != 0" class="col-md-6 col-md-offset-3">
+				<a href="{{question.medias[0].uri}}">
+					<img  ng-src="{{question.medias[0].uri}}" class="img-thumbnail" >
+				</a>
+			</div>
+			<div  ng-if="question.questionContent" class="col-sm-12 col-xs-12">
+				<strong>Question:</strong>
+				<span>{{question.questionContent}} </span>
+				<small class="pull-right">{{question.recordedTime | date:'MMM d, h:mm a'}}</small>
+			</div>
+			<div  ng-repeat="answer in question.answers" ng class="col-sm-12 col-xs-12">
+				<strong ng-if="answer.signature">{{answer.signature}}:</strong>
+				<strong ng-if="!answer.signature">Answer:</strong>
+				<span>{{answer.description}} </span>
+				<small class="pull-right">{{answer.create_time | date:'MMM d, h:mm a'}}</small>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+	</div>

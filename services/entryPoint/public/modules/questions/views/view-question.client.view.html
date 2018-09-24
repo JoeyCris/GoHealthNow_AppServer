@@ -1,0 +1,68 @@
+<section data-ng-controller="QuestionsController" data-ng-init="findOne()">
+
+	<div class="page-header">
+		<h1 data-ng-bind="question.userID.email"></h1>
+		<!-- <a data-ng-href="/#!/user/records/{{question.userID.userID}}">
+			<button class="btn btn-default">User Records</button></a> -->
+		<a data-ng-href="/#!/logbook/{{question.userID.userID}}">
+			<button class="btn btn-default">Logbook</button></a>
+	</div>
+	<div class="pull-right" >
+		<!-- data-ng-show="authentication.user.userID == question.userID.userID"> -->
+		<!-- <a class="btn btn-primary" href="/#!/questions/{{question._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a> -->
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="question.recordedTime | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="question.userID.email"></span>
+		</em>
+	</small>
+	<p class="lead" data-ng-bind="question.questionContent"></p>
+	<div ng-show="question.medias.length">
+		<label class="control-label" for="photo">Photo</label>
+		<div class="row">
+			<div class="col-sm-1 btn" ng-repeat="media in question.medias">
+					<img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="img-thumbnail">
+					<img class="img-responsive"  ng-src="{{premedia.uri}}" />
+			</div>
+		</div>
+	</div>
+	<div ng-show="question.noteAudio">
+		<label class="control-label" >Audio</label>
+		<div class="row">
+			<div class="col-xs-12">
+				<audio ng-src="{{question.audioURL}}"  controls>
+					Your browser does not support the audio element.
+				</audio>
+			</div>
+		</div>
+	</div>
+	<h4 data-ng-show="question.topics.length">Answer:</h4>
+	<div class="list-group">
+		<a data-ng-repeat="topic in question.topics" data-ng-href="#!/topics/{{topic._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="topic.create_time | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="topic.creator.email"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="topic.user.email"></h4>
+			<p class="list-group-item-text" data-ng-bind="topic.description"></p>
+		</a>
+	</div>
+	<div ng-show="isDietitian()">
+		<a class="btn btn-primary pull-right" href="/#!/answers/create/question/{{question._id}}">Create Answer</a>
+	</div>
+
+</section>

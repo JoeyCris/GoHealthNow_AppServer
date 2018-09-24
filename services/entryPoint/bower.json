@@ -1,0 +1,28 @@
+{
+  "name": "meanjs",
+  "version": "0.3.2",
+  "description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
+  "dependencies": {
+    "angular-animate": "~1.4.8",
+    "angular-bootstrap": "~0.13",
+    "angular-chart.js": "~0.8.3",
+    "angular-mocks": "~1.4.8",
+    "angular-resource": "~1.4.8",
+    "angular-ui-router": "~0.2",
+    "angular-ui-utils": "bower",
+    "bootstrap": "~3",
+    "highcharts-ng": "~0.0.11",
+    "ng-file-upload": "~7.2.1",
+    "ng-file-upload-shim": "~7.2.1",
+    "ngclipboard": "~1.1.0",
+    "clipboard": "~1.5.5",
+    "isteven-angular-multiselect": "~4.0.0",
+    "angular-ckeditor": "~1.0.2",
+    "ckeditor": "~4.5.6",
+    "angular-sanitize": "~1.4.8",
+    "angular": "~1.4.8"
+  },
+  "resolutions": {
+    "angular": "1.4.9"
+  }
+}

@@ -1,0 +1,54 @@
+
+<div ng-show="meal" style="mini-height:11em">
+	<b>{{title}}</b>  {{meal.recordedTime | date:'HH:mm'}}<br>
+
+	<!--<b>Meal Summary: </b><br>-->
+	Carb: {{meal.carb | number:1}}(g)<br>
+	Fibre: {{meal.fiber | number:1}} (g) <br>
+	<!--Sugars: TODO (g).<br>-->
+	Pro: {{meal.pro | number:1}}(g)<br>
+	Fat: {{meal.fat | number:1}}(g)<br>
+	Calories: {{meal.cals | number:1}} kcals <br>
+
+	<div>
+
+		<button type="button" class="btn btn-default" ng-click="$parent.showMealDetail(meal, title)">
+			See Details
+		</button>
+
+		<!--button type="button" class="btn btn-default" ng-click="collapsed = !collapsed">
+			{{collapsed?'See Details':'Hide Details'}}
+		</button>
+
+
+
+		<div collapse="collapsed">
+			<hr>
+			<div  ng-if="meal.mealPhoto">
+				Meal Photo:<br>
+				<a href="/images/{{meal.userID}}/{{meal.mealPhoto}}">
+					<img  ng-src="/images/{{meal.userID}}/{{meal.mealPhoto}}" class="img-thumbnail" >
+				</a>
+			</div>
+			<div ng-repeat="food in meal.food">
+				Name: {{food.itemID.name}}<br>
+				Quantity: {{food.servingSize | number:1}} <br>
+				Serving Size:{{food.servingSizeName}}<br>
+				Carb: {{food.itemID.carbs *food.servingSize| number:1}}(g) :<br>
+				Fibre: {{food.itemID.fibre*food.servingSize | number:1}}(g);<br>
+				Sugar: {{food.itemID.sugars *food.servingSize| number:1}}(g).<br>
+				Pro: {{food.itemID.protein *food.servingSize| number:1}}(g)<br>
+				Fat: {{food.itemID.saturatedFat *food.servingSize| number:1}}(g)<br>
+				Calories: {{food.itemID.calories *food.servingSize | number:1}} kcals <br>
+				<hr ng-hide="$last">
+			</div>
+		</div -->
+	</div>
+
+</div>
+
+<div ng-hide="meal" style="height:11em">
+	<b>{{title}}</b>
+	<div>Not Recorded</div>
+</div>
+<br>

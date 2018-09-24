@@ -1,0 +1,147 @@
+/*.container {
+	margin: 0 0;
+}
+
+@media (min-width: 1200px) {
+	.container {
+		width: 100%;
+	}
+	.row {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+
+	.trendContainer {
+		margin: 10px auto;
+
+		background-color: #3c3f41;
+	}
+}*/
+/*!
+ * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+
+
+body {
+	width: 100%;
+	height: 100%;
+	font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	color: #fff;
+	background-color: #000;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+*/
+
+
+@media screen {
+	.printOnly {
+		display: none;
+	}
+
+	body {
+		background-color: #E5E9EC;
+	}
+
+	.trendContainer {
+		margin: 10px auto;
+
+		background-color: #3c3f41;
+	}
+
+	.weeklySum {
+		margin: 30px auto;
+		color: white;
+	}
+
+	.summaryCard {
+		position: relative;
+	}
+
+	.dailySummaryBoard {
+		position: absolute;
+		margin: 30px 50px;
+		color: whitesmoke;
+	}
+
+	.center-modal {
+		position: fixed;
+		top: 30%;
+		left: 18.5%;
+		z-index: 1050;
+		width: 80%;
+		height: 80%;
+		margin-left: -10%;
+	}
+
+}
+
+@media screen and (max-width: 320px){.hiddenForSmallDevice{display:none;}}
+@media screen and (max-width: 480px){
+	.hiddenForSmallDevice{display:none;}
+
+ 
+
+
+}
+@media screen and (max-width: 650px){.hiddenForSmallDevice{display:none;}}
+@media screen and (max-width: 980px){.hiddenForSmallDevice{display:none;}}
+
+@media screen and (min-width: 420px){.phoneOnly{display:none;}}
+@media screen and (max-width: 420px){.hiddenForPhone{display:none;}}
+@media screen and (min-width: 980px){
+	.hiddenForBigDevice{
+		display: none;
+	}
+}
+
+
+@media print
+{
+	.hideForPhone {
+		display: none;
+	}
+
+	.noPrint {
+		display:none;
+	}
+
+	.avoidBreak {
+		border: 2px ;
+		page-break-inside:avoid;
+	}
+
+
+	table { page-break-inside:auto;}
+	td    { page-break-inside:avoid; page-break-after:auto }
+	tr  { page-break-inside:avoid; page-break-after:auto }
+	div   { page-break-inside:avoid; } /* This is the key */
+	thead { display:table-header-group }
+	tfoot { display:table-footer-group }
+}
+
+/*
+.panel-gray > .panel-heading {
+	background-image: linear-gradient(to bottom, rgb(96, 96, 96) 0%, rgb(16, 16, 16) 100%);
+	background-repeat: repeat-x;
+}
+.panel-gray > .panel-heading {
+	color: #a94442;
+	background-color: #2a2a2b;
+	border-color: #3e3e40;
+}
+
+.panel-default > .panel-heading {
+	background-image: linear-gradient(to bottom, rgb(96, 96, 96) 0%, #a3a3a3 100%);
+	background-repeat: repeat-x;
+}
+
+.panel-default > .panel-heading {
+	color: whitesmoke;
+	background-color: rgb(96, 96, 96);
+	border-color: rgb(96, 96, 96);
+}*/

@@ -1,0 +1,210 @@
+<section data-ng-controller="MonthlyOrgAdminsController" data-ng-init="" xmlns="http://www.w3.org/1999/html">
+	<div style=" background: #fff">
+	    <div class="page-header">
+			<div class="row">
+				<div class="col-md-offset-1 col-md-2 col-xs-offset-1">
+					<img  class="pull-left" ng-src="/{{brandInfo.uri}}" class="img-rounded" height="80"/><br>
+				</div>
+				<div class="col-md-9">
+					<div class="col-md-offset-2">
+						<h1 class="text-left">Leaderboard</h1>
+					</div>
+				</div>
+			</div>
+	    </div>
+
+		<div class="row">
+			<div class="col-md-4 col-xs-1">
+				<!--<label class="pull-right">Time: </label>-->
+			</div>
+
+			<!-- no need for choose monthly-->
+			<!-- <div class="col-md-3">
+				<p class="input-group">
+					<span class="input-group-addon">Type:</span>
+					<select class="form-control" name="dateSpan" ng-model="dateSpan">
+						<option value="dateSpan-month">Monthly Report</option>
+						<option value="dateSpan-quarter">Last Three Month Report</option>
+					</select>
+				</p>
+			</div> -->
+			<!--</div>-->
+			<!--<div class="row">-->
+			<div class="col-md-3 col-xs-10">
+
+				<p class="input-group">
+					<span class="input-group-addon">Month:</span>
+					<input type="text" class="form-control"
+						   datepicker-popup="MM/yyyy"
+						   ng-model="endDate" is-open="endDateOpened"
+						   max-date="maxDate" datepicker-options="dateOptions"
+						   min-mode="'month'" datepicker-mode="'month'"
+						   date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+					<span class="input-group-btn">
+	                	<button type="button" class="btn btn-default" ng-click="endDateOpen($event)">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+	              </span>
+				</p>
+			</div>
+		</div>
+
+
+
+		<br/>
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10 col-xs-offset-1">
+				<p>Log in your Personal Online Logbook to view your Monthly Random ID</p>
+			</div>
+		</div>
+ 		<br>
+	
+	<div ng-repeat= "(accesscode, orgUsers) in allOrgUsers">
+		<!-- <div class="row">
+			<div class="col-md-offset-1 col-md-3 col-xs-offset-1">
+				Access Code: <strong class="text-warning">{{accesscode}}</strong>
+			</div>
+			
+		</div> -->
+
+		<!-- high chart-->
+		<div class="row"  >
+			<div class="col-md-offset-1 col-md-10 col-xs-12" >
+				<highchart id="chart1" config="StepChart"></highchart>
+			</div>
+
+			<div class="col-md-offset-1 col-md-10 col-xs-12" style="margin-top:20px;">
+				<highchart id="chart1" config="CaloriesChart"></highchart>
+			</div>
+
+			<div class="col-md-offset-1 col-md-10 col-xs-12" style="margin-top:20px;">
+				<highchart id="chart1" config="MealscoreChart"></highchart>
+			</div>
+
+		</div>
+		<br>
+	<!-- data table -->
+		<div class="row">
+			<div class="col-md-offset-1 col-md-10 col-xs-offset-1 col-xs-11">
+				<div class="row">
+					<div class="col-md-offset-5 col-xs-offset-2">
+						<h3 class="text-left">Statistics for All Users</h3>
+					</div>
+				</div>
+				<table class="table table-bordered display table-responsive table-hover " id="orgUserList">
+					
+					<tr>
+						<th>
+							<a ng-click="sortType = 'randomID'; sortReverse = !sortReverse">Monthly Random ID
+								<span ng-show="sortType == 'randomID' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'randomID' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th class="hiddenForPhone">
+							<a ng-click="sortType = 'stepCountAvg'; sortReverse = !sortReverse"> Average Step Counts
+								<span ng-show="sortType == 'stepCountAvg' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'stepCountAvg' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'caloriesAvg'; sortReverse = !sortReverse"> Average Calories Burned
+								<span ng-show="sortType == 'caloriesAvg' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'caloriesAvg' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th >
+							<a ng-click="sortType = 'mealScoreAvg'; sortReverse = !sortReverse"> Average Meal Score
+								<span ng-show="sortType == 'mealScoreAvg' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'mealScoreAvg' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th class="hiddenForPhone">
+							<a ng-click="sortType = 'WeeklyMealPoint'; sortReverse = !sortReverse"> Weekly Meal Points
+								<span ng-show="sortType == 'WeeklyMealPoint' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'WeeklyMealPoint' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th class="hiddenForPhone">
+							<a ng-click="sortType = 'WeeklyExercisePoint'; sortReverse = !sortReverse"> Weekly Exercise Points
+								<span ng-show="sortType == 'WeeklyExercisePoint' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'WeeklyExercisePoint' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+						<th>
+							<a ng-click="sortType = 'WeeklyTotalPoint'; sortReverse = !sortReverse"> Weekly Total Points
+								<span ng-show="sortType == 'WeeklyTotalPoint' && !sortReverse" class="glyphicon glyphicon-triangle-top"></span>
+								<span ng-show="sortType == 'WeeklyTotalPoint' && sortReverse" class="glyphicon glyphicon-triangle-bottom"></span>
+							</a>
+						</th>
+
+             
+					</tr>
+					<tr class="info">
+						<th>
+							<strong class="text-info"><b>Average</b></strong>
+						</th>
+
+						<th class="hiddenForPhone">
+							<strong class="text-info ">{{(overallAvgStepCounts[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+						<th >
+							<strong class="text-info">{{(overallAvgCalories[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<th >
+							<strong class="text-info">{{(overallAvgMealScore[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<!-- <th>
+							<strong class="text-danger">{{(overallAvgUsage[accesscode] | number : 0) || '-'}}</strong>
+						</th> -->
+
+            			<th class="hiddenForPhone">
+							<strong class="text-info">{{(overallAvgWeeklyMealPoints[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<th class="hiddenForPhone">
+							<strong class="text-info">{{(overallAvgWeeklyExercisePoints[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						<th>
+							<strong class="text-info">{{(overallAvgWeeklyTotalPoints[accesscode] | number : 0) || '-'}}</strong>
+						</th>
+
+						 
+					</tr>
+					<tr data-ng-repeat="user in orgUsers | orderBy:sortType:sortReverse | emptyToEnd : sortType">
+						<!-- td>{{getUserFullName(user)}} ({{user.userName}})< /td -->
+						<!-- td>{{user.sponsorUID}}</td -->
+
+						<td>{{user.randomID}}</td>		 
+						<td class="hiddenForPhone">{{(user.stepCountAvg | number:0) || '-'}}</td>	
+						<td >{{(user.caloriesAvg | number : 0) || '-'}}</td>
+						<td >{{(user.mealScoreAvg | number : 0) || '-'}}</td>
+						<!-- <td>{{(user.activity | number : 0) || '-'}}</td> -->
+			            <td class="hiddenForPhone"> {{(user.WeeklyMealPoint | number : 0) || '-'}}</td>
+			            <td class="hiddenForPhone">{{(user.WeeklyExercisePoint | number : 0) || '-'}}</td>
+			            <td>{{(user.WeeklyTotalPoint | number : 0) || '-'}}</td>
+					</tr>
+
+					
+				</table>
+			</div>
+		</div>
+		<hr>
+
+	</div>
+
+
+ 
+		
+
+
+	</div>
+</section>

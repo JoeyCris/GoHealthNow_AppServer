@@ -1,0 +1,92 @@
+<section data-ng-controller="TopicsController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Edit Topic</h1>
+	</div>
+	<div class="col-md-12">
+		<div class="jumbotron" data-ng-show="question">
+			<h4>Reference: </h4>
+			<div class="page-header">
+				<p data-ng-bind="question.questionContent"></p>
+			</div>
+			<small>
+				<em class="text-muted">
+					Posted on
+					<span data-ng-bind="question.recordedTime | date:'mediumDate'"></span>
+					by
+					<span data-ng-bind="question.userID.email"></span>
+				</em>
+			</small>
+			<div ng-show="question.medias">
+				<label class="control-label" for="photo">Photo</label>
+				<div class="row">
+					<div class="col-sm-1 btn" ng-repeat="media in question.medias">
+							<img class="img-responsive" ng-click="selectqmedia(media)" ng-src="{{media.uri}}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="img-thumbnail">
+							<img class="img-responsive"  ng-src="{{preqmedia.uri}}" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<form name="topicForm" class="form-horizontal" data-ng-submit="topicForm.$valid && update(topicForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && topicForm.type.$invalid}">
+					<label class="control-label" for="type">Type</label>
+					<div class="controls">
+						<input name="type" type="text" data-ng-model="topic.type" id="type" class="form-control" placeholder="Type" required>
+					</div>
+					<div ng-show="submitted && topicForm.type.$invalid" class="help-block">
+						<p ng-show="topicForm.type.$error.required" class="text-danger">Type is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && topicForm.description.$invalid}">
+					<label class="control-label" for="description">Content*</label>
+					<div class="controls">
+						<textarea name="description" data-ng-model="topic.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description" required></textarea>
+					</div>
+					<div ng-show="submitted && topicForm.description.$invalid" class="help-block">
+						<p ng-show="topicForm.description.$error.required" class="text-danger">Description is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': opicForm.signature.$invalid }">
+					<label class="control-label" for="signature">Sender's Name*</label>
+					<div class="controls">
+						<input type="text" name="signature" data-ng-model="signature" id="signature" class="form-control" placeholder="Leave you name here" required></input>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && topicForm.link.$invalid}">
+					<label class="control-label" for="link">Link (If you put a link URL here, when users click the tip in their GlucoGuide App, the website will be loaded)</label>
+					<div class="controls">
+						<input type="url" data-ng-model="topic.link" name="link" data-ng-model="link" id="link" class="form-control" placeholder="Link URL : http://www.google.ca"></input>
+					</div>
+				</div>
+				<div class="form-group">
+				  <div ng-show="medias" ng-class="{ 'has-error': topicForm.photos.$dirty && topicForm.photos.$invalid }">
+				    <label class="control-label" for="photos">Photo</label>
+				    <div class="row">
+				      <div class="col-sm-1 btn" ng-repeat="media in medias">
+				          <img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}"/>
+				      </div>
+				    </div>
+				    <div class="row">
+				      <div class="img-thumbnail">
+				          <img class="img-responsive"  ng-src="{{premedia.uri}}" />
+				      </div>
+				    </div>
+				  </div>
+				  <div class="controls">
+				    <div class="btn btn-default" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+				  </div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-primary">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

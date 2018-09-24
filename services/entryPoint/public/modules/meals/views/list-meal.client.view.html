@@ -1,0 +1,33 @@
+<section data-ng-controller="MealsController" data-ng-init="find()">
+	<div class="page-header">
+		<h1>Meals</h1>
+	</div>
+	<ul class="nav nav-pills">
+    <li data-ng-repeat="mealType in mealTypes" ng-class="{ active:isSet(mealType.type) }">
+      <a href ng-click="setType(mealType.type)">{{mealType.type}}</a>
+    </li>
+
+  </ul>
+
+	<div ng-show="isSet(mealType.type)" class="list-group" data-ng-repeat="mealType in mealTypes">
+		<a data-ng-repeat="meal in mealType.meals" data-ng-href="#!/meals/{{meal._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="meal.recordedTime | date:'mediumDate'"></span>
+				by
+				<span data-ng-bind="meal.userID.email"></span>
+			</small>
+			<span data-ng-show="meal.replyTimes" class="badge">{{meal.replyTimes}}</span>
+			<h4 class="list-group-item-heading" data-ng-bind="meal.userID.email"></h4>
+			<p>Calories: {{meal.cals}}</p>
+			<p>Carbs: {{meal.carb}}</p>
+			<p>Protein: {{meal.pro}}</p>
+			<p>Fat: {{meal.fat}}</p>
+			<p>Photo: {{ (meal.mealPhoto != undefined && meal.mealPhoto != "") }}</p>
+		</a>
+		<div class="alert alert-warning text-center" data-ng-if="mealType.meals.$resolved && !mealType.meals.length">
+			No meals yet
+		</div>
+	</div>
+
+</section>

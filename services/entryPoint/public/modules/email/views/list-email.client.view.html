@@ -1,0 +1,26 @@
+<section data-ng-controller="EmailController" data-ng-init="find()">
+	<div class="page-header">
+		<h1>Email</h1>
+	</div>
+	<ul class="nav nav-pills">
+    <li data-ng-repeat="emailStatus in emailStatuses" ng-class="{ active:isSet(emailStatus.status) }">
+      <a href ng-click="setStatus(emailStatus.status)">{{emailStatus.status}}</a>
+    </li>
+  </ul>
+
+	<div ng-show="isSet(emailStatus.status)" class="list-group" data-ng-repeat="emailStatus in emailStatuses">
+		<a data-ng-repeat="email in emailStatus.emailList" data-ng-href="#!/email/{{email._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="email.create_time | date:'mediumDate'"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="email.title"></h4>
+			<!-- <p class="list-group-item-text" data-ng-bind="email.content"></p> -->
+			<progressbar class="progress-striped active" value="email.progress" max="email.users.length" type="{{type}}">{{email.progress}}/{{email.users.length}}</progressbar>
+			<!-- <div class="col-sm-4"><progress max="100" value="55">55/100</progress></div> -->
+		</a>
+		<div class="alert alert-warning text-center" data-ng-if="emailStatus.emailList.$resolved && !emailStatus.emailList.length">
+			No email yet, why don't you <a href="/#!/email/create/status/{{emailStatus.status}}">create one</a>?
+		</div>
+	</div>
+</section>

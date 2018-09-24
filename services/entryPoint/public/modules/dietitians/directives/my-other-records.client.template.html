@@ -1,0 +1,154 @@
+
+<div ng-repeat="insulin in records.insulinRecords">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Insulin</strong>
+			<span class="pull-right">{{insulin.recordedTime | date:'HH:mm'}}</span>
+		</div>
+		<div class="panel-body">
+			<b>{{insulin.insulinID.name}}</b><strong class="text-info" style="font-size:150%"> {{insulin.dose| number:1}} </strong>units.
+
+			<div ng-if="insulin.note">
+				<strong>Note:</strong>
+				<span>{{insulin.note}}</span>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-repeat="medicine in records.medicineRecords">
+
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Medicine</strong>
+			<span class="pull-right">{{medicine.recordedTime | date:'HH:mm'}}</span>
+		</div>
+
+		<div class="panel-body">
+			<p class="text-center">
+			<b>{{medicine.medicineName}}</b><br>
+			<strong class="text-info" style="font-size:150%"> {{medicine.dose| number:1}}  </strong>{{medicine.unit}}.<br>
+			</p>
+			<div ng-if="medicine.note">
+				<p>
+				<strong>Note:</strong>
+				<span>{{medicine.note}}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-repeat="record in records.bloodPressureRecords">
+
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>Blood Pressure</strong>
+			<span class="pull-right">{{record.recordedTime | date:'HH:mm'}}</span>
+		</div>
+
+		<div class="panel-body text-left">
+			<p>
+				<b>Systolic:</b>
+				<span>
+				<strong class="text-info" style="font-size:150%"> {{record.systolic| number:1}}
+				</strong>mmHg
+				</span>
+			</p>
+			<p>
+				<b>Diastolic:</b><span>
+				<strong class="text-info" style="font-size:150%"> {{record.diastolic| number:1}}  </strong>mmHg
+				</span>
+			</p>
+			<p>
+				<b>Pulse:</b><span>
+				<strong class="text-info" style="font-size:150%"> {{record.pulse| number:1}}  </strong>BPM
+				</span>
+			</p>
+			<div ng-if="record.note">
+				<p>
+					<strong>Note:</strong>
+					<span>{{record.note}}</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- div  ng-repeat="exercise in records.exerciseRecords">
+	<div class="panel panel-default">
+		<div class="panel-heading"><strong>Exercise</strong>
+			<span class="pull-right">{{(exercise.exerciseStartingTime? exercise.exerciseStartingTime : exercise.recordedTime) | date:'HH:mm'}}</span>
+		</div>
+
+		<div class="panel-body">
+
+			<b>{{exercise.type}}</b><strong style="font-size: 150%" class="text-info"> {{exercise.minutes | number:1}}</strong> minutes.<br>
+
+			<b>Burned:</b><strong style="font-size: 150%" class="text-info"> {{exercise.calories | number:1}}</strong> calories<br>
+            <hr/>
+			<p class="text-right">{{exercise.exerciseRecordType==1 ? 'Automatically added' : 'Manually added'}}</p>
+
+
+		</div>
+	</div>
+</div -->
+
+
+<div  ng-repeat="meal in records.mealRecords">
+	<div class="panel panel-default">
+		<div class="panel-heading"><strong>Snack</strong><span class="pull-right">{{meal.recordedTime | date:'HH:mm'}}</span></div>
+		<div class="panel-body">
+
+			<div class="row">
+				<div class="col-xs-4">
+					<strong>Carbs</strong><br>
+					<strong style="font-size: 150%" class="text-info">{{meal.carb | number:1}}</strong><br>
+					<small>grams</small><br>
+				</div>
+				<div class="col-xs-4">
+					<strong>Fibre</strong><br>
+					<strong style="font-size: 150%" class="text-info">{{meal.fibre | number:1}}</strong><br>
+					<small>grams</small><br>
+				</div>
+				<div class="col-xs-4">
+					<strong>Calories</strong><br>
+					<strong style="font-size: 150%" class="text-info">{{meal.cals | number:1}}</strong><br>
+					<small>kcals</small><br>
+				</div>
+			</div>
+			<div  ng-if="meal.mealPhoto" class="row">
+
+				<a href="/images/{{meal.userID}}/{{meal.mealPhoto}}">
+					<img  ng-src="/images/{{meal.userID}}/{{meal.mealPhoto}}" class="img-thumbnail" >
+				</a>
+			</div>
+
+
+			<div ng-if="meal.note">
+				<p>
+				<strong>Note:</strong>
+				<span>{{meal.note}}</span>
+				</p>
+			</div>
+			<hr/>
+
+			<div class="row text-center">
+				<button type="button" class="btn btn-default" ng-click="$parent.$parent.showMealDetail(meal, 'Snack')">
+					See Details
+				</button>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+

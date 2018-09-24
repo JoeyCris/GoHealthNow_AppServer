@@ -1,0 +1,13 @@
+
+	<p>You have a new advice from GlucoGuide for question you entered in "Ask Experts":</p>
+	<br>
+	{% if question.medias.length != 0 %}
+	{% for media in question.medias %}
+	<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	<br>
+	{% endif %}
+	<!-- <p><img src="http://res.cloudinary.com/da1blwk33/image/upload/v1428250875/220px-InsideJob2010Poster_em0cxq.jpg"/></img></p> -->
+	<p>{{question.questionContent}}</p>
+	<br>
+	<p>Please <a href=\"http://kdd.csd.uwo.ca/GlucoGuideAdmin/openapp\">enter your GlucoGuide+ APP</a> to view it!</p>

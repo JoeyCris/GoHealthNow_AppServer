@@ -1,0 +1,24 @@
+<section data-ng-controller="TopicTemplatesController" data-ng-init="find()">
+	<div class="page-header">
+		<h1>Template</h1>
+	</div>
+	<ul class="nav nav-pills">
+    <li data-ng-repeat="templateType in templateTypes" ng-class="{ active:isSet(templateType.type) }">
+      <a href ng-click="setType(templateType.type)">{{templateType.name}}</a>
+    </li>
+  </ul>
+
+	<div ng-show="isSet(templateType.type)" class="list-group" data-ng-repeat="templateType in templateTypes">
+		<p class="alert alert-info"><strong>Notice:</strong> {{templateType.description}}</p>
+		<a data-ng-repeat="template in templateType.templates" data-ng-href="#!/templates/{{template._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="template.create_time | date:'mediumDate'"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="template.title"></h4>
+			<p class="list-group-item-text" data-ng-bind="template.content"></p>
+		</a>
+		<div class="alert alert-warning text-center" data-ng-if="templateType.templates.$resolved && !templateType.templates.length">
+			There are no templates added yet. You can <a href="/#!/templates/create/type/{{templateType.type}}">create a template</a> for tips or answers that are sent frequently. Templates allow you to send more generic tips or answers quickly.</div>
+	</div>
+</section>

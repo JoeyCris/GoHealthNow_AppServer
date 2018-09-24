@@ -1,0 +1,158 @@
+<section data-ng-controller="GoalController" data-ng-init="getLatestGoal()" class="row">
+	<style>
+		.form-control[readonly] {
+			background-color: #ffffff;
+			opacity: 1;
+			border: none;
+			box-shadow: none;
+		}
+	</style>
+	<div class="row">
+		<div ng-controller="DietSidebarCtrl">
+			<diet-sidebar></diet-sidebar>
+		</div>
+		<div class="col-sm-12 col-md-11 col-md-offset-1 col-lg-11 col-lg-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Weight Goal</h3>
+				</div>
+				<div class="panel-body">
+					<h4>Weekly Weight Goal:</h4>
+					<div class="row">
+						<div class="col-md-5">
+
+
+							<input ng-class="{show:!goals.weightGoal.is2save(),hidden:goals.weightGoal.is2save()}"
+									   class="form-control" value="{{goals.weightGoal.showText()}}" readonly>
+
+
+							<div class="input-group" ng-class="{show:goals.weightGoal.is2save(),hidden:!goals.weightGoal.is2save()}">
+								<select data-ng-model="goals.weightGoal.type" class="form-control" style="max-width: 45%">
+									<option value="1" ng-selected="goals.weightGoal.type==1">Gain</option>
+									<option value="0" ng-selected="goals.weightGoal.type==0">Lose</option>
+								</select>
+								<select data-ng-model="goals.weightGoal.target" class="form-control" style="max-width: 55%">
+									<option value="1.0">1.00kg (2.20lbs)</option>
+									<option value="0.75">0.75kg (1.65lbs)</option>
+									<option value="0.5">0.50kg (1.10lbs)</option>
+									<option value="0.25">0.25kg (0.55lbs)</option>
+									<option value="0.00">0.00kg (0.00lbs)</option>
+								</select>
+							</div>
+
+						</div>
+						<div class="col-md-5 col-md-offset-1" >
+							<div class="row" ng-class="{show:goals.weightGoal.is2save(),hidden:!goals.weightGoal.is2save()}">
+								<div class="form-group">
+									<div class="input-group checkbox">
+										<label> <input name="checked" type="checkbox" ng-model="goals.weightGoal.sendTip">&nbsp;Send Personalized Tip to User</label> &nbsp;
+
+
+													<!-- span><button type="button" class="btn btn-primary btn-sm"
+																  ng-click="setTipContent()">
+														<i class="glyphicon glyphicon-pencil">Edit</i>
+													</button></span -->
+
+									</div>
+									<!-- div class="row">
+
+										<div class="col-xs-11 well well-sm">
+
+											<p/>
+											<blockquote>
+												<p>{{goals.weightGoal.tipContent}}</p></blockquote>
+										</div>
+									</div -->
+								</div>
+							</div>
+							<div class="row">
+								<button type="button" class="btn btn-default"
+										ng-click="toggle(goals.weightGoal)">
+									{{goals.weightGoal.state}}
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Exercise Goals</h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-md-12" ng-repeat="exerciseGoal in goals.exerciseGoal">
+						<div><h4>{{exerciseGoal.showType()}} :</h4></div>
+						<div class="col-md-5">
+								<input ng-class="{show:!exerciseGoal.is2save(),hidden:exerciseGoal.is2save()}" class="form-control" value="{{exerciseGoal.showText()}}" readonly>
+								<input ng-class="{show:exerciseGoal.is2save(),hidden:!exerciseGoal.is2save()}" class="form-control" data-ng-model="exerciseGoal.target" type="number" required>
+
+						</div>
+						<div class="col-md-5 col-md-offset-1">
+							<div class="row" ng-class="{show:exerciseGoal.is2save(),hidden:!exerciseGoal.is2save()}">
+								<div class="form-group">
+									<div class="input-group checkbox">
+										<label> <input name="checked" type="checkbox" ng-model="exerciseGoal.sendTip">&nbsp;Send Personalized Tip to User</label> &nbsp;
+
+
+										<!-- span><button type="button" class="btn btn-primary btn-sm"
+                                                      ng-click="setTipContent()">
+                                            <i class="glyphicon glyphicon-pencil">Edit</i>
+                                        </button></span -->
+
+									</div>
+									<!-- div class="row">
+
+										<div class="col-xs-11 well well-sm">
+
+											<p/>
+											<blockquote>
+												<p>{{goals.weightGoal.tipContent}}</p></blockquote>
+										</div>
+									</div -->
+								</div>
+							</div>
+							<div class="row">
+								<button type="button" class="btn btn-default" ng-click="toggle(exerciseGoal)">{{exerciseGoal.state}}
+								</button>
+							</div>
+						</div>
+						<br>
+					</div>
+
+				</div>
+
+			</div>
+
+			<!-- div class="panel panel-info">
+				<div class="panel-heading">
+					<h3>Blood Glucoses Goals</h3>
+				</div>
+				<div class="panel-body">
+					<div ng-repeat="bloodGlucoseGoal in goals.bloodGlucoseGoal">
+						<div><h4>{{bloodGlucoseGoal.showType()}} :</h4></div>
+						<div class="row">
+							<div class="col-md-2">
+								<input ng-class="{show:!bloodGlucoseGoal.is2save(),hidden:bloodGlucoseGoal.is2save()}" class="form-control" value="{{bloodGlucoseGoal.showText()}}" readonly>
+								<input ng-class="{show:bloodGlucoseGoal.is2save(),hidden:!bloodGlucoseGoal.is2save()}" class="form-control" data-ng-model="bloodGlucoseGoal.target" type="number" required>
+							</div>
+							<div class="col-md-1">
+								<button type="button" class="btn btn-default" ng-click="toggle(bloodGlucoseGoal)">{{bloodGlucoseGoal.state}}
+								</button>
+							</div>
+						</div>
+						<br>
+					</div>
+				</div>
+
+			</div -->
+
+
+			<br/>
+
+
+		</div>
+	</div>
+
+
+</section>

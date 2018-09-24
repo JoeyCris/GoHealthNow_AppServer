@@ -1,0 +1,13 @@
+
+	<p>You have a new message</p>
+	<p><strong>Message: </strong></p>
+	{% if topic.medias.length != 0 %}
+	{% for media in topic.medias %}
+	<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	{% endif %}
+	<p>{{topic.description}}</p>
+	{% if topic.link %}
+	<a href="{{topic.link}}">{{topic.link}}</a>
+	{% endif %}
+	<p>You can also enter your APP to view it!</p>

@@ -1,0 +1,35 @@
+{"isCommon":"0","medicineID":"med01","name":"Rosiglitazone (Avandia)","type":"1"}
+{"isCommon":"0","medicineID":"med02","name":"Pioglitazone (Actos)","type":"1"}
+{"isCommon":"1","medicineID":"med03","name":"Saxagliptin + Metformin(Komboglyze)","type":"3"}
+{"isCommon":"1","medicineID":"med04","name":"Sitagliptin + Metformin(Janumet)","type":"3"}
+{"isCommon":"1","medicineID":"med05","name":"Sitagliptin + Metformin XR(Janumet XR)","type":"3"}
+{"isCommon":"0","medicineID":"med06","name":"Rosiglitazone + Metformin(Avandamet)","type":"3"}
+{"isCommon":"0","medicineID":"med07","name":"Rosiglitazone + Glimepiride(Avandaryl)","type":"3"}
+{"isCommon":"0","medicineID":"med08","name":"Canagliflozen (Invokana)","type":"1"}
+{"isCommon":"0","medicineID":"med09","name":"Dapagliflozen (Forxiga)","type":"1"}
+{"isCommon":"1","medicineID":"med10","name":"Glyburide (Diabeta)","type":"1"}
+{"isCommon":"1","medicineID":"med11","name":"Gliclazide (Diamicron)","type":"1"}
+{"isCommon":"1","medicineID":"med12","name":"Gliclazide (Diamicron MR)","type":"1"}
+{"isCommon":"0","medicineID":"med13","name":"Glimepiride (Amaryl)","type":"1"}
+{"isCommon":"0","medicineID":"med14","name":"Repaglinide (Gluconorm)","type":"1"}
+{"isCommon":"0","medicineID":"med15","name":"Nateglinide (Starlix)","type":"1"}
+{"isCommon":"1","medicineID":"med16","name":"Metformin (Glucophage)","type":"1"}
+{"isCommon":"1","medicineID":"med17","name":"Metformin (Glumetza)","type":"1"}
+{"isCommon":"1","medicineID":"med18","name":"Metformin XR (Glucophage XR)","type":"1"}
+{"isCommon":"1","medicineID":"med19","name":"Sitagliptin (Januvia)","type":"1"}
+{"isCommon":"1","medicineID":"med20","name":"Saxagliptin (Onglyza)","type":"1"}
+{"isCommon":"1","medicineID":"med21","name":"Linagliptin (Trajenta)","type":"1"}
+{"isCommon":"1","medicineID":"med22","name":"Liraglutide (Victoza)","type":"1"}
+{"isCommon":"0","medicineID":"med23","name":"Exenatide (Byetta)","type":"1"}
+{"isCommon":"1","medicineID":"med24","name":"Linagliptin + Metformin (Jentadueto)","type":"3"}
+
+
+        {"isCommon":"1","medicineID":"in021","name":"Apidra","type":"2"}
+        {"isCommon":"1","medicineID":"in022","name":"Humalog","type":"2"}
+        {"isCommon":"1","medicineID":"in031","name":"Humalog Mix 75/25","type":"3"}
+        {"isCommon":"1","medicineID":"in011","name":"Humulin N","type":"1"}
+        {"isCommon":"1","medicineID":"in012","name":"Lantus","type":"1"}
+        {"isCommon":"1","medicineID":"in013","name":"Levemir","type":"1"}
+        {"isCommon":"1","medicineID":"in023","name":"NovoRapid/NovoLog","type":"2"}
+        {"isCommon":"1","medicineID":"in032","name":"NovoLog Mix 70/30","type":"3"}
+        {"isCommon":"1","medicineID":"in014","name":"Novolin N","type":"1"}

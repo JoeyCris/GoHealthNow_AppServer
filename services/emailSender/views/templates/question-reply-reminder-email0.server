@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+	<p>Dear {{name}},</p>
+	<p></p>
+	<p>This is a confirmation that the password for your account has just been changed</p>
+	<br>
+	<br>
+	<p>The {{appName}} Support Team</p>
+</body>
+</html>
+
+
+pushcontent = rec_content
+if user.device_type==0:
+		try:
+				send_push_request_gcm('post','http://localhost:30000/pushserver/gcm/', user.registrationid, 'AIzaSyA-MAQ-BT96Cvmoa_lGHtyWOnM-H9BuWFk', pushcontent)
+		except:
+				print "send_push_request_gcm error"
+				pass
+elif user.device_type==1:
+		try:
+				send_push_request_apn('post','http://localhost:30000/pushserver/apn/', user.registrationid, pushcontent)
+		except:
+				print "send_push_request_apn"
+				pass
+
+if user.isactivated==1:
+		send_email(user.email,"You have a new advice from GlucoGuide for question you entered in \"Ask Experts\".","You have a new advice from GlucoGuide for question you entered in \"Ask Experts\": <br>\""+note.content+"\"  <br>Please <a href=\"http://kdd.csd.uwo.ca/GlucoGuideAdmin/openapp\">enter your GlucoGuide+ APP</a> to view it!")
+recipients = []
+for superuser in get_super_user_list():
+		recipients.append(superuser.email)
+send_email(recipients,"["+user.organizationcode+"] Question Answered by "+reply_user.email,"Question from user "+user.email+" is answered: <br>\""+rec_content+"\"<br> reply by"+reply_user.lastname)

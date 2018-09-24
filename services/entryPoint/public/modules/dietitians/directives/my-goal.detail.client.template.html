@@ -1,0 +1,62 @@
+<div class="modal-header">
+
+	<div class="modal-title">
+		<h3>My Goals</h3>
+	</div>
+
+	<div class="modal-body">
+
+		<div class="row" >
+			<div class="col-md-6 col-xs-12" ng-if="goals.bloodGlucoseGoal">
+				<div class="panel panel-default">
+					<div class="panel-heading"><strong>Blood Glucose Goal</strong>
+					</div>
+
+					<div class="panel-body">
+						<b>Lower Bound: </b> <span>goals.bloodGlucoseGoal.lowerBound</span>
+						<b>Upper Bound: </b> <span>goals.bloodGlucoseGoal.upperBound</span>
+						<!--<b>Type: </b><span>Weekly</span><br>-->
+						<!--<b>Target: </b><span>{{goals.weightGoal.showText()}}</span>-->
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-xs-12" ng-if="goals.weightGoal">
+				<div class="panel panel-default">
+					<div class="panel-heading"><strong>Weight Goal</strong>
+					</div>
+
+					<div class="panel-body">
+						<b>Type: </b><span>Weekly</span><br>
+						<b>Target: </b><span>{{goals.weightGoal.showText()}}</span>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-xs-12" ng-repeat="row in goals.exerciseGoal">
+				<div class="panel panel-default">
+					<div class="panel-heading"><strong>Exercise Goal</strong>
+					</div>
+
+					<div class="panel-body">
+						<b>Type: </b><span>{{row.showType()}}</span><br>
+						<b>Target: </b><span>{{row.showText()}}</span>
+						<!-- hr/>
+						<p class="text-right">{{exercise.exerciseRecordType==1 ? 'Automatically added' : 'Manually added'}}</p -->
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="modal-footer">
+		<button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+	</div>
+
+</div>

@@ -1,0 +1,79 @@
+<User_Record>
+	<UserID>55c5080e00dbf257afe98c4c</UserID>
+	<Note_Records FeatureID="01">
+		<Note_Record>
+			<NoteContent>test audio</NoteContent>
+			<RecordedTime>2016-10-31T12:22:37-0400</RecordedTime>
+			<UploadingVersion>0</UploadingVersion>
+			<NoteType>Diet</NoteType> <!-- //Diet/Exercise/Blood Glucose/Weight/Others -->
+			<NoteAudio>question.mp3</NoteAudio>
+		</Note_Record>
+	</Note_Records>
+	<Created_Time>2016-10-31T12:22:37-0400</Created_Time>
+</User_Record>
+
+<!-- User_Record>
+<UserID>568146608c4eac52bd21c143</UserID>
+<BloodPressureRecords>
+	<BloodPressureRecord>
+		<Systolic>435</Systolic>
+		<Diastolic>23</Diastolic>
+		<Pulse>59</Pulse>
+		<Note>Test for blood pressure</Note>
+		<RecordedTime>2016-08-19T16:27:59-0400</RecordedTime>
+	</BloodPressureRecord>
+</BloodPressureRecords>
+<Created_Time>2016-08-19T16:27:59-0400</Created_Time>
+</User_Record -->
+
+<!-- User_Record>
+	<UserID>559d7f081f1f2c42758f5f02</UserID>
+	<Meal_Records>
+		<Meal_Record>
+			<Carb>95.645248</Carb>
+			<Pro>15.164749</Pro>
+			<Fat>32.615372</Fat>
+			<Cals>737.212524</Cals>
+			<Fibre>9.695</Fibre>
+			<MealType>0</MealType>
+			<MealEnterType>1</MealEnterType>
+			<MealPhoto>meal_20150901_152843.jpg</MealPhoto>
+			<Food_Records>
+				<Food_Record>
+					<FoodItem>
+						<FoodItemID>6253</FoodItemID>
+					</FoodItem>
+					<FoodItemServingSize>1.25</FoodItemServingSize>
+					<ServingSizeID>1649</ServingSizeID>
+					<FoodItemLogType>1</FoodItemLogType>
+				</Food_Record>
+
+					<Food_Record>
+						<FoodItem>
+							<FoodItemID>7611494</FoodItemID>
+						</FoodItem>
+						<FoodItemServingSize>1.000000</FoodItemServingSize>
+						<ServingSizeID>7335436</ServingSizeID>
+						<ProviderID>4</ProviderID>
+						<FoodItemLogType>4</FoodItemLogType>
+						<FoodItemPhoto></FoodItemPhoto>
+					</Food_Record>
+
+
+				<Food_Record>
+					<FoodItem>
+						<FoodItemID>801032</FoodItemID>
+					</FoodItem>
+					<FoodItemServingSize>2</FoodItemServingSize>
+
+					<ServingSizeID>1032</ServingSizeID>
+					<FoodItemLogType>0</FoodItemLogType>
+					<FoodItemPhoto>meal_20150901_152132.jpg</FoodItemPhoto>
+				</Food_Record>
+			</Food_Records>
+			<RecordedTime>2016-08-09T15:33:00+0000</RecordedTime>
+		</Meal_Record>
+	</Meal_Records>
+	<Created_Time>2016-08-09T15:33:00+0000</Created_Time>
+</User_Record -->
+

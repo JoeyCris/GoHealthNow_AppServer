@@ -1,0 +1,37 @@
+<section data-ng-controller="BrandController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Company Name: {{brand.name}}</h1>
+	</div>
+	<div class="pull-right">
+		<a class="btn btn-primary" href="/#!/brand/{{brand.accessCode}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="brand.create_time | date:'mediumDate'"></span>
+		</em>
+	</small>
+	<!-- <span class="label label-warning" ng-show="knowledge.send_push">Push Notification</span>
+	<span class="label label-warning" ng-show="knowledge.send_email">Email Notification</span> -->
+	<p class="lead">AccessCode: {{brand.accessCode}}</p>
+	<p class="lead">Home Page: <a href="{{brand.homePage}}" ng-show="brand.homePage">{{brand.homePage}}</a></p>
+	<div ng-show="brand.medias">
+		<label class="control-label">Logo</label>
+		<div class="row">
+			<div class="col-sm-1 btn" ng-repeat="media in brand.medias">
+					<img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="img-thumbnail">
+					<img class="img-responsive"  ng-src="{{premedia.uri}}" />
+			</div>
+		</div>
+	</div>
+
+</section>

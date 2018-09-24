@@ -1,0 +1,35 @@
+<section data-ng-controller="TopicTemplatesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="template.title"></h1>
+	</div>
+	<div class="pull-right">
+		<a class="btn btn-primary" href="/#!/templates/{{template._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="template.create_time | date:'mediumDate'"></span>
+		</em>
+	</small>
+	<p class="lead" data-ng-bind="template.content"></p>
+	<a href="{{template.link}}" ng-show="template.link">{{template.link}}</a>
+	<div ng-show="template.medias">
+		<label class="control-label">Photo</label>
+		<div class="row">
+			<div class="col-sm-1 btn" ng-repeat="media in template.medias">
+					<img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="img-thumbnail">
+					<img class="img-responsive"  ng-src="{{premedia.uri}}" />
+			</div>
+		</div>
+	</div>
+
+</section>

@@ -1,0 +1,2 @@
+curl -k -X POST -d, --data-urlencode userRecord@test.xml https://api.glucoguide.com/GlucoGuide/Write
+curl -k -X POST -d, --data-urlencode userRecord@test.xml http://locahost:3000/GlucoGuide/Write

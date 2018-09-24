@@ -1,0 +1,131 @@
+<!-- section class="row" data-ng-controller="AuthenticationController">
+	<div class="row">
+
+		<div  class="col-xs-12 col-md-offset-1 col-md-6">
+		  <div style="height: 270px">
+		    <carousel interval="myInterval" no-wrap="noWrapSlides">
+		      <slide ng-repeat="slide in slides" active="slide.active">
+		        <img ng-src="{{slide.image}}" style="margin:auto;">
+		        <div class="carousel-caption">
+		        </div>
+		      </slide>
+		    </carousel>
+		  </div>
+	    <div class="media col-md-12" style="padding: 10px; background-color: rgba(255, 255, 255, 0.6)">
+				<div class="media-right media-middle">
+					<a ng-click="demosignin()" class="btn btn-lg btn-success media-object" style="margin:10px">See a Demo Logbook</a>
+				</div>
+				<div class="media-body" style="text-shadow: white 0.1em 0.1em 0.1em;">
+				<b>Use a computer or tablet for a complete overview of your data, charts and trends. Viewing through a smartphone is not recommended due to their small screen size.</b>
+				</div>
+	    </div>
+	  </div>
+
+		<div class="col-xs-12 col-md-4 thumbnail" >
+
+				<div class="alert alert-dismissible" role="alert">
+					<p class="text-danger"><b>Note:</b> You need to FIRST use your smartphone to create a GlucoGuide account.</p>
+				</div>
+			<div>
+				<h3 class="text-center">Log in to GlucoGuide</h3>
+			</div>
+			<div class="col-xs-offset-1 col-md-offset-1 col-xs-10 col-md-10">
+				<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off" name="loginForm">
+					<fieldset>
+						<div class="form-group">
+							<label for="username">Email</label>
+							<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password"  placeholder="Password">
+
+						</div>
+						<div data-ng-show="error" class=" text-danger">
+							<strong data-ng-bind="error"></strong>
+						</div>
+						<div class="text-center form-group">
+							<button type="submit" class="btn btn-primary pull-left">Secure Sign in</button>&nbsp;
+
+							<div class="forgot-password pull-right">
+								<a href="/#!/password/forgot">Forgot your password?</a>
+							</div>
+						</div>
+
+						<div class="alert alert-info alert-dismissible" role="alert">
+							<b>Hint:</b> Use the email address and password you used when you created your account in the GlucoGuide App.
+						</div>
+					</fieldset>
+
+
+				</form>
+
+			</div>
+		</div>
+</div>
+</section -->
+
+<section class="container-fluid" data-ng-controller="AuthenticationController">
+	<div class="signin_container">
+		<p class="text-danger text-center"><b>Note:</b> You need to FIRST use your smartphone to create a GlucoGuide account.</p>
+		<p/>
+
+		<div class="col-xs-12 col-md-6 col-md-offset-3 col-centered" >
+
+			<!-- div class="alert alert-dismissible" role="alert">
+				<p class="text-danger"><b>Note:</b> You need to FIRST use your smartphone to create a GlucoGuide account.</p>
+			</div -->
+
+			<div class="panel panel-default">
+				<div class="panel-heading"><h4 class="text-center">Log in to GlucoGuide</h4></div>
+				<div class="panel-body">
+					<div class="col-xs-offset-1 col-md-offset-1 col-xs-10 col-md-10">
+						<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off" name="loginForm">
+							<fieldset>
+								<div class="form-group">
+									<label for="username">Email</label>
+									<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Email Address">
+								</div>
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password"  placeholder="Password">
+
+								</div>
+								<div data-ng-show="error" class=" text-danger">
+									<strong data-ng-bind="error"></strong>
+								</div>
+								<div class="text-center form-group">
+									<button type="submit" class="btn btn-primary pull-left">Secure Sign in</button>&nbsp;
+									<!--<a href="/#!/signup">Sign up</a>-->
+									<div class="forgot-password pull-right">
+										<a href="/#!/password/forgot">Forgot your password?</a>
+									</div>
+								</div>
+
+								<div class="alert alert-info alert-dismissible" role="alert">
+									<b>Hint:</b> Use the email address and password you used when you created your account in the GlucoGuide App.
+								</div>
+
+
+							</fieldset>
+
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="col-xs-12 col-md-12 " >
+						<a ng-click="demoSignin()" class="btn btn-lg btn-success media-object" style="margin:10px">See a Demo Logbook</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>
+

@@ -1,0 +1,71 @@
+<section class="container-fluid" data-ng-controller="AuthenticationController">
+	<div class="signin_container">
+		<div class="col-xs-12 col-md-8 col-md-offset-2 col-centered" >
+			<div class="panel panel-default">
+				<div class="panel-heading"><h4 class="text-center">Admin Login to GlucoGuide</h4></div>
+				<div class="panel-body">
+					<div class="col-xs-offset-1 col-md-offset-1 col-xs-10 col-md-10">
+						<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off" name="loginForm">
+							<p>
+								Use an Access Code (such as DEC1234, Corp1234) and password provided by GlucoGuide to login to GlucoGuide.
+								<ul>
+									<li>Healthcare providers and clinicians can view detailed patient information. Watch the <a href="https://www.youtube.com/watch?v=isSaXEbF46A" target="_blank">5-min video</a> on how clinicians use GlucoGuide for improved efficiency and patient care.</li>
+									<li>Employers and teams can view aggregated summary health information about their members and teams.  Team challenges can be easily set up and viewed. </li>
+									<li>Insurance companies and Brokers can view aggregated summary health information about their policyholders. </li>
+
+								</ul>
+							</p>
+							<p>Contact us via <a href="mailto:support@glucoguide.com" target="_blank">support@glucoguide.com</a> to obtain an Access Code to start a free trial today!</p>
+							<!--<p>-->
+								<!--GlucoGuide is free for Diabetes Education Programs (<a href="http://www.southwesthealthline.ca/listServices.aspx?id=10891" target="_blank">DEPs</a>) and their-->
+								<!--patients. Contact us via-->
+								<!--<a href="mailto:support@glucoguide.com" target="_blank">support@glucoguide.com</a>-->
+								<!--to obtain an Access Code to start today!-->
+							<!--</p>-->
+							<!--<p>-->
+								<!--Watch the <a href="https://www.youtube.com/watch?v=KETZOSlzh-w&feature=youtu.be" target="_blank">5-min video</a>  on how DEPs and clinics use GlucoGuide for-->
+								<!--improved efficiency and patient care.-->
+							<!--</p>-->
+							<!--<br>-->
+							<fieldset>
+								<div class="form-group">
+									<label for="username">Access Code</label>
+									<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Access Code">
+								</div>
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password"  placeholder="Password">
+
+								</div>
+								<div data-ng-show="error" class=" text-danger">
+									<strong data-ng-bind="error"></strong>
+								</div>
+								<div class="text-center form-group">
+									<button type="submit" class="btn btn-primary pull-left">Secure Sign in</button>&nbsp;
+									<!--<a href="/#!/signup">Sign up</a>-->
+									<div class="forgot-password pull-right">
+										<a href="/#!/password/forgot">Forgot your password?</a>
+									</div>
+								</div>
+
+
+							</fieldset>
+
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<!--<div class="panel panel-default">-->
+				<!--<div class="panel-body">-->
+					<!--<div class="col-xs-12 col-md-12" >-->
+						<!--<a ng-click="demoSignin()" class="btn btn-lg btn-success media-object" style="margin:10px">See a Demo Logbook</a>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+
+		</div>
+	</div>
+</section>

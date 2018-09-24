@@ -1,0 +1,78 @@
+<User_Record>
+<UserID>590a13b6526e95083f499a19</UserID>
+<Meal_Records>
+        <Meal_Record>
+            <Carb>22.0</Carb>
+            <Fibre>12.0</Fibre>
+            <Pro>0.0</Pro>
+            <Fat>0.0</Fat>
+            <Cals>88.0</Cals>
+            <MealPhoto>meal_20150618.jpg</MealPhoto>
+            <MealName>MyMeal</MealName>
+            <MealType>3</MealType>
+            <MealName>MyMeal</MealName>
+            <MealScore>96</MealScore>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <UploadingVersion>0</UploadingVersion>
+        </Meal_Record>
+                <Meal_Record>
+            <Carb>22.0</Carb>
+            <Fibre>12.0</Fibre>
+            <Pro>0.0</Pro>
+            <Fat>0.0</Fat>
+            <Cals>88.0</Cals>
+            <MealPhoto>meal_20150618.jpg</MealPhoto>
+            <MealName>MyMeal</MealName>
+            <MealType>3</MealType>
+            <MealName>MyMeal</MealName>
+            <MealScore>25</MealScore>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <UploadingVersion>0</UploadingVersion>
+        </Meal_Record>
+                <Meal_Record>
+            <Carb>22.0</Carb>
+            <Fibre>12.0</Fibre>
+            <Pro>0.0</Pro>
+            <Fat>0.0</Fat>
+            <Cals>88.0</Cals>
+            <MealPhoto>meal_20150618.jpg</MealPhoto>
+            <MealName>MyMeal</MealName>
+            <MealType>3</MealType>
+            <MealName>MyMeal</MealName>
+            <MealScore>86</MealScore>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <UploadingVersion>0</UploadingVersion>
+        </Meal_Record>
+                <Meal_Record>
+            <Carb>22.0</Carb>
+            <Fibre>12.0</Fibre>
+            <Pro>0.0</Pro>
+            <Fat>0.0</Fat>
+            <Cals>88.0</Cals>
+            <MealPhoto>meal_20150618.jpg</MealPhoto>
+            <MealName>MyMeal</MealName>
+            <MealType>3</MealType>
+            <MealName>MyMeal</MealName>
+            <MealScore>62</MealScore>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <UploadingVersion>0</UploadingVersion>
+        </Meal_Record>
+
+                <Meal_Record>
+            <Carb>22.0</Carb>
+            <Fibre>12.0</Fibre>
+            <Pro>0.0</Pro>
+            <Fat>0.0</Fat>
+            <Cals>88.0</Cals>
+            <MealPhoto>meal_20150618.jpg</MealPhoto>
+            <MealName>MyMeal</MealName>
+            <MealType>3</MealType>
+            <MealName>MyMeal</MealName>
+            <MealScore>76</MealScore>
+            <RecordedTime>2017-06-01T16:27:59-0400</RecordedTime>
+            <UploadingVersion>0</UploadingVersion>
+        </Meal_Record>
+    </Meal_Records>
+
+<Created_Time>2017-06-06T15:33:06+0000</Created_Time>
+</User_Record>

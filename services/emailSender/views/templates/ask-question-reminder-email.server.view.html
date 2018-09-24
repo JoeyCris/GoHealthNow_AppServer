@@ -1,0 +1,15 @@
+
+<p>New questions Asked by the Client Number {{user.userID}}</p>
+<p>Organization Code: {{user.accessCode}}</p>
+<p>Name: {{user.lastName}}, {{user.firstName}}</p>
+<p>Email: {{user.email}}</p>
+<p>Question: </p>
+<p>{{question.questionContent}}</p>
+{% if question.medias.length != 0 %}
+	{% for media in question.medias %}
+		<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	<br>
+{% endif %}
+<p>Please click the link below to reply, ASAP. Thanks for Cooperation.</p><br>
+<a href="{{url}}">Reply</a>

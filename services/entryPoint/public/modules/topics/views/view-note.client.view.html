@@ -1,0 +1,113 @@
+<section data-ng-controller="NotesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="note.user.email"></h1>
+		<div class="pull-left">
+			<a class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Create New Note" href="/#!/notes/create/{{note.user._id}}">
+				<i class="glyphicon glyphicon-plus" tooltip="Create Note" tooltip-placement="top"></i>
+			</a>
+			<a class="btn btn-default" href="/#!/notes/user/{{note.user._id}}">
+				<i class="glyphicon glyphicon-th-list" tooltip="List Notes" tooltip-placement="top"></i>
+			</a>
+		</div>
+	</div>
+	<br/>
+	<br/>
+	<small>
+		<em class="text-muted">
+			Created on
+			<span data-ng-bind="note.create_time | date:'MMMM d yyyy H:mm'"></span>
+			by
+			<span ng-show="note.signature" data-ng-bind="note.signature"></span>
+			<span ng-hide="note.signature" data-ng-bind="note.creator.email"></span>
+		</em>
+	</small>
+	<div class="pull-right">
+		<a class="btn btn-primary" href="/#!/notes/{{note._id}}/edit">
+			<i class="glyphicon glyphicon-edit" tooltip="Edit" tooltip-placement="top"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash" tooltip="Remove" tooltip-placement="top"></i>
+		</a>
+	</div>
+
+	<p class="lead" data-ng-bind="note.description"></p>
+	<a href="{{note.link}}" ng-show="note.link">{{note.link}}</a>
+	<div ng-show="note.medias">
+		<label class="control-label">Photo</label>
+		<div class="row">
+			<div class="col-sm-1 btn" ng-repeat="media in note.medias">
+					<img class="img-responsive" ng-click="toggleMedia(media)" ng-src="{{media.uri}}" />
+			</div>
+		</div>
+		<div class="row">
+			<div class="img-thumbnail" ng-class="{hidden:!premedia}">
+				<img class="img-responsive"  ng-src="{{premedia.uri}}" ng-click="toggleMedia(media)"/>
+			</div>
+		</div>
+	</div>
+	<!--<div class="jumbotron" data-ng-show="note.reference">-->
+		<!--<h4>Reference: </h4>-->
+		<!--<a data-ng-href="/#!/logbook/{{question.userID}}">-->
+			<!--<button class="btn btn-default">Logbook</button></a>-->
+		<!--<div class="page-header">-->
+			<!--<p data-ng-bind="question.questionContent"></p>-->
+		<!--</div>-->
+		<!--<small>-->
+			<!--<em class="text-muted">-->
+				<!--Posted on-->
+				<!--<span data-ng-bind="question.recordedTime | date:'mediumDate'"></span>-->
+				<!--&lt;!&ndash; by-->
+				<!--<span data-ng-bind="question.userID.email"></span> &ndash;&gt;-->
+			<!--</em>-->
+		<!--</small>-->
+
+		<!--<div ng-show="question.medias.length">-->
+			<!--<label class="control-label" for="photo">Photo</label>-->
+			<!--<div class="row">-->
+				<!--<div class="col-sm-1 btn" ng-repeat="media in question.medias">-->
+						<!--<img class="img-responsive" ng-click="selectqmedia(media)" ng-src="{{media.uri}}" />-->
+				<!--</div>-->
+			<!--</div>-->
+			<!--<div class="row">-->
+				<!--<div class="img-thumbnail">-->
+						<!--<img class="img-responsive"  ng-src="{{preqmedia.uri}}" />-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+	<!--
+	<h4>Comments:</h4>
+	<div class="page-footer" ng-repeat="comment in topic.comments">
+		<div class="pull-right" data-ng-show="authentication.user.userID == comment.user.userID">
+			<a class="btn btn-primary" data-ng-click="updateComment(comment)">
+				<i class="glyphicon glyphicon-edit"></i>
+			</a>
+			<a class="btn btn-primary" data-ng-click="removeComment(comment)">
+				<i class="glyphicon glyphicon-trash"></i>
+			</a>
+		</div>
+		<blockquote>
+			<strong data-ng-bind="comment.content"></strong>
+			<cite class="clearfix"><small data-ng-bind="comment.user.email"></small></cite>
+		</blockquote>
+	</div>
+	<form name="commentForm" ng-submit="addComment(comment)">
+
+    <blockquote>
+      <strong>{{comment.content}}</strong>
+      <cite class="clearfix"><small data-ng-bind="authentication.user.email"></small></cite>
+    </blockquote>
+
+
+    <h4>Submit a Comment</h4>
+    <fieldset class="form-group">
+      <textarea class="form-control" ng-model="comment.content" placeholder="Write a short comment of the topic..." title="Comment"></textarea>
+    </fieldset>
+    <fieldset class="form-group">
+      <input type="submit" class="btn btn-primary pull-right" value="Submit Comment" />
+    </fieldset>
+		<div data-ng-show="error" class="text-danger">
+			<strong data-ng-bind="error"></strong>
+		</div>
+  </form> -->
+</section>

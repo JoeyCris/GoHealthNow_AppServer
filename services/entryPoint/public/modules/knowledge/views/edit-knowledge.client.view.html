@@ -1,0 +1,107 @@
+<section data-ng-controller="KnowledgeController" data-ng-init="updateinit()">
+	<div class="page-header">
+		<h1>Edit Knowledge</h1>
+	</div>
+	<div class="col-md-12">
+		<form name="knowledgeForm" class="form-horizontal" data-ng-submit="knowledgeForm.$valid && update(knowledgeForm.$valid)" novalidate>
+			<fieldset>
+				<div class="form-group" ng-class="{ 'has-error': knowledgeForm.checkpush.$dirty && knowledgeForm.checkpush.$invalid }">
+					<h4>Select to send app notification and/or send email:
+					<span class="label label-warning" ng-show="checkpush.sendPush">App Notification</span>
+					<span class="label label-warning" ng-show="checkpush.sendEmail">Email Notification</span></h4>
+			    <!-- <pre>Model: {{checkpush}}</pre> -->
+			    <div class="btn-group">
+			        <label class="btn btn-primary" ng-model="checkpush.sendPush" btn-checkbox>Send App Notification</label>
+			        <label class="btn btn-primary" ng-model="checkpush.sendEmail" btn-checkbox>Send Email</label>
+			    </div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': knowledgeForm.priority.$dirty && knowledgeForm.priority.$invalid }">
+					<label class="control-label" for="title">Priority</label>
+					<div class="controls">
+				 		<rating ng-model="priority" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" ></rating>
+				 		<span class="label" ng-class="{'label-warning': overStar<3, 'label-info': overStar>=3 && overStar<5, 'label-success': overStar>=5}" ng-show="overStar">Priority: {{overStar}}</span>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && knowledgeForm.title.$invalid}">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<input name="title" type="text" data-ng-model="knowledge.title" id="title" class="form-control" placeholder="Title" required>
+					</div>
+					<div ng-show="submitted && knowledgeForm.title.$invalid" class="help-block">
+						<p ng-show="knowledgeForm.title.$error.required" class="text-danger">Title is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && knowledgeForm.type.$invalid}">
+					<label class="control-label" for="type">Type</label>
+					<div class="controls">
+						<input name="type" type="text" data-ng-model="knowledge.type" id="type" class="form-control" placeholder="Type" required>
+					</div>
+					<div ng-show="submitted && knowledgeForm.type.$invalid" class="help-block">
+						<p ng-show="knowledgeForm.type.$error.required" class="text-danger">Type is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && knowledgeForm.content.$invalid}">
+					<label class="control-label" for="content">Content</label>
+					<div class="controls">
+						<textarea name="content" data-ng-model="knowledge.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && knowledgeForm.contenu.$invalid}">
+					<label class="control-label" for="contenu">Contenu</label>
+					<div class="controls">
+						<textarea name="contenu" data-ng-model="knowledge.contenu" id="contenu" class="form-control" cols="30" rows="10" placeholder="Contenu"></textarea>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': knowledgeForm.replaceParts.$dirty && knowledgeForm.replaceParts.$invalid }">
+					<label class="control-label" for="replaceParts">Replace Parts</label>
+					<div class="input-group" ng-repeat="part in replaceParts">
+						<input type="text" name="keyword" data-ng-model="part.keyword" class="form-control col-sm-5" placeholder="Keyword in content"></input>
+						<span class="input-group-addon">==></span>
+						<input type="text" name="reference" data-ng-model="part.reference" class="form-control col-sm-5" placeholder="Reference attribute"></input>
+						<span class="input-group-addon btn glyphicon glyphicon-remove-sign" ng-click="removeReplacePart(part)"></span>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error': knowledgeForm.conditions.$dirty && knowledgeForm.conditions.$invalid }">
+					<label class="control-label" type="conditions">Conditions: </label>
+					<div class="controls">
+						<div isteven-multi-select input-model="checkconditions" output-model="checkConditions" button-label="functionName" item-label="functionName functionDescription" tick-property="ticked" output-properties="_id" orientation="horizontal"></div>
+					</div>
+					<div ng-show="submitted && knowledgeForm.conditions.$invalid" class="help-block">
+						<p ng-show="knowledgeForm.conditions.$error.required" class="text-danger">Conditions is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && knowledgeForm.link.$invalid}">
+					<label class="control-label" for="link">Link</label>
+					<div class="controls">
+						<input type="text" data-ng-model="knowledge.link" name="link" data-ng-model="link" id="link" class="form-control" placeholder="Link URL : http://www.google.ca"></input>
+						<!--type="url"-->
+					</div>
+				</div>
+				<div class="form-group">
+					<div ng-show="medias" ng-class="{ 'has-error': knowledgeForm.photos.$dirty && knowledgeForm.photos.$invalid }">
+						<label class="control-label" for="photos">Photo</label>
+						<div class="row">
+							<div class="col-sm-1 btn" ng-repeat="media in medias">
+									<img class="img-responsive" ng-click="selectmedia(media)" ng-src="{{media.uri}}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="img-thumbnail">
+									<img class="img-responsive"  ng-src="{{premedia.uri}}" />
+							</div>
+						</div>
+					</div>
+					<div class="controls">
+						<div class="btn btn-primary" id="photos" ngf-select ngf-multiple="true" ng-model="photos">Upload Photo</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-default">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>

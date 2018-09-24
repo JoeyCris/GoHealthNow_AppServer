@@ -1,0 +1,84 @@
+
+<div class="panel panel-default">
+	<div class="panel-heading"><strong>{{ title }}</strong><span class="pull-right">{{meal.recordedTime | date:'HH:mm'}}</span></div>
+	<div class="panel-body">
+		<div ng-if="before || after">
+		<div class="row">
+			<div class="col-xs-6 col-md-6 text-center">
+				<strong>BEFORE</strong><br>
+				<!-- strong style="font-size: 200%" class="text-success">{{before.level}}</strong -->
+				<strong  style="font-size: 200%" ng-class="{
+				'text-danger': before.level < 4,
+				'text-success': before.level >= 4 && before.level <=10,
+				'text-warning':  before.level > 10 }" >
+
+					{{before.level? (before.level | number:1) :'--' }}
+				</strong><br>
+				<small>mmol/L</small><br>
+			</div>
+			<div class="col-xs-6 col-md-6 text-center">
+
+				<strong>AFTER</strong><br>
+				<strong  style="font-size: 200%" ng-class="{
+				'text-danger': after.level < 4,
+				'text-success': after.level >= 4 && after.level <=10,
+				'text-warning':  after.level > 10 }" >
+
+					{{after.level ? (after.level | number:1) : '--'}}
+				</strong><br>
+				<small>mmol/L</small><br>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12"  ng-show="before.note">
+				<strong>Note</strong><span>(Before Meal BG):</span>
+				<p>{{before.note}}</p>
+			</div>
+			<div class="col-xs-12"  ng-show="after.note">
+				<strong>Note</strong><span>(After Meal BG):</span>
+				<p>{{after.note}}</p>
+			</div>
+		</div>
+		</div>
+		<p></p>
+		<div class="row">
+			<div class="col-xs-4 text-center">
+				<strong>Carbs</strong><br>
+				<strong style="font-size: 150%" class="text-info text-center">{{meal.carb? (meal.carb | number:1):  '--'}}</strong><br>
+				<small>grams</small><br>
+			</div>
+			<div class="col-xs-4 text-center">
+				<strong>Fibre</strong><br>
+				<strong style="font-size: 150%" class="text-info text-center">{{meal.fibre?(meal.fibre | number:1):  '--'}}</strong><br>
+				<small>grams</small><br>
+			</div>
+			<div class="col-xs-4 text-center">
+				<strong>Calories</strong><br>
+				<strong style="font-size: 150%" class="text-info text-center">{{meal.cals? (meal.cals | number:1) :  '--'}}</strong><br>
+				<small>kcals</small><br>
+			</div>
+		</div>
+		<div  ng-if="meal.mealPhoto" class="row">
+
+			<a href="/images/{{meal.userID}}/{{meal.mealPhoto}}">
+				<img  ng-src="/images/{{meal.userID}}/{{meal.mealPhoto}}" class="img-thumbnail" >
+			</a>
+		</div>
+
+	</div>
+	<div data-ng-if="meal">
+		<div class="panel-footer">
+			<div class="row text-center">
+
+				<button type="button" class="btn btn-default" ng-click="$parent.$parent.showMealDetail(meal, title)">
+					See Details
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+

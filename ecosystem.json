@@ -1,0 +1,82 @@
+{
+  /**
+   * pm2 configuration file
+   */
+
+  "apps" : [
+    {
+      "name"      : "GG/entryPoint",
+      "script"    : "services/entryPoint/server.js",
+      "merge_logs": true,
+      "log_date_format" : "YY-MM-DD HH:mm Z",
+      "env": {
+        "COMMON_VARIABLE": true,
+        "NODE_ENV": "development"
+      },
+      "env_production" : {
+        "NODE_ENV": "production"
+      },
+      "env_dev" : {
+        "NODE_ENV": "development"
+      },
+      "instances"  : 4,
+      "exec_mode"  : "cluster_mode"
+    },
+    {
+      "name"      : "GG/tipGenerator",
+      "script"    : "services/tipsGenerator/server.js",
+      "merge_logs": true,
+      "log_date_format" : "YY-MM-DD HH:mm Z",
+      "env": {
+        "COMMON_VARIABLE": true
+      },
+      "env_production" : {
+        "NODE_ENV": "production"
+      },
+      "env_dev" : {
+        "NODE_ENV": "development"
+      }
+    },
+    {
+      "name"      : "GG/pushServer",
+      "script"    : "services/pushServer/server.js",
+      "merge_logs": true,
+      "log_date_format" : "YY-MM-DD HH:mm Z",
+      "env": {
+        "COMMON_VARIABLE": true
+      },
+      "env_production" : {
+        "NODE_ENV": "production"
+      },
+      "env_dev" : {
+        "NODE_ENV": "development"
+      }
+    }
+  ],
+
+
+  /**
+   * PM2 help you to deploy apps over your servers
+   * For more help go to :
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment-pm2--090
+   */
+  "deploy" : {
+    "production" : {
+      "user" : "glucoguide",
+      "host" : "kdd.csd.uwo.ca",
+      "ref"  : "origin/production",
+      "repo" : "git@github.com:GlucoGuideRD/GlucoGuide-AppServer.git",
+      "path" : "/var/www/GlucoGuide/production",
+      "post-deploy" : "pwd && npm install && pm2 startOrRestart ecosystem.json --env production"
+    },
+    "development" : {
+      "user" : "nodejs",
+      "host" : "dev.kdd.csd.uwo.ca",
+      "ref"  : "origin/nodejs",
+      "repo" : "git@github.com:GlucoGuideRD/GlucoGuide-AppServer.git",
+      "path" : "/var/www/GlucoGuide/development",
+      "post-deploy" : "pwd && npm install && pm2 startOrRestart ecosystem.json --env dev"
+
+    }
+  }
+}

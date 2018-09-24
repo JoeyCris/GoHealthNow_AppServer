@@ -1,0 +1,63 @@
+<section class="container-fluid" data-ng-controller="AuthenticationController">
+	<div class="signin_container">
+		<p class="text-danger text-center"><b>Note:</b> You need to FIRST use your smartphone to create a GoHealthNow account.</p>
+		<p/>
+
+		<div class="col-xs-12 col-md-6 col-md-offset-3 col-centered" >
+
+			<!-- div class="alert alert-dismissible" role="alert">
+				<p class="text-danger"><b>Note:</b> You need to FIRST use your smartphone to create a GlucoGuide account.</p>
+			</div -->
+
+			<div class="panel panel-default">
+				<div class="panel-heading"><h4 class="text-center">Log in to GoHealthNow</h4></div>
+				<div class="panel-body">
+					<div class="col-xs-offset-1 col-md-offset-1 col-xs-10 col-md-10">
+						<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off" name="loginForm">
+							<fieldset>
+								<div class="form-group">
+									<label for="username">Email</label>
+									<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Email Address">
+								</div>
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password"  placeholder="Password">
+
+								</div>
+								<div data-ng-show="error" class=" text-danger">
+									<strong data-ng-bind="error"></strong>
+								</div>
+								<div class="text-center form-group">
+									<button type="submit" class="btn btn-primary pull-left">Secure Sign in</button>&nbsp;
+									<!--<a href="/#!/signup">Sign up</a>-->
+									<div class="forgot-password pull-right">
+										<a href="/#!/password/forgot">Forgot your password?</a>
+									</div>
+								</div>
+
+								<div class="alert alert-info alert-dismissible" role="alert">
+									<b>Hint:</b> Use the email address and password you used when you created your account in the GoHealthNow App.
+								</div>
+
+
+							</fieldset>
+
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="col-xs-12 col-md-12 " >
+						<a ng-click="demoSignin()" class="btn btn-lg btn-success media-object" style="margin:10px">See a Demo Logbook</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>

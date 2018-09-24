@@ -1,0 +1,83 @@
+<section data-ng-controller="AdminsController" data-ng-init="listUsers()" >
+    <div class="page-header">
+        <h1 class="text-center">User List</h1>
+    </div>
+<style type="text/css">
+	.sortorder:after {
+		content: '\25b2';
+	}
+	.sortorder.reverse:after {
+		content: '\25bc';
+	}
+</style>
+
+	<div novalidate class="pull-right input-group col-md-4">
+		<!--<label>Quick Search:-->
+			<!--<input ng-model="search" placeholder="in current {{maxSize}} pages" data-ng-change="filter()">-->
+		<!--</label>-->
+		<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+		<input type="input" class="form-control" ng-model="search" placeholder="in current {{maxSize}} pages" data-ng-change="filter()">
+		<span class="input-group-btn">
+			<a href="/#!/admin/searchUsers/{{search}}" target="_blank">
+				<button type="button" class="btn btn-default form-control" ng-show="search">Completely Search</button>
+			</a>
+		</span>
+
+	</div>
+	<br>
+	<br/>
+	<div class="row">
+		<table class="table table-hove table-striped display nowrap  dtr-inline" id="userList">
+			<tr>
+				<th>
+					Email
+					<!--<a href="" ng-click="order('email')">Email</a>-->
+					<!--<span class="sortorder" ng-show="predicate === 'email'" ng-class="{reverse:reverse}"></span>-->
+				</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Gender</th>
+				<th>DoB</th>
+				<!--<th>Weight</th>-->
+				<!--<th>Height</th>-->
+				<!--<th>Waist Size</th>-->
+				<th>Access Code</th>
+				<!--<th>BMI</th>-->
+				<th>Registration Time</th>
+				<th>Role</th>
+				<!--<th>Points</th>-->
+				<th>last Login Time</th>
+				<th>Profile</th>
+				<th>Password</th>
+			</tr>
+
+			<!--<tr data-ng-repeat="user in users | filter:search | orderBy:predicate:reverse">-->
+			<tr data-ng-repeat="user in users | filter:search ">
+				<th>
+					<a data-ng-href="/#!/user/records/{{user.userID}}">{{user.email}}</a>
+				</th>
+				<!--<th>{{user.email}}</th> -->
+				<th>{{user.firstName}}</th>
+				<th>{{user.lastName}}</th>
+				<th>{{user.gender === 0 ? "Male":"Female"}}</th>
+				<th>{{user.dob}}</th>
+				<!--<th>{{user.weight}}</th>-->
+				<!--<th>{{user.height}}</th>-->
+				<!--<th>{{user.waistSize}}</th>-->
+				<th>{{user.accessCode}}</th>
+				<!--<th>{{user.bmi}}</th>-->
+				<th>{{user.registrationTime | date:'yyyy-MM-dd HH:mm:ss' }}</th>
+				<th>{{user.roles[0]}}</th>
+				<!--<th>{{user.points}}</th>-->
+				<th>{{user.lastLoginTime | date:'yyyy-MM-dd HH:mm:ss'}}</th>
+				<th><a data-ng-href="/#!/admin/editUserProfile/{{user._id}}"><button class="btn btn-default">Edit</button></a></th>
+				<th><a data-ng-href="/#!/admin/editUserPassword/{{user._id}}"><button class="btn btn-default">Change</button></a></th>
+			</tr>
+		</table>
+	</div>
+
+	<div class="text-center">
+		<pagination  ng-model="currentPage" total-items="totalNum" max-size="maxSize" rotate="false" boundary-links="true"></pagination>
+	</div>
+	<!--<pagination  total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
+</section>

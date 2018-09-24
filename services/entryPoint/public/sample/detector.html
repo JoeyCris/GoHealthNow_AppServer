@@ -1,0 +1,243 @@
+	<!DOCTYPE html>
+
+	<!--
+	Copyright 2017 Google Inc.
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+		http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	-->
+
+	<html lang="en">
+	<head>
+
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<link type="text/css" rel="stylesheet" href="common.css">
+		<title>Digits Recognition Demo</title>
+
+
+		<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+		<script src="/lib/angular/angular.js"></script>
+		<script src="/lib/angular-animate/angular-animate.js"></script>
+		<script src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script src="/lib/ng-file-upload/ng-file-upload.min.js"></script>
+
+		<script src="./js/camera.js"></script>
+
+		<!-- script type="text/javascript">
+			FileAPI = {
+				debug: true,
+				//forceLoad: true, html5: false //to debug flash in HTML5 browsers
+				//wrapInsideDiv: true, //experimental for fixing css issues
+				//only one of jsPath or jsUrl.
+				//jsPath: '/js/FileAPI.min.js/folder/',
+				//jsUrl: 'yourcdn.com/js/FileAPI.min.js',
+				//only one of staticPath or flashUrl.
+				//staticPath: '/flash/FileAPI.flash.swf/folder/'
+				//flashUrl: 'yourcdn.com/js/FileAPI.flash.swf'
+			};
+		</script>
+
+		<script type="text/javascript">
+			// load angularjs specific version
+			var angularVersion = window.location.hash.substring(1);
+			if (angularVersion.indexOf('/') == 0) angularVersion = angularVersion.substring(1);
+			document.write('<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/' +
+					(angularVersion || '1.2.24') + '/angular.js"><\/script>');
+		</script>
+		<script src="/lib/ng-file-upload/ng-file-upload-shim.js"></script>
+		<script src="/lib/ng-file-upload/ng-file-upload.js"></script>
+
+
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlmixed/htmlmixed.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlembedded/htmlembedded.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/xml/xml.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/javascript/javascript.min.js"></script>
+		<script src="./js/camera.js"></script -->
+
+
+	</head>
+
+	<!-- input type="file" accept="image/*;capture=camera" -->
+	<body>
+	<!-- div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<img src="" id="image">
+				<input id="input" type="file" onchange="handleFiles()">
+				<script>
+
+					function handleFiles()
+					{
+						var filesToUpload = document.getElementById('input').files;
+						var file = filesToUpload[0];
+
+						console.log('handleFiles:'+file.name);
+
+						document.getElementById('image').src = file;
+
+						// Create an image
+						var img = document.createElement("img");
+						// Create a file reader
+						var reader = new FileReader();
+						// Set the image once loaded into file reader
+						reader.onload = function(e)
+						{
+							img.src = e.target.result;
+
+							var canvas = document.createElement("canvas");
+							//var canvas = $("<canvas>", {"id":"testing"})[0];
+							var ctx = canvas.getContext("2d");
+							ctx.drawImage(img, 0, 0);
+
+							var MAX_WIDTH = 400;
+							var MAX_HEIGHT = 300;
+							var width = img.width;
+							var height = img.height;
+
+							if (width > height) {
+								if (width > MAX_WIDTH) {
+									height *= MAX_WIDTH / width;
+									width = MAX_WIDTH;
+								}
+							} else {
+								if (height > MAX_HEIGHT) {
+									width *= MAX_HEIGHT / height;
+									height = MAX_HEIGHT;
+								}
+							}
+							canvas.width = width;
+							canvas.height = height;
+							var ctx = canvas.getContext("2d");
+							ctx.drawImage(img, 0, 0, width, height);
+
+							var dataurl = canvas.toDataURL("image/png");
+							document.getElementById('image').src = dataurl;
+						}
+						// Load files into file reader
+						reader.readAsDataURL(file);
+
+
+						// Post the data
+						/*
+						 var fd = new FormData();
+						 fd.append("name", "some_filename.jpg");
+						 fd.append("image", dataurl);
+						 fd.append("info", "lah_de_dah");
+						 */
+					}</script>
+			</div>
+		</div>
+	</div -->
+
+	<style>
+		.thumb {
+			width: 24px;
+			height: 24px;
+			float: none;
+			position: relative;
+			top: 7px;
+		}
+
+		form .progress {
+			line-height: 15px;
+		}
+		}
+
+		.progress {
+			display: inline-block;
+			width: 100px;
+			border: 3px groove #CCC;
+		}
+
+		.progress div {
+			font-size: smaller;
+			background: orange;
+			width: 0;
+		}
+
+	</style>
+	<div class="container" ng-app="fileUpload" ng-controller="MyCtrl">
+
+		<div class="row">
+			<div class="col-xs-12">
+				<form name="myForm">
+					<fieldset>
+						<legend>Digits Recognition</legend>
+
+						<div class="col-xs-12">Photo:</div>
+						<div class="col-xs-12">
+
+							<div class="form-group">
+								<label for="file">*required</label>
+								<input type="file" ngf-select ng-model="picFile" name="file"
+							   accept="image/*" ngf-max-size="10MB" required
+							   ngf-model-invalid="errorFile">
+								<br>
+								<button ng-click="picFile = null" ng-show="picFile">Remove
+
+								</button>
+							</div>
+							<br>
+							<i ng-show="myForm.file.$error.maxSize">File too large
+								{{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+
+						</div>
+						<br>
+						<div class="col-xs-12">
+						<button ng-disabled="!myForm.$valid"
+								ng-click="uploadPic(picFile)">Submit</button>
+							</div>
+		  <!--  span class="progress" ng-show="picFile.progress >= 0">
+			<div style="width:{{picFile.progress}}%"
+				 ng-bind="picFile.progress + '%'"></div>
+		  </span  -->
+						<div class="col-xs-12" ng-show="picFile.result">
+
+							<span>Upload Successful</span>
+							<div class="img-thumbnail">
+
+								<img class="img-responsive"  ng-src="{{out_img}}" />
+							</div>
+						</div>
+						<div class="row">
+						<div class="err" ng-show="errorMsg">{{errorMsg}}</div>
+						</div>
+					</fieldset>
+					<br>
+				</form>
+			</div>
+			</div>
+		<div class="row">
+			<div class="btn-group col-xs-12">
+				<button type="button" class="btn btn-default"
+						ng-click="isCollapsed = !isCollapsed">
+					<strong>{{isCollapsed?'Show All Images ':'Collapse '}}</strong>
+
+					<!-- span><i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !isDailyDetailCollapsed, 'glyphicon-chevron-right': isDailyDetailCollapsed}">
+
+					</i></span -->
+					<span><i class="glyphicon glyphicon" ng-class="{'glyphicon-chevron-down': !isCollapsed, 'glyphicon-chevron-right': isCollapsed}"></i></span>
+				</button>
+			</div>
+			<hr>
+			<div collapse="isCollapsed">
+				<div  class="col-xs-12">
+				<div class="col-xs-12 col-md-4 img" ng-repeat="image in imageList">
+					<img ng-src="{{image}}" class="img-responsive" >
+				</div></div>
+			</div>
+		</div>
+	</div>
+	</body>
+
+	</body>
+	</html>

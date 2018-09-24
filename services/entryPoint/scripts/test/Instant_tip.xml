@@ -1,0 +1,15 @@
+<User_Record>
+    <UserID>5924f065c91a7fa81f8ce917</UserID>
+    <Note_Records FeatureID="01">
+        <Note_Record>
+            <NoteContent>Lorem ipsum</NoteContent>
+            <RecordedTime>2017-06-08T10:22:37-0400</RecordedTime>
+            <UploadingVersion>0</UploadingVersion>
+            <NoteType>Diet</NoteType> <!-- //Diet/Exercise/Blood Glucose/Weight/Others -->
+            <NotePhoto>question_20150319102237.jpg</NotePhoto>
+            <NoteAudio>question_audio_20150319102237.mp3</NoteAudio>
+        </Note_Record>
+    </Note_Records>
+<Created_Time>2017-06-08T16:27:59-0400</Created_Time> 
+</User_Record> 
+

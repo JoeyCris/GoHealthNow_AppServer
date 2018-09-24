@@ -1,0 +1,58 @@
+<!--div class="col-xs-3" ng-show="exercises" >
+    <div ng-repeat="exercise in exercises">
+		<b>Exercise</b> {{(exercise.exerciseStartingTime? exercise.exerciseStartingTime : exercise.recordedTime) | date:'HH:mm'}}<br>
+        Type: {{exercise.type}}
+        Time Last: {{exercise.minutes | number:1}} minutes<br>
+        Total Calories burned: {{exercise.calories | number:1}} kcals
+        <hr ng-hide="$last">
+    </div>
+</div>
+
+<div class="col-xs-3" ng-hide="exercises">
+    <b>Exercise</b><br>
+    Not Recorded
+</div -->
+
+<div ng-if="exercises">
+	<div class="panel panel-default">
+		<div class="panel-heading"><strong>Exercise</strong>
+		</div>
+
+		<div class="panel-body">
+			<div  ng-show="!!exercises.pedometer.length">
+				<b>By Pedometer:</b><br>
+				<div ng-if="exercises.stepCount>0">
+				<b>Steps:</b>
+				<strong style="font-size: 150%" class="text-info">{{exercises.stepCount | number:0}}</strong><br>
+				</div>
+				<div  ng-repeat="row in exercises.pedometer">
+
+					<b>- {{row.type}}</b><strong style="font-size: 150%" class="text-info"> {{row.minutes | number:1}}</strong> minutes.<br>
+
+				</div>
+				<hr/>
+			</div>
+			<div  ng-show="!!exercises.manual.length">
+				<b>By Manual Input:</b>
+
+				<div  ng-repeat="row in exercises.manual">
+
+					<b>- {{row.type}}</b><strong style="font-size: 150%" class="text-info"> {{row.minutes | number:1}}</strong> minutes.<br>
+
+				</div>
+				<hr/>
+			</div>
+			<b>Total burned:</b><strong style="font-size: 150%" class="text-info"> {{exercises.totalCals | number:1}}</strong> calories<br>
+
+		</div>
+		<div class="panel-footer">
+			<div class="row text-center">
+
+				<button type="button" class="btn btn-default" ng-click="seeDetail(exercises.userID, exercises.date)">
+					See Details
+				</button>
+			</div>
+		</div>
+	</div>
+
+</div>

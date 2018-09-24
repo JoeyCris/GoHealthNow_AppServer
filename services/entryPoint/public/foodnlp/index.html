@@ -1,0 +1,78 @@
+<Doctype html>
+<html>
+
+	<head>
+ 
+		<script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js" ></script>
+		<link  href="css/bootstrap.min.css" rel="stylesheet" >
+		<link  href="css/bootstrap-theme.css" rel="stylesheet" >
+		<link  href="css/speech-input.css" rel="stylesheet" >
+		
+		<title>Glucoguide Corp food language search</title>	
+
+	</head>
+	<body onload='load()'>
+	<div class="container theme-showcase" role="main">
+		<div class="jumbotron">
+	        <h1>Food Language Processing</h1>
+	        	
+      	</div>
+		<div align="center">
+	 
+
+			<div class="page-header">
+	        	<h1>input your sentence</h1>
+	      	</div>	
+
+			<textarea type='text' class="speech-input" placeholder="voice input" name='ntext' id='content' rows='5' cols='60'>
+			
+			</textarea> <br>
+
+ 
+
+			<button type="button" class="btn btn-default btn-sm" onclick="randomize()">sentence examples</button>
+			<br>
+
+			<button id="localbutton" type="button" class="btn btn-lg btn-primary" style="font-size:20; margin-top:20px;" onclick="local_click(this)">1.Local process</button> 
+	<!--		<button id="cloudbutton" type="button" class="btn btn-lg btn-success" style="font-size:20; margin-top:20px;" onclick="cloud_click(this)">2.Cloud process</button><br>
+ 	-->		
+ 			 
+ 		 	
+			<div class="panel panel-default" style="margin-top:50px;">
+	            <div class="panel-heading">
+	              <h3 class="panel-title">Processed text:</h3>
+	            </div>
+	            <div class="panel-body" id='results'>
+	              <p></p>
+	            </div>
+          	</div>
+          	 
+		</div>
+
+		<div align='center' style="margin-top:50px;">
+			<div class="page-header">
+		        <h1>Food Items</h1>
+		    </div>
+		    <div class="row">
+			    <div class="col-md-12 col-md-offset-2">
+					<table  class="table table-bordered" id='display' cellpadding="20">
+						<tr> 
+							<td><b>Amount</b></td>
+							<td><b>Unit</b></td>
+							<td><b>Food item</b></td>
+							<td><b>Description</b></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		 
+
+		</div>
+	</body>
+	<script type="text/javascript" src="js/speech-input.js"></script>
+	<script    src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script   src='js/client.js' ></script>	
+	<script   src="js/bootstrap.min.js" ></script>
+	
+</html>

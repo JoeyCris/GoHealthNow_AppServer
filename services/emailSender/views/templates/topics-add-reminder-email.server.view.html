@@ -1,0 +1,30 @@
+
+<p>New questions Asked by the Client Number {{user.userID}} has been replyed</p>
+<p><b>USER INFORMATION</b></p>
+<p>Organization Code: {{user.accessCode}}</p>
+<p>Name: {{user.lastName}}, {{user.firstName}}</p>
+<p>Email: {{user.email}}</p>
+<p>Question: </p>
+<p>{{question.questionContent}}</p>
+{% if question.medias.length != 0 %}
+	{% for media in question.medias %}
+		<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	<br>
+{% endif %}
+
+<p><b>REPLYER INFORMATION</b></p>
+<p>Organization Code: {{replyer.accessCode}}</p>
+<p>Name: {{replyer.lastName}}, {{replyer.firstName}}</p>
+<p>Email: {{replyer.email}}</p>
+<p>Answer:</p>
+<p>{{answer.description}}</p>
+{% if answer.medias.length != 0 %}
+	{% for media in answer.medias %}
+		<p><img src="{{media.uri}}"></img><p>
+	{% endfor %}
+	<br>
+{% endif %}
+{% if answer.medias %}
+<p><a href="{{answer.url}}">{{answer.url}}</a></p>
+{% endif %}
